@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>プライバシーポリシー - Salesforce Opportunity Explorer</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: 'Helvetica Neue', Arial, 'Hiragino Kaku Gothic ProN', 'Hiragino Sans', Meiryo, sans-serif;
+      font-size: 15px;
+      line-height: 1.8;
+      color: #333;
+      background: #f9f9f9;
+    }
+    header {
+      background: #032D60;
+      color: #fff;
+      padding: 32px 0;
+      text-align: center;
+    }
+    header h1 { font-size: 22px; font-weight: bold; letter-spacing: 0.03em; }
+    header p { font-size: 13px; margin-top: 6px; opacity: 0.75; }
+    main {
+      max-width: 760px;
+      margin: 40px auto;
+      padding: 0 20px 60px;
+    }
+    .meta {
+      font-size: 13px;
+      color: #888;
+      margin-bottom: 32px;
+    }
+    section { margin-bottom: 28px; }
+    h2 {
+      font-size: 16px;
+      font-weight: bold;
+      margin-bottom: 8px;
+    }
+    p { margin-bottom: 8px; }
+    ul { padding-left: 20px; margin-bottom: 8px; }
+    ul li { margin-bottom: 4px; }
+    a { color: #0176d3; }
+    footer {
+      text-align: center;
+      font-size: 12px;
+      color: #999;
+      padding: 24px 0;
+      border-top: 1px solid #e0e0e0;
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <h1>プライバシーポリシー</h1>
+  <p>Salesforce Opportunity Explorer</p>
+</header>
+
+<main>
+
+  <p class="meta">最終更新日: 2026年5月20日　｜　対象拡張機能: Salesforce Opportunity Explorer v1.0</p>
+
+  <section>
+    <h2>1. 基本方針</h2>
+    <p>「Salesforce Opportunity Explorer」（以下、本拡張機能）は、ユーザーのプライバシーを尊重し、個人情報の適切な保護に努めます。</p>
+  </section>
+
+  <section>
+    <h2>2. アクセスする情報</h2>
+    <p>本拡張機能がアクセス・保存する情報は以下のみです：</p>
+    <ul>
+      <li><strong>Salesforce の認証クッキー（sid）</strong>：ユーザーがログイン済みの Salesforce セッションを識別するために使用します。</li>
+      <li><strong>Salesforce の商談データ・活動履歴</strong>：ユーザーの Salesforce 組織から、Salesforce REST API 経由で取得します。</li>
+    </ul>
+    <p>また、以下の情報をブラウザのローカルストレージ（IndexedDB）に一時保存します（端末外には送信しません）：</p>
+    <ul>
+      <li>取得した商談データのキャッシュ</li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>3. 情報の利用目的</h2>
+    <p>収集した情報は以下の目的のみに使用します：</p>
+    <ul>
+      <li>商談一覧の表示・絞り込み・リスクスコアリング</li>
+      <li>活動履歴の確認・収益グラフおよびカンバンボードへの反映</li>
+      <li>高リスク商談が検出された際のデスクトップ通知の送信</li>
+      <li>表示高速化のためのローカルキャッシュへの保存</li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>4. 第三者への提供</h2>
+    <p>収集した情報は、いかなる第三者にも販売・提供・転送しません。</p>
+  </section>
+
+  <section>
+    <h2>5. 外部サービスへの通信</h2>
+    <p>
+      本拡張機能はユーザーがログイン中の Salesforce 組織（*.lightning.force.com / *.my.salesforce.com）の API にのみ通信します。それ以外の外部サーバーへの通信は一切行いません。
+    </p>
+  </section>
+
+  <section>
+    <h2>6. リモートコード</h2>
+    <p>
+      本拡張機能は外部 URL からスクリプトを読み込む処理（リモートコード）を一切使用していません。すべての JavaScript コードは拡張機能パッケージ内にバンドルされています。
+    </p>
+  </section>
+
+  <section>
+    <h2>7. データの保存場所</h2>
+    <p>
+      すべてのデータはユーザーのブラウザ内（IndexedDB）にのみ保存されます。本拡張機能の開発者がユーザーのデータにアクセスすることはできません。
+    </p>
+  </section>
+
+  <section>
+    <h2>8. お問い合わせ</h2>
+    <p>
+      本プライバシーポリシーに関するご質問は、GitHub リポジトリの Issue よりお問い合わせください。<br />
+      <a href="https://github.com/kouji-kojima/Salesforce-Opportunity-Explorer/issues" target="_blank" rel="noopener noreferrer">
+        https://github.com/kouji-kojima/Salesforce-Opportunity-Explorer/issues
+      </a>
+    </p>
+  </section>
+
+</main>
+
+<footer>
+  &copy; 2026 kouji-kojima. All rights reserved.
+</footer>
+
+</body>
+</html>
