@@ -1,0 +1,762 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Privacy Policy — Backlog My Tasks</title>
+  <style>
+    /* ── Design tokens ── */
+    :root {
+      --brand:        #3FD4AD;
+      --brand-dark:   #2ab898;
+      --accent-light: rgba(63,212,173,0.12);
+      --bg:           #f0f4f8;
+      --surface:      #ffffff;
+      --surface2:     #f8fafc;
+      --border:       #e2e8f0;
+      --text:         #1a202c;
+      --text-muted:   #64748b;
+      --header-from:  #0b2e22;
+      --header-to:    #1a5e46;
+      --radius:       12px;
+      --shadow:       0 2px 8px rgba(0,0,0,.07), 0 6px 20px rgba(0,0,0,.05);
+      --shadow-sm:    0 1px 3px rgba(0,0,0,.07);
+    }
+
+    @media (prefers-color-scheme: dark) {
+      :root:not([data-theme="light"]) {
+        --accent-light: rgba(63,212,173,0.10);
+        --bg:           #0e1117;
+        --surface:      #1a1f2e;
+        --surface2:     #141824;
+        --border:       #2d3748;
+        --text:         #e2e8f0;
+        --text-muted:   #94a3b8;
+        --header-from:  #071510;
+        --header-to:    #0e3326;
+      }
+    }
+    [data-theme="dark"] {
+      --accent-light: rgba(63,212,173,0.10);
+      --bg:           #0e1117;
+      --surface:      #1a1f2e;
+      --surface2:     #141824;
+      --border:       #2d3748;
+      --text:         #e2e8f0;
+      --text-muted:   #94a3b8;
+      --header-from:  #071510;
+      --header-to:    #0e3326;
+    }
+    [data-theme="light"] {
+      --accent-light: rgba(63,212,173,0.12);
+      --bg:           #f0f4f8;
+      --surface:      #ffffff;
+      --surface2:     #f8fafc;
+      --border:       #e2e8f0;
+      --text:         #1a202c;
+      --text-muted:   #64748b;
+      --header-from:  #0b2e22;
+      --header-to:    #1a5e46;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Helvetica Neue", Arial,
+                   "Noto Sans CJK JP", "Noto Sans CJK KR", "Noto Sans CJK TC", sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.75;
+      transition: background .2s, color .2s;
+    }
+
+    /* ── Hero ── */
+    .pp-header {
+      background: linear-gradient(135deg, var(--header-from) 0%, var(--header-to) 100%);
+      color: #fff;
+      padding: 52px 24px 44px;
+      text-align: center;
+      position: relative;
+    }
+    .pp-header::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse 70% 60% at 50% 110%, rgba(63,212,173,0.25) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .pp-theme-btn {
+      position: absolute;
+      top: 16px; right: 16px;
+      background: rgba(255,255,255,.15);
+      border: 1px solid rgba(255,255,255,.3);
+      border-radius: 8px;
+      color: #fff;
+      padding: 7px 13px;
+      cursor: pointer;
+      font-size: .85rem;
+      backdrop-filter: blur(4px);
+      transition: background .2s;
+      line-height: 1;
+      z-index: 1;
+    }
+    .pp-theme-btn:hover { background: rgba(255,255,255,.28); }
+
+    .pp-header-icon {
+      width: 68px; height: 68px;
+      background: rgba(255,255,255,.15);
+      border-radius: 18px;
+      display: flex; align-items: center; justify-content: center;
+      margin: 0 auto 18px;
+      font-size: 34px;
+      backdrop-filter: blur(8px);
+      box-shadow: 0 4px 20px rgba(0,0,0,.2);
+      position: relative; z-index: 1;
+    }
+    .pp-header h1 {
+      font-size: clamp(1.25rem, 4vw, 1.8rem);
+      font-weight: 700;
+      letter-spacing: -.02em;
+      margin-bottom: 6px;
+      position: relative; z-index: 1;
+    }
+    .pp-header .pp-subtitle {
+      font-size: .88rem;
+      opacity: .7;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      position: relative; z-index: 1;
+    }
+
+    /* ── Language tab bar ── */
+    .pp-lang-bar {
+      position: sticky; top: 0; z-index: 100;
+      background: var(--surface);
+      border-bottom: 1px solid var(--border);
+      padding: 0 12px;
+      display: flex; gap: 2px;
+      overflow-x: auto;
+      scrollbar-width: none;
+      box-shadow: var(--shadow-sm);
+    }
+    .pp-lang-bar::-webkit-scrollbar { display: none; }
+
+    .pp-lang-btn {
+      flex-shrink: 0;
+      padding: 13px 16px;
+      border: none; background: none;
+      color: var(--text-muted);
+      cursor: pointer;
+      font-size: .875rem; font-weight: 500;
+      border-bottom: 3px solid transparent;
+      transition: color .2s, border-color .2s, background .2s;
+      border-radius: 6px 6px 0 0;
+      white-space: nowrap;
+    }
+    .pp-lang-btn:hover {
+      color: var(--brand);
+      background: var(--accent-light);
+    }
+    .pp-lang-btn.active {
+      color: var(--brand);
+      border-bottom-color: var(--brand);
+      font-weight: 600;
+    }
+
+    /* ── Content ── */
+    .pp-content {
+      max-width: 760px;
+      margin: 0 auto;
+      padding: 32px 16px 80px;
+    }
+
+    .pp-lang-section { display: none; }
+    .pp-lang-section.active {
+      display: block;
+      animation: fadeUp .22s ease;
+    }
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(8px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    .pp-date {
+      text-align: right;
+      font-size: .78rem;
+      color: var(--text-muted);
+      margin-bottom: 20px;
+    }
+
+    /* ── Cards ── */
+    .pp-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 22px 24px;
+      margin-bottom: 12px;
+      box-shadow: var(--shadow);
+      transition: background .2s, border-color .2s;
+    }
+
+    .pp-card-header {
+      display: flex; align-items: center; gap: 12px;
+      margin-bottom: 12px;
+    }
+
+    .pp-card-icon {
+      width: 40px; height: 40px;
+      border-radius: 10px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 20px;
+      flex-shrink: 0;
+      background: var(--accent-light);
+    }
+
+    .pp-card h2 {
+      font-size: 1rem; font-weight: 600;
+      color: var(--text);
+    }
+
+    .pp-card p {
+      font-size: .875rem;
+      color: var(--text-muted);
+      line-height: 1.78;
+    }
+    .pp-card p + p { margin-top: 8px; }
+
+    .pp-card ul {
+      list-style: none;
+      margin-top: 10px;
+    }
+    .pp-card ul li {
+      font-size: .875rem;
+      color: var(--text-muted);
+      padding: 4px 0 4px 20px;
+      position: relative;
+      line-height: 1.65;
+    }
+    .pp-card ul li::before {
+      content: "•";
+      position: absolute; left: 6px;
+      color: var(--brand); font-weight: bold;
+    }
+    .pp-card p + ul { margin-top: 8px; }
+
+    code {
+      font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace;
+      font-size: 11.5px;
+      background: var(--surface2);
+      color: var(--text-muted);
+      padding: 2px 6px;
+      border-radius: 4px;
+      border: 1px solid var(--border);
+    }
+
+    .pp-badge {
+      display: inline-flex; align-items: center; gap: 4px;
+      background: var(--accent-light);
+      color: var(--brand-dark);
+      border-radius: 20px;
+      padding: 4px 12px;
+      font-size: .76rem; font-weight: 600;
+      margin-top: 12px;
+      border: 1px solid rgba(63,212,173,0.3);
+    }
+    @media (prefers-color-scheme: dark) { .pp-badge { color: var(--brand); } }
+    [data-theme="dark"]  .pp-badge { color: var(--brand); }
+    [data-theme="light"] .pp-badge { color: var(--brand-dark); }
+
+    /* ── Footer ── */
+    .pp-footer {
+      text-align: center;
+      padding: 22px;
+      font-size: .78rem;
+      color: var(--text-muted);
+      border-top: 1px solid var(--border);
+      background: var(--surface);
+    }
+
+    @media (max-width: 480px) {
+      .pp-header { padding: 40px 16px 36px; }
+      .pp-header-icon { width: 56px; height: 56px; font-size: 28px; }
+      .pp-card { padding: 18px 16px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- Hero -->
+<header class="pp-header">
+  <button class="pp-theme-btn" id="themeBtn" aria-label="Toggle theme">🌙</button>
+  <div class="pp-header-icon">🔒</div>
+  <h1>Backlog My Tasks</h1>
+  <p class="pp-subtitle">Privacy Policy</p>
+</header>
+
+<!-- Sticky Language Tabs -->
+<nav class="pp-lang-bar" role="tablist" aria-label="Language selector">
+  <button class="pp-lang-btn" data-lang="ja"    role="tab">🇯🇵 日本語</button>
+  <button class="pp-lang-btn" data-lang="en"    role="tab">🇺🇸 English</button>
+  <button class="pp-lang-btn" data-lang="ko"    role="tab">🇰🇷 한국어</button>
+  <button class="pp-lang-btn" data-lang="zh-TW" role="tab">🇹🇼 繁體中文</button>
+  <button class="pp-lang-btn" data-lang="zh-HK" role="tab">🇭🇰 廣東話</button>
+</nav>
+
+<main class="pp-content">
+
+<!-- ════════════════ 日本語 ════════════════ -->
+<section class="pp-lang-section" data-lang="ja">
+  <p class="pp-date">最終更新：2026年4月7日</p>
+
+  <div class="pp-card">
+    <div class="pp-card-header"><div class="pp-card-icon">🛡️</div><h2>基本方針</h2></div>
+    <p>「Backlog My Tasks」（以下、本拡張機能）は、ユーザーのプライバシーを尊重し、個人情報の適切な保護に努めます。</p>
+    <div class="pp-badge">✅ 外部送信なし — すべてのデータは端末内で完結します</div>
+  </div>
+
+  <div class="pp-card">
+    <div class="pp-card-header"><div class="pp-card-icon">📋</div><h2>収集する情報</h2></div>
+    <p>本拡張機能が収集・保存する情報は以下のみです：</p>
+    <ul>
+      <li><strong>Backlog スペース URL</strong>：設定画面で入力したURL（<code>chrome.storage.sync</code> に保存）</li>
+      <li><strong>Backlog API キー</strong>：設定画面で入力したAPIキー（<code>chrome.storage.sync</code> に保存）</li>
+    </ul>
+    <p>また、以下の情報をローカルストレージ（<code>chrome.storage.local</code>）に一時保存します（端末外には送信しません）：</p>
+    <ul>
+      <li>取得したタスクデータのキャッシュ</li>
+      <li>ユーザーが入力したローカルメモ</li>
+      <li>ピン留め・通知履歴などの設定</li>
+    </ul>
+  </div>
+
+  <div class="pp-card">
+    <div class="pp-card-header"><div class="pp-card-icon">🎯</div><h2>情報の利用目的</h2></div>
+    <p>収集した情報は以下の目的のみに使用します：</p>
+    <ul>
+      <li>ユーザーが設定したBacklogスペースのAPIへのアクセス</li>
+      <li>ログインユーザーに割り当てられたタスクの取得・表示</li>
+    </ul>
+  </div>
+
+  <div class="pp-card">
+    <div class="pp-card-header"><div class="pp-card-icon">🚫</div><h2>第三者への提供</h2></div>
+    <p>収集した情報は、ユーザーが設定したBacklogのAPIエンドポイント以外のいかなる第三者にも送信・提供しません。すべてのデータ処理はユーザーのブラウザ内で完結します。</p>
+    <div class="pp-badge">✅ 外部送信なし</div>
+  </div>
+
+  <div class="pp-card">
+    <div class="pp-card-header"><div class="pp-card-icon">🌐</div><h2>外部サービスへの通信</h2></div>
+    <p>本拡張機能はユーザーが設定したBacklogスペース（例：<code>https://yourspace.backlog.com</code>）のAPIにのみ通信します。アナリティクス・広告・トラッキングサービスへの通信は一切行いません。</p>
+  </div>
+
+  <div class="pp-card">
+    <div class="pp-card-header"><div class="pp-card-icon">💻</div><h2>リモートコード</h2></div>
+    <p>本拡張機能はリモートコードを実行しません。すべてのコードは拡張機能パッケージ内にバンドルされており、Chrome ウェブストアによって審査・署名されています。</p>
+    <div class="pp-badge">🔒 Chrome Web Store 審査済み</div>
+  </div>
+
+  <div class="pp-card">
+    <div class="pp-card-header"><div class="pp-card-icon">💾</div><h2>データの保存場所</h2></div>
+    <p>すべてのデータはユーザーのブラウザ内（Chromeストレージ）にのみ保存されます。本拡張機能の開発者がユーザーのデータにアクセスすることはできません。</p>
+    <p>ブラウザのデータを消去することで、保存されたデータをいつでも削除できます。</p>
+  </div>
+
+  <div class="pp-card">
+    <div class="pp-card-header"><div class="pp-card-icon">👤</div><h2>未成年者について</h2></div>
+    <p>本拡張機能は、Backlogを利用する業務ユーザーを対象としたビジネスツールです。未成年者の使用を意図したものではありません。</p>
+  </div>
+
+  <div class="pp-card">
+    <div class="pp-card-header"><div class="pp-card-icon">📝</div><h2>ポリシーの変更</h2></div>
+    <p>本プライバシーポリシーは予告なく改訂される場合があります。重要な変更がある場合は、拡張機能のアップデートリリースノートでお知らせします。最新版は常に本ページに掲載されます。</p>
+  </div>
+
+  <div class="pp-card">
+    <div class="pp-card-header"><div class="pp-card-icon">📬</div><h2>お問い合わせ</h2></div>
+    <p>本プライバシーポリシーに関するご質問は、Chrome ウェブストアの拡張機能ページよりお問い合わせください。</p>
+  </div>
+</section>
+
+<!-- ════════════════ English ════════════════ -->
+<section class="pp-lang-section" data-lang="en">
+  <p class="pp-date">Last updated: April 7, 2026</p>
+
+  <div class="pp-card">
+    <div class="pp-card-header"><div class="pp-card-icon">🛡️</div><h2>Overview</h2></div>
+    <p>"Backlog My Tasks" (the "Extension") is committed to protecting your privacy and handling your personal information with care.</p>
+    <div class="pp-badge">✅ No external uploads — all data stays on your device</div>
+  </div>
+
+  <div class="pp-card">
+    <div class="pp-card-header"><div class="pp-card-icon">📋</div><h2>Information We Collect</h2></div>
+    <p>The Extension collects and stores only the following:</p>
+    <ul>
+      <li><strong>Backlog Space URL</strong>: The URL you enter in settings (stored in <code>chrome.storage.sync</code>)</li>
+      <li><strong>Backlog API Key</strong>: The API key you enter in settings (stored in <code>chrome.storage.sync</code>)</li>
+    </ul>
+    <p>The following is temporarily stored in local storage (<code>chrome.storage.local</code>) and never leaves your device:</p>
+    <ul>
+      <li>Cached task data retrieved from Backlog</li>
+      <li>Local notes you enter</li>
+      <li>Settings such as pinned items and notification history</li>
+    </ul>
+  </div>
+
+  <div class="pp-card">
+    <div class="pp-card-header"><div class="pp-card-icon">🎯</div><h2>How We Use Your Information</h2></div>
+    <p>Collected information is used solely for:</p>
+    <ul>
+      <li>Accessing the Backlog space API you configured</li>
+      <li>Retrieving and displaying tasks assigned to you</li>
+    </ul>
+  </div>
+
+  <div class="pp-card">
+    <div class="pp-card-header"><div class="pp-card-icon">🚫</div><h2>Third Parties</h2></div>
+    <p>Your information is never sold, shared, or disclosed to any third party other than the Backlog API endpoint you configured. All data processing occurs entirely within your browser.</p>
+    <div class="pp-badge">✅ No external data transmission</div>
+  </div>
+
+  <div class="pp-card">
+    <div class="pp-card-header"><div class="pp-card-icon">🌐</div><h2>External Communications</h2></div>
+    <p>The Extension communicates only with the Backlog space API you configured (e.g., <code>https://yourspace.backlog.com</code>). No analytics, advertising, or tracking services are used.</p>
+  </div>
+
+  <div class="pp-card">
+    <div class="pp-card-header"><div class="pp-card-icon">💻</div><h2>Remote Code</h2></div>
+    <p>The Extension does not execute remote code. All code is bundled within the extension package and has been reviewed and signed by the Chrome Web Store.</p>
+    <div class="pp-badge">🔒 Chrome Web Store verified</div>
+  </div>
+
+  <div class="pp-card">
+    <div class="pp-card-header"><div class="pp-card-icon">💾</div><h2>Data Storage</h2></div>
+    <p>All data is stored only within your browser (Chrome storage). The developer of this Extension has no access to your data.</p>
+    <p>You can delete all stored data at any time by clearing your browser data.</p>
+  </div>
+
+  <div class="pp-card">
+    <div class="pp-card-header"><div class="pp-card-icon">👤</div><h2>Minors</h2></div>
+    <p>The Extension is a business tool intended for Backlog users in a professional context. It is not designed for or directed at minors.</p>
+  </div>
+
+  <div class="pp-card">
+    <div class="pp-card-header"><div class="pp-card-icon">📝</div><h2>Policy Changes</h2></div>
+    <p>This Privacy Policy may be updated at any time. Significant changes will be announced in the extension's release notes. The latest version will always be available on this page.</p>
+  </div>
+
+  <div class="pp-card">
+    <div class="pp-card-header"><div class="pp-card-icon">📬</div><h2>Contact</h2></div>
+    <p>For questions about this Privacy Policy, please reach out via the extension's page on the Chrome Web Store.</p>
+  </div>
+</section>
+
+<!-- ════════════════ 한국어 ════════════════ -->
+<section class="pp-lang-section" data-lang="ko">
+  <p class="pp-date">최종 업데이트: 2026년 4월 7일</p>
+
+  <div class="pp-card">
+    <div class="pp-card-header"><div class="pp-card-icon">🛡️</div><h2>기본 방침</h2></div>
+    <p>「Backlog My Tasks」（이하 「본 확장프로그램」）는 사용자의 개인정보를 존중하며 적절히 보호하기 위해 노력합니다.</p>
+    <div class="pp-badge">✅ 외부 전송 없음 — 모든 데이터는 기기 내에서 완결됩니다</div>
+  </div>
+
+  <div class="pp-card">
+    <div class="pp-card-header"><div class="pp-card-icon">📋</div><h2>수집하는 정보</h2></div>
+    <p>본 확장프로그램이 수집·저장하는 정보는 다음에 한합니다：</p>
+    <ul>
+      <li><strong>Backlog 스페이스 URL</strong>：설정 화면에서 입력한 URL（<code>chrome.storage.sync</code> 에 저장）</li>
+      <li><strong>Backlog API 키</strong>：설정 화면에서 입력한 API 키（<code>chrome.storage.sync</code> 에 저장）</li>
+    </ul>
+    <p>또한 다음 정보를 로컬 스토리지（<code>chrome.storage.local</code>）에 임시 저장합니다（기기 외부로는 전송되지 않습니다）：</p>
+    <ul>
+      <li>취득한 작업 데이터 캐시</li>
+      <li>사용자가 입력한 로컬 메모</li>
+      <li>핀 고정·알림 기록 등 설정</li>
+    </ul>
+  </div>
+
+  <div class="pp-card">
+    <div class="pp-card-header"><div class="pp-card-icon">🎯</div><h2>정보의 이용 목적</h2></div>
+    <p>수집한 정보는 다음 목적으로만 사용합니다：</p>
+    <ul>
+      <li>설정한 Backlog 스페이스 API에 액세스</li>
+      <li>로그인한 사용자에게 할당된 작업 취득·표시</li>
+    </ul>
+  </div>
+
+  <div class="pp-card">
+    <div class="pp-card-header"><div class="pp-card-icon">🚫</div><h2>제3자 제공</h2></div>
+    <p>수집한 정보는 사용자가 설정한 Backlog API 엔드포인트 이외의 어떠한 제3자에게도 전송·제공하지 않습니다. 모든 데이터 처리는 사용자의 브라우저 내에서 완결됩니다.</p>
+    <div class="pp-badge">✅ 외부 전송 없음</div>
+  </div>
+
+  <div class="pp-card">
+    <div class="pp-card-header"><div class="pp-card-icon">🌐</div><h2>외부 서비스 통신</h2></div>
+    <p>본 확장프로그램은 사용자가 설정한 Backlog 스페이스（예：<code>https://yourspace.backlog.com</code>）의 API에만 통신합니다. 분석·광고·추적 서비스와의 통신은 일절 수행하지 않습니다.</p>
+  </div>
+
+  <div class="pp-card">
+    <div class="pp-card-header"><div class="pp-card-icon">💻</div><h2>원격 코드</h2></div>
+    <p>본 확장프로그램은 원격 코드를 실행하지 않습니다. 모든 코드는 확장프로그램 패키지에 번들되어 있으며 Chrome 웹 스토어의 심사 및 서명을 받았습니다.</p>
+    <div class="pp-badge">🔒 Chrome 웹 스토어 심사 완료</div>
+  </div>
+
+  <div class="pp-card">
+    <div class="pp-card-header"><div class="pp-card-icon">💾</div><h2>데이터 저장 위치</h2></div>
+    <p>모든 데이터는 사용자의 브라우저（Chrome 스토리지） 내에만 저장됩니다. 본 확장프로그램의 개발자가 사용자 데이터에 접근하는 것은 불가능합니다.</p>
+    <p>브라우저 데이터를 삭제하면 언제든지 저장된 데이터를 제거할 수 있습니다.</p>
+  </div>
+
+  <div class="pp-card">
+    <div class="pp-card-header"><div class="pp-card-icon">👤</div><h2>미성년자</h2></div>
+    <p>본 확장프로그램은 Backlog를 업무에 활용하는 사용자를 위한 비즈니스 도구입니다. 미성년자를 대상으로 설계되지 않았습니다.</p>
+  </div>
+
+  <div class="pp-card">
+    <div class="pp-card-header"><div class="pp-card-icon">📝</div><h2>정책 변경</h2></div>
+    <p>본 개인정보 처리방침은 예고 없이 변경될 수 있습니다. 중요한 변경 사항은 확장프로그램의 업데이트 릴리스 노트를 통해 공지됩니다. 최신 버전은 항상 이 페이지에서 확인할 수 있습니다.</p>
+  </div>
+
+  <div class="pp-card">
+    <div class="pp-card-header"><div class="pp-card-icon">📬</div><h2>문의</h2></div>
+    <p>본 개인정보 처리방침에 관한 문의는 Chrome 웹 스토어의 확장프로그램 페이지에서 연락해 주시기 바랍니다.</p>
+  </div>
+</section>
+
+<!-- ════════════════ 繁體中文（台灣）════════════════ -->
+<section class="pp-lang-section" data-lang="zh-TW">
+  <p class="pp-date">最後更新：2026年4月7日</p>
+
+  <div class="pp-card">
+    <div class="pp-card-header"><div class="pp-card-icon">🛡️</div><h2>基本方針</h2></div>
+    <p>「Backlog My Tasks」（以下簡稱「本擴充功能」）尊重使用者的隱私，並致力於妥善保護個人資訊。</p>
+    <div class="pp-badge">✅ 不對外傳送 — 所有資料僅在裝置內處理</div>
+  </div>
+
+  <div class="pp-card">
+    <div class="pp-card-header"><div class="pp-card-icon">📋</div><h2>收集的資訊</h2></div>
+    <p>本擴充功能收集與儲存的資訊僅限以下項目：</p>
+    <ul>
+      <li><strong>Backlog 空間 URL</strong>：在設定畫面輸入的 URL（儲存於 <code>chrome.storage.sync</code>）</li>
+      <li><strong>Backlog API 金鑰</strong>：在設定畫面輸入的 API 金鑰（儲存於 <code>chrome.storage.sync</code>）</li>
+    </ul>
+    <p>以下資訊會暫時儲存於本機儲存空間（<code>chrome.storage.local</code>），不會傳送至裝置外部：</p>
+    <ul>
+      <li>取得的工作資料快取</li>
+      <li>使用者輸入的本機備忘錄</li>
+      <li>釘選、通知紀錄等設定</li>
+    </ul>
+  </div>
+
+  <div class="pp-card">
+    <div class="pp-card-header"><div class="pp-card-icon">🎯</div><h2>資訊的使用目的</h2></div>
+    <p>收集的資訊僅用於以下目的：</p>
+    <ul>
+      <li>存取使用者設定的 Backlog 空間 API</li>
+      <li>取得並顯示指派給登入使用者的工作</li>
+    </ul>
+  </div>
+
+  <div class="pp-card">
+    <div class="pp-card-header"><div class="pp-card-icon">🚫</div><h2>提供給第三方</h2></div>
+    <p>收集的資訊不會出售、共享或提供給使用者設定的 Backlog API 端點以外的任何第三方。所有資料處理均在瀏覽器內完成。</p>
+    <div class="pp-badge">✅ 無外部資料傳輸</div>
+  </div>
+
+  <div class="pp-card">
+    <div class="pp-card-header"><div class="pp-card-icon">🌐</div><h2>與外部服務的通訊</h2></div>
+    <p>本擴充功能僅與使用者設定的 Backlog 空間（例：<code>https://yourspace.backlog.com</code>）的 API 進行通訊。不使用任何分析、廣告或追蹤服務。</p>
+  </div>
+
+  <div class="pp-card">
+    <div class="pp-card-header"><div class="pp-card-icon">💻</div><h2>遠端程式碼</h2></div>
+    <p>本擴充功能不執行遠端程式碼。所有程式碼均已封裝於擴充功能套件中，並經過 Chrome 線上應用程式商店的審查與簽署。</p>
+    <div class="pp-badge">🔒 Chrome 線上應用程式商店已審查</div>
+  </div>
+
+  <div class="pp-card">
+    <div class="pp-card-header"><div class="pp-card-icon">💾</div><h2>資料儲存位置</h2></div>
+    <p>所有資料僅儲存於使用者的瀏覽器（Chrome 儲存空間）中。本擴充功能的開發者無法存取使用者的資料。</p>
+    <p>清除瀏覽器資料即可隨時刪除所有已儲存的資料。</p>
+  </div>
+
+  <div class="pp-card">
+    <div class="pp-card-header"><div class="pp-card-icon">👤</div><h2>未成年人</h2></div>
+    <p>本擴充功能是專為使用 Backlog 的業務人員設計的商業工具，並非針對未成年人所設計或提供。</p>
+  </div>
+
+  <div class="pp-card">
+    <div class="pp-card-header"><div class="pp-card-icon">📝</div><h2>政策變更</h2></div>
+    <p>本隱私權政策得隨時更新。重大變更將於擴充功能的更新版本說明中公告。最新版本將持續發布於本頁面。</p>
+  </div>
+
+  <div class="pp-card">
+    <div class="pp-card-header"><div class="pp-card-icon">📬</div><h2>聯絡方式</h2></div>
+    <p>如對本隱私權政策有任何疑問，請透過 Chrome 線上應用程式商店的擴充功能頁面與我們聯繫。</p>
+  </div>
+</section>
+
+<!-- ════════════════ 廣東話（香港）════════════════ -->
+<section class="pp-lang-section" data-lang="zh-HK">
+  <p class="pp-date">最後更新：2026年4月7日</p>
+
+  <div class="pp-card">
+    <div class="pp-card-header"><div class="pp-card-icon">🛡️</div><h2>基本方針</h2></div>
+    <p>「Backlog My Tasks」（以下簡稱「本擴充程式」）致力保護用戶私隱，並妥善處理個人資料。</p>
+    <div class="pp-badge">✅ 不對外傳送 — 所有資料只在裝置內處理</div>
+  </div>
+
+  <div class="pp-card">
+    <div class="pp-card-header"><div class="pp-card-icon">📋</div><h2>收集的資料</h2></div>
+    <p>本擴充程式收集及儲存的資料僅限以下項目：</p>
+    <ul>
+      <li><strong>Backlog 空間 URL</strong>：在設定畫面輸入的 URL（儲存於 <code>chrome.storage.sync</code>）</li>
+      <li><strong>Backlog API 金鑰</strong>：在設定畫面輸入的 API 金鑰（儲存於 <code>chrome.storage.sync</code>）</li>
+    </ul>
+    <p>以下資料會暫時儲存於本地儲存空間（<code>chrome.storage.local</code>），不會傳送至裝置外部：</p>
+    <ul>
+      <li>取得的任務資料快取</li>
+      <li>用戶輸入的本地備忘</li>
+      <li>釘選、通知記錄等設定</li>
+    </ul>
+  </div>
+
+  <div class="pp-card">
+    <div class="pp-card-header"><div class="pp-card-icon">🎯</div><h2>資料的使用目的</h2></div>
+    <p>收集的資料僅用於以下目的：</p>
+    <ul>
+      <li>存取用戶設定的 Backlog 空間 API</li>
+      <li>取得並顯示分配給已登入用戶的任務</li>
+    </ul>
+  </div>
+
+  <div class="pp-card">
+    <div class="pp-card-header"><div class="pp-card-icon">🚫</div><h2>向第三方披露</h2></div>
+    <p>收集的資料不會出售、共享或披露予用戶設定的 Backlog API 端點以外的任何第三方。所有資料處理均在瀏覽器內完成。</p>
+    <div class="pp-badge">✅ 無外部資料傳輸</div>
+  </div>
+
+  <div class="pp-card">
+    <div class="pp-card-header"><div class="pp-card-icon">🌐</div><h2>與外部服務的通訊</h2></div>
+    <p>本擴充程式僅與用戶設定的 Backlog 空間（例：<code>https://yourspace.backlog.com</code>）的 API 進行通訊。不使用任何分析、廣告或追蹤服務。</p>
+  </div>
+
+  <div class="pp-card">
+    <div class="pp-card-header"><div class="pp-card-icon">💻</div><h2>遠端程式碼</h2></div>
+    <p>本擴充程式不執行遠端程式碼。所有程式碼均已封裝於擴充程式套件內，並經 Chrome 線上應用程式商店審查及簽署。</p>
+    <div class="pp-badge">🔒 Chrome 線上應用程式商店已審查</div>
+  </div>
+
+  <div class="pp-card">
+    <div class="pp-card-header"><div class="pp-card-icon">💾</div><h2>資料儲存位置</h2></div>
+    <p>所有資料僅儲存於用戶的瀏覽器（Chrome 儲存空間）中。本擴充程式的開發者無法存取用戶的資料。</p>
+    <p>清除瀏覽器資料即可隨時刪除所有已儲存的資料。</p>
+  </div>
+
+  <div class="pp-card">
+    <div class="pp-card-header"><div class="pp-card-icon">👤</div><h2>未成年人</h2></div>
+    <p>本擴充程式係專為使用 Backlog 的業務人員設計的商業工具，並非針對未成年人所設計或提供。</p>
+  </div>
+
+  <div class="pp-card">
+    <div class="pp-card-header"><div class="pp-card-icon">📝</div><h2>私隱政策變更</h2></div>
+    <p>本私隱政策可隨時更新。重大變更將於擴充程式的更新版本說明中公告。最新版本將持續發布於本頁面。</p>
+  </div>
+
+  <div class="pp-card">
+    <div class="pp-card-header"><div class="pp-card-icon">📬</div><h2>聯絡我們</h2></div>
+    <p>如對本私隱政策有任何查詢，請透過 Chrome 線上應用程式商店的擴充程式頁面與我們聯繫。</p>
+  </div>
+</section>
+
+</main>
+
+<footer class="pp-footer">
+  <p>Backlog My Tasks — Chrome Extension</p>
+</footer>
+
+<script>
+(function () {
+  'use strict';
+
+  const LANGS = ['ja', 'en', 'ko', 'zh-TW', 'zh-HK'];
+
+  /* ── Language detection ── */
+  function detectLang() {
+    const hash = location.hash.replace('#', '');
+    if (LANGS.includes(hash)) return hash;
+
+    const navLangs = (navigator.languages && navigator.languages.length)
+      ? Array.from(navigator.languages)
+      : [navigator.language || 'ja'];
+
+    for (const nl of navLangs) {
+      const l = nl.toLowerCase();
+      if (l.startsWith('ja'))                                    return 'ja';
+      if (l.startsWith('ko'))                                    return 'ko';
+      if (l === 'zh-tw' || l === 'zh-hant-tw')                  return 'zh-TW';
+      if (l === 'zh-hk' || l === 'zh-hant-hk' || l === 'zh-mo') return 'zh-HK';
+      if (l === 'zh-hant')                                       return 'zh-TW';
+      if (l.startsWith('en'))                                    return 'en';
+      if (l.startsWith('zh'))                                    return 'zh-TW';
+    }
+    return 'ja';
+  }
+
+  /* ── Activate language ── */
+  const HTML_LANG = { ja: 'ja', en: 'en', ko: 'ko', 'zh-TW': 'zh-Hant-TW', 'zh-HK': 'zh-Hant-HK' };
+
+  function switchLang(lang) {
+    document.querySelectorAll('.pp-lang-section').forEach(function (s) {
+      s.classList.toggle('active', s.dataset.lang === lang);
+    });
+    document.querySelectorAll('.pp-lang-btn').forEach(function (b) {
+      const on = b.dataset.lang === lang;
+      b.classList.toggle('active', on);
+      b.setAttribute('aria-selected', on ? 'true' : 'false');
+    });
+    history.replaceState(null, '', '#' + lang);
+    document.documentElement.lang = HTML_LANG[lang] || lang;
+  }
+
+  document.querySelectorAll('.pp-lang-btn').forEach(function (btn) {
+    btn.addEventListener('click', function () {
+      switchLang(btn.dataset.lang);
+      btn.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+    });
+  });
+
+  window.addEventListener('hashchange', function () {
+    const hash = location.hash.replace('#', '');
+    if (LANGS.includes(hash)) switchLang(hash);
+  });
+
+  /* ── Dark mode toggle ── */
+  var themeBtn = document.getElementById('themeBtn');
+
+  function applyTheme(theme) {
+    document.documentElement.setAttribute('data-theme', theme);
+    themeBtn.textContent = theme === 'dark' ? '☀️' : '🌙';
+    localStorage.setItem('pp_theme', theme);
+  }
+
+  var saved = localStorage.getItem('pp_theme');
+  if (saved) {
+    applyTheme(saved);
+  } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+    applyTheme('dark');
+  }
+
+  themeBtn.addEventListener('click', function () {
+    var cur = document.documentElement.getAttribute('data-theme');
+    applyTheme(cur === 'dark' ? 'light' : 'dark');
+  });
+
+  /* ── Init ── */
+  switchLang(detectLang());
+})();
+</script>
+</body>
+</html>
