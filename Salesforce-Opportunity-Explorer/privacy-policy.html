@@ -1,136 +1,812 @@
 <!DOCTYPE html>
 <html lang="ja">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>プライバシーポリシー - Salesforce Opportunity Explorer</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Privacy Policy — Salesforce Opportunity Explorer</title>
   <style>
-    * { box-sizing: border-box; margin: 0; padding: 0; }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --brand:        #0176d3;
+      --brand-dark:   #014486;
+      --brand-glow:   rgba(1,118,211,0.15);
+      --accent:       #032d60;
+      --bg:           #f0f4f8;
+      --card:         #ffffff;
+      --text:         #1a202c;
+      --text-sub:     #64748b;
+      --border:       #e2e8f0;
+      --shadow:       0 2px 12px rgba(0,0,0,.07);
+      --shadow-hover: 0 6px 24px rgba(0,0,0,.12);
+      --tab-bg:       #e8f4fd;
+      --tab-text:     #64748b;
+      --hero-from:    #032d60;
+      --hero-to:      #0176d3;
+      --badge-bg:     rgba(1,118,211,0.10);
+      --badge-border: rgba(1,118,211,0.30);
+    }
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --bg:           #0f172a;
+        --card:         #1e293b;
+        --text:         #e2e8f0;
+        --text-sub:     #94a3b8;
+        --border:       #334155;
+        --shadow:       0 2px 12px rgba(0,0,0,.30);
+        --shadow-hover: 0 6px 28px rgba(0,0,0,.45);
+        --tab-bg:       #1e3a5f;
+        --tab-text:     #94a3b8;
+        --hero-from:    #020d1f;
+        --hero-to:      #0e3a6b;
+        --badge-bg:     rgba(1,118,211,0.15);
+        --badge-border: rgba(96,165,250,0.30);
+        --brand:        #60a5fa;
+        --brand-dark:   #93c5fd;
+        --brand-glow:   rgba(96,165,250,0.15);
+      }
+    }
+    [data-theme="dark"] {
+      --bg:           #0f172a;
+      --card:         #1e293b;
+      --text:         #e2e8f0;
+      --text-sub:     #94a3b8;
+      --border:       #334155;
+      --shadow:       0 2px 12px rgba(0,0,0,.30);
+      --shadow-hover: 0 6px 28px rgba(0,0,0,.45);
+      --tab-bg:       #1e3a5f;
+      --tab-text:     #94a3b8;
+      --hero-from:    #020d1f;
+      --hero-to:      #0e3a6b;
+      --badge-bg:     rgba(1,118,211,0.15);
+      --badge-border: rgba(96,165,250,0.30);
+      --brand:        #60a5fa;
+      --brand-dark:   #93c5fd;
+      --brand-glow:   rgba(96,165,250,0.15);
+    }
+    [data-theme="light"] {
+      --brand:        #0176d3;
+      --brand-dark:   #014486;
+      --brand-glow:   rgba(1,118,211,0.15);
+      --accent:       #032d60;
+      --bg:           #f0f4f8;
+      --card:         #ffffff;
+      --text:         #1a202c;
+      --text-sub:     #64748b;
+      --border:       #e2e8f0;
+      --tab-bg:       #e8f4fd;
+      --tab-text:     #64748b;
+      --hero-from:    #032d60;
+      --hero-to:      #0176d3;
+      --badge-bg:     rgba(1,118,211,0.10);
+      --badge-border: rgba(1,118,211,0.30);
+    }
+
     body {
-      font-family: 'Helvetica Neue', Arial, 'Hiragino Kaku Gothic ProN', 'Hiragino Sans', Meiryo, sans-serif;
-      font-size: 15px;
-      line-height: 1.8;
-      color: #333;
-      background: #f9f9f9;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Helvetica Neue", Arial,
+                   "Noto Sans CJK JP", "Noto Sans CJK KR", "Noto Sans CJK TC", sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.75;
+      min-height: 100vh;
+      transition: background .2s, color .2s;
     }
-    header {
-      background: #032D60;
-      color: #fff;
-      padding: 32px 0;
+
+    /* ── Hero ── */
+    .hero {
+      background: linear-gradient(135deg, var(--hero-from) 0%, var(--hero-to) 100%);
+      padding: 48px 24px 36px;
       text-align: center;
+      position: relative;
+      overflow: hidden;
     }
-    header h1 { font-size: 22px; font-weight: bold; letter-spacing: 0.03em; }
-    header p { font-size: 13px; margin-top: 6px; opacity: 0.75; }
-    main {
-      max-width: 760px;
-      margin: 40px auto;
-      padding: 0 20px 60px;
+    .hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse 60% 60% at 50% 110%, rgba(1,118,211,0.25) 0%, transparent 70%);
+      pointer-events: none;
     }
-    .meta {
+    .hero-theme-btn {
+      position: absolute;
+      top: 14px; right: 14px;
+      background: rgba(255,255,255,.15);
+      border: 1px solid rgba(255,255,255,.28);
+      border-radius: 8px;
+      color: #fff;
+      padding: 6px 12px;
+      cursor: pointer;
+      font-size: .82rem;
+      backdrop-filter: blur(4px);
+      transition: background .2s;
+      line-height: 1;
+    }
+    .hero-theme-btn:hover { background: rgba(255,255,255,.26); }
+    .hero-icon {
+      font-size: 54px;
+      line-height: 1;
+      margin-bottom: 14px;
+      display: block;
+      filter: drop-shadow(0 0 16px rgba(1,118,211,0.6));
+    }
+    .hero h1 {
+      font-size: clamp(18px, 5vw, 24px);
+      font-weight: 700;
+      color: #fff;
+      letter-spacing: -.3px;
+      margin-bottom: 6px;
+    }
+    .hero-sub {
       font-size: 13px;
-      color: #888;
-      margin-bottom: 32px;
+      color: rgba(255,255,255,.55);
+      letter-spacing: .5px;
     }
-    section { margin-bottom: 28px; }
-    h2 {
-      font-size: 16px;
-      font-weight: bold;
-      margin-bottom: 8px;
+
+    /* ── Badges ── */
+    .badges {
+      display: flex;
+      gap: 10px;
+      justify-content: center;
+      flex-wrap: wrap;
+      padding: 18px 16px 24px;
+      background: linear-gradient(135deg, var(--hero-from) 0%, var(--hero-to) 100%);
     }
-    p { margin-bottom: 8px; }
-    ul { padding-left: 20px; margin-bottom: 8px; }
-    ul li { margin-bottom: 4px; }
-    a { color: #0176d3; }
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 6px 14px;
+      border-radius: 999px;
+      border: 1px solid var(--badge-border);
+      background: var(--badge-bg);
+      color: var(--brand);
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: .2px;
+      backdrop-filter: blur(4px);
+    }
+
+    /* ── Sticky tab bar ── */
+    .tab-bar {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: var(--card);
+      border-bottom: 1px solid var(--border);
+      box-shadow: 0 1px 8px rgba(0,0,0,.06);
+      padding: 0 16px;
+      overflow-x: auto;
+      scrollbar-width: none;
+      -webkit-overflow-scrolling: touch;
+    }
+    .tab-bar::-webkit-scrollbar { display: none; }
+    .lang-tabs {
+      display: flex;
+      gap: 2px;
+      list-style: none;
+      min-width: max-content;
+      padding: 10px 0;
+    }
+    .lang-tab {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      padding: 7px 15px;
+      border-radius: 8px;
+      background: transparent;
+      color: var(--tab-text);
+      font-size: 13px;
+      font-weight: 500;
+      cursor: pointer;
+      text-decoration: none;
+      transition: background .15s, color .15s;
+      white-space: nowrap;
+      user-select: none;
+    }
+    .lang-tab:hover { background: var(--tab-bg); color: var(--text); }
+    .lang-tab.active {
+      background: var(--brand-glow);
+      color: var(--brand);
+      font-weight: 700;
+    }
+    .lang-tab .flag { font-size: 16px; }
+
+    /* ── Content ── */
+    .main {
+      max-width: 760px;
+      margin: 0 auto;
+      padding: 32px 16px 80px;
+    }
+
+    .lang-section { display: none; animation: fadeIn .22s ease; }
+    .lang-section.active { display: block; }
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: translateY(0); } }
+
+    .last-updated {
+      font-size: 12px;
+      color: var(--text-sub);
+      margin-bottom: 24px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    /* ── Cards ── */
+    .policy-card {
+      background: var(--card);
+      border-radius: 14px;
+      border: 1px solid var(--border);
+      box-shadow: var(--shadow);
+      padding: 22px 24px 20px;
+      margin-bottom: 14px;
+      transition: box-shadow .2s;
+    }
+    .policy-card:hover { box-shadow: var(--shadow-hover); }
+
+    .card-header {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 12px;
+    }
+    .card-icon {
+      width: 42px; height: 42px;
+      border-radius: 10px;
+      background: var(--brand-glow);
+      display: flex;
+      align-items: center; justify-content: center;
+      font-size: 20px;
+      flex-shrink: 0;
+    }
+    .card-title {
+      font-size: 15px;
+      font-weight: 700;
+      color: var(--brand);
+    }
+
+    p, li { font-size: 14px; color: var(--text); }
+    p { margin: 8px 0; }
+    ul { padding-left: 20px; margin: 8px 0; }
+    li { margin: 5px 0; }
+
+    code {
+      font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace;
+      font-size: 11.5px;
+      background: var(--tab-bg);
+      color: var(--text-sub);
+      padding: 2px 6px;
+      border-radius: 4px;
+    }
+
+    .highlight {
+      background: var(--badge-bg);
+      border: 1px solid var(--badge-border);
+      border-radius: 8px;
+      padding: 12px 16px;
+      margin-top: 12px;
+    }
+    .highlight p {
+      color: var(--brand);
+      font-size: 13px;
+      font-weight: 600;
+      margin: 0;
+    }
+
+    a { color: var(--brand); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+
+    /* ── Footer ── */
     footer {
       text-align: center;
+      padding: 24px 16px;
       font-size: 12px;
-      color: #999;
-      padding: 24px 0;
-      border-top: 1px solid #e0e0e0;
+      color: var(--text-sub);
+      border-top: 1px solid var(--border);
+      background: var(--card);
+    }
+
+    @media (max-width: 480px) {
+      .hero { padding: 36px 16px 28px; }
+      .hero-icon { font-size: 44px; }
+      .policy-card { padding: 18px 16px; }
     }
   </style>
 </head>
 <body>
 
-<header>
-  <h1>プライバシーポリシー</h1>
-  <p>Salesforce Opportunity Explorer</p>
-</header>
+<!-- Hero -->
+<div class="hero">
+  <button class="hero-theme-btn" id="themeBtn" aria-label="Toggle dark mode">🌙</button>
+  <span class="hero-icon">🔍</span>
+  <h1>Privacy Policy</h1>
+  <p class="hero-sub">Salesforce Opportunity Explorer</p>
+</div>
 
-<main>
+<!-- Badges (language-dynamic) -->
+<div class="badges" id="badge-bar"></div>
 
-  <p class="meta">最終更新日: 2026年5月20日　｜　対象拡張機能: Salesforce Opportunity Explorer v1.0</p>
+<!-- Sticky Language Tabs -->
+<div class="tab-bar">
+  <ul class="lang-tabs" role="tablist">
+    <li><a class="lang-tab" href="#ja" role="tab" data-lang="ja"><span class="flag">🇯🇵</span> 日本語</a></li>
+    <li><a class="lang-tab" href="#en" role="tab" data-lang="en"><span class="flag">🇺🇸</span> English</a></li>
+    <li><a class="lang-tab" href="#ko" role="tab" data-lang="ko"><span class="flag">🇰🇷</span> 한국어</a></li>
+    <li><a class="lang-tab" href="#tw" role="tab" data-lang="tw"><span class="flag">🇹🇼</span> 繁中（台灣）</a></li>
+    <li><a class="lang-tab" href="#hk" role="tab" data-lang="hk"><span class="flag">🇭🇰</span> 繁中（香港）</a></li>
+  </ul>
+</div>
 
-  <section>
-    <h2>1. 基本方針</h2>
-    <p>「Salesforce Opportunity Explorer」（以下、本拡張機能）は、ユーザーのプライバシーを尊重し、個人情報の適切な保護に努めます。</p>
-  </section>
+<main class="main">
 
-  <section>
-    <h2>2. アクセスする情報</h2>
-    <p>本拡張機能がアクセス・保存する情報は以下のみです：</p>
+<!-- ════ 日本語 ════ -->
+<section id="lang-ja" class="lang-section" role="tabpanel">
+  <p class="last-updated">🗓 最終更新：2025年1月</p>
+
+  <div class="policy-card">
+    <div class="card-header"><div class="card-icon">🛡️</div><div class="card-title">基本方針</div></div>
+    <p>Salesforce Opportunity Explorer（以下「本拡張機能」）は、ユーザーのプライバシーを最大限に尊重します。本拡張機能は、ユーザーが既にアクセス権を持つ Salesforce データを表示・管理するためのツールであり、ユーザーの同意なしに個人情報を収集・外部送信することはありません。</p>
+    <div class="highlight"><p>✅ すべてのデータはお使いのブラウザ内にのみ保存されます。外部サーバーへの送信は一切行いません。</p></div>
+  </div>
+
+  <div class="policy-card">
+    <div class="card-header"><div class="card-icon">📋</div><div class="card-title">アクセスする情報</div></div>
+    <p>本拡張機能は、以下の情報にアクセスします。</p>
     <ul>
-      <li><strong>Salesforce の認証クッキー（sid）</strong>：ユーザーがログイン済みの Salesforce セッションを識別するために使用します。</li>
-      <li><strong>Salesforce の商談データ・活動履歴</strong>：ユーザーの Salesforce 組織から、Salesforce REST API 経由で取得します。</li>
+      <li>Salesforce の商談・取引先・取引先責任者・活動データ</li>
+      <li>ログイン中のユーザーセッション（認証情報は保存しません）</li>
+      <li>列の表示設定・並び順・パートナー列名などのカスタマイズ設定（ブラウザのローカルストレージに保存）</li>
     </ul>
-    <p>また、以下の情報をブラウザのローカルストレージ（IndexedDB）に一時保存します（端末外には送信しません）：</p>
+  </div>
+
+  <div class="policy-card">
+    <div class="card-header"><div class="card-icon">🎯</div><div class="card-title">利用目的</div></div>
+    <p>取得した情報は、以下の目的にのみ使用します。</p>
     <ul>
-      <li>取得した商談データのキャッシュ</li>
+      <li>商談リストの表示・フィルタリング・ソート</li>
+      <li>活動履歴・次回アクションの表示</li>
+      <li>ユーザーごとの列カスタマイズ設定の保持</li>
+      <li>AI アシスタントへの分析データエクスポート</li>
     </ul>
-  </section>
+  </div>
 
-  <section>
-    <h2>3. 情報の利用目的</h2>
-    <p>収集した情報は以下の目的のみに使用します：</p>
+  <div class="policy-card">
+    <div class="card-header"><div class="card-icon">🚫</div><div class="card-title">第三者への提供</div></div>
+    <p>本拡張機能は、取得したデータを第三者に提供・販売・共有することは一切ありません。すべてのデータ処理はユーザーのブラウザ内で完結します。</p>
+  </div>
+
+  <div class="policy-card">
+    <div class="card-header"><div class="card-icon">🌐</div><div class="card-title">外部通信</div></div>
+    <p>本拡張機能が通信する外部サーバーは、ユーザーがログイン中の Salesforce 組織のみです。アナリティクス・広告・トラッキングサービスへの通信は一切行いません。</p>
+  </div>
+
+  <div class="policy-card">
+    <div class="card-header"><div class="card-icon">💻</div><div class="card-title">リモートコード</div></div>
+    <p>本拡張機能はリモートコードを実行しません。すべてのコードは拡張機能パッケージ内にバンドルされており、Chrome ウェブストアによって審査・署名されています。</p>
+  </div>
+
+  <div class="policy-card">
+    <div class="card-header"><div class="card-icon">💾</div><div class="card-title">データ保存</div></div>
+    <p>本拡張機能は、パフォーマンス向上のため以下のデータをブラウザ内にキャッシュします。</p>
     <ul>
-      <li>商談一覧の表示・絞り込み・リスクスコアリング</li>
-      <li>活動履歴の確認・収益グラフおよびカンバンボードへの反映</li>
-      <li>高リスク商談が検出された際のデスクトップ通知の送信</li>
-      <li>表示高速化のためのローカルキャッシュへの保存</li>
+      <li><strong>localStorage：</strong>列の表示設定・並び順・パートナー列名</li>
+      <li><strong>IndexedDB：</strong>商談の活動データキャッシュ（ブラウザ内のみ、クラウド同期なし）</li>
     </ul>
-  </section>
+    <p style="margin-top:8px">これらのデータは外部に送信されることはなく、ブラウザのデータを消去することで削除できます。</p>
+  </div>
 
-  <section>
-    <h2>4. 第三者への提供</h2>
-    <p>収集した情報は、いかなる第三者にも販売・提供・転送しません。</p>
-  </section>
+  <div class="policy-card">
+    <div class="card-header"><div class="card-icon">👤</div><div class="card-title">未成年者について</div></div>
+    <p>本拡張機能は企業の Salesforce ユーザーを対象としたビジネスツールです。未成年者の使用を意図したものではありません。</p>
+  </div>
 
-  <section>
-    <h2>5. 外部サービスへの通信</h2>
-    <p>
-      本拡張機能はユーザーがログイン中の Salesforce 組織（*.lightning.force.com / *.my.salesforce.com）の API にのみ通信します。それ以外の外部サーバーへの通信は一切行いません。
-    </p>
-  </section>
+  <div class="policy-card">
+    <div class="card-header"><div class="card-icon">📝</div><div class="card-title">ポリシーの変更</div></div>
+    <p>本プライバシーポリシーは予告なく改訂される場合があります。重要な変更がある場合は、拡張機能のアップデートリリースノートでお知らせします。最新版は常に本ページに掲載されます。</p>
+  </div>
 
-  <section>
-    <h2>6. リモートコード</h2>
-    <p>
-      本拡張機能は外部 URL からスクリプトを読み込む処理（リモートコード）を一切使用していません。すべての JavaScript コードは拡張機能パッケージ内にバンドルされています。
-    </p>
-  </section>
+  <div class="policy-card">
+    <div class="card-header"><div class="card-icon">📬</div><div class="card-title">お問い合わせ</div></div>
+    <p>本プライバシーポリシーに関するご質問は、Chrome ウェブストアの拡張機能ページよりお問い合わせください。</p>
+  </div>
+</section>
 
-  <section>
-    <h2>7. データの保存場所</h2>
-    <p>
-      すべてのデータはユーザーのブラウザ内（IndexedDB）にのみ保存されます。本拡張機能の開発者がユーザーのデータにアクセスすることはできません。
-    </p>
-  </section>
+<!-- ════ English ════ -->
+<section id="lang-en" class="lang-section" role="tabpanel">
+  <p class="last-updated">🗓 Last updated: January 2025</p>
 
-  <section>
-    <h2>8. お問い合わせ</h2>
-    <p>
-      本プライバシーポリシーに関するご質問は、GitHub リポジトリの Issue よりお問い合わせください。<br />
-      <a href="https://github.com/kouji-kojima/Salesforce-Opportunity-Explorer/issues" target="_blank" rel="noopener noreferrer">
-        https://github.com/kouji-kojima/Salesforce-Opportunity-Explorer/issues
-      </a>
-    </p>
-  </section>
+  <div class="policy-card">
+    <div class="card-header"><div class="card-icon">🛡️</div><div class="card-title">Our Commitment</div></div>
+    <p>Salesforce Opportunity Explorer (the "Extension") is committed to protecting your privacy. The Extension is a tool for viewing and managing Salesforce data that you are already authorized to access. It does not collect or transmit personal information without your consent.</p>
+    <div class="highlight"><p>✅ All data is stored exclusively within your browser. Nothing is ever sent to external servers.</p></div>
+  </div>
+
+  <div class="policy-card">
+    <div class="card-header"><div class="card-icon">📋</div><div class="card-title">Information Accessed</div></div>
+    <p>The Extension accesses the following information:</p>
+    <ul>
+      <li>Salesforce opportunity, account, contact, and activity data</li>
+      <li>Your active Salesforce login session (credentials are never stored)</li>
+      <li>Column visibility, order, and partner column name preferences (stored in browser localStorage)</li>
+    </ul>
+  </div>
+
+  <div class="policy-card">
+    <div class="card-header"><div class="card-icon">🎯</div><div class="card-title">Purpose of Use</div></div>
+    <p>Accessed information is used solely for the following purposes:</p>
+    <ul>
+      <li>Displaying, filtering, and sorting opportunity lists</li>
+      <li>Showing activity history and next scheduled actions</li>
+      <li>Persisting per-user column customization preferences</li>
+      <li>Exporting data for AI assistant analysis</li>
+    </ul>
+  </div>
+
+  <div class="policy-card">
+    <div class="card-header"><div class="card-icon">🚫</div><div class="card-title">Third-Party Disclosure</div></div>
+    <p>The Extension does not sell, share, or disclose any data to third parties. All data processing occurs entirely within your browser.</p>
+  </div>
+
+  <div class="policy-card">
+    <div class="card-header"><div class="card-icon">🌐</div><div class="card-title">External Communication</div></div>
+    <p>The only external server the Extension communicates with is the Salesforce org you are currently logged into. No analytics, advertising, or tracking services are used.</p>
+  </div>
+
+  <div class="policy-card">
+    <div class="card-header"><div class="card-icon">💻</div><div class="card-title">Remote Code</div></div>
+    <p>The Extension does not execute remote code. All code is bundled within the extension package and has been reviewed and signed by the Chrome Web Store.</p>
+  </div>
+
+  <div class="policy-card">
+    <div class="card-header"><div class="card-icon">💾</div><div class="card-title">Data Storage</div></div>
+    <p>The Extension caches the following data locally in your browser for performance:</p>
+    <ul>
+      <li><strong>localStorage:</strong> Column visibility, order, and partner column names</li>
+      <li><strong>IndexedDB:</strong> Opportunity activity data cache (local only, no cloud sync)</li>
+    </ul>
+    <p style="margin-top:8px">This data is never sent externally and can be deleted by clearing your browser data.</p>
+  </div>
+
+  <div class="policy-card">
+    <div class="card-header"><div class="card-icon">👤</div><div class="card-title">Minors</div></div>
+    <p>The Extension is a business tool intended for enterprise Salesforce users. It is not designed for or directed at minors.</p>
+  </div>
+
+  <div class="policy-card">
+    <div class="card-header"><div class="card-icon">📝</div><div class="card-title">Policy Changes</div></div>
+    <p>This Privacy Policy may be updated at any time. Significant changes will be announced in the extension's release notes. The latest version will always be available on this page.</p>
+  </div>
+
+  <div class="policy-card">
+    <div class="card-header"><div class="card-icon">📬</div><div class="card-title">Contact</div></div>
+    <p>For questions about this Privacy Policy, please reach out via the extension's page on the Chrome Web Store.</p>
+  </div>
+</section>
+
+<!-- ════ 한국어 ════ -->
+<section id="lang-ko" class="lang-section" role="tabpanel">
+  <p class="last-updated">🗓 최종 업데이트: 2025년 1월</p>
+
+  <div class="policy-card">
+    <div class="card-header"><div class="card-icon">🛡️</div><div class="card-title">기본 방침</div></div>
+    <p>Salesforce Opportunity Explorer（이하 「본 확장 프로그램」）는 사용자의 개인정보를 최대한 존중합니다. 본 확장 프로그램은 사용자가 이미 접근 권한을 보유한 Salesforce 데이터를 조회·관리하기 위한 도구로, 사용자의 동의 없이 개인정보를 수집하거나 외부로 전송하지 않습니다.</p>
+    <div class="highlight"><p>✅ 모든 데이터는 브라우저 내에만 저장됩니다. 외부 서버로의 전송은 일절 없습니다.</p></div>
+  </div>
+
+  <div class="policy-card">
+    <div class="card-header"><div class="card-icon">📋</div><div class="card-title">접근하는 정보</div></div>
+    <p>본 확장 프로그램은 다음 정보에 접근합니다.</p>
+    <ul>
+      <li>Salesforce의 영업 기회·거래처·연락처·활동 데이터</li>
+      <li>현재 로그인된 사용자 세션（인증 정보는 저장하지 않음）</li>
+      <li>열 표시 설정·정렬 순서·파트너 열 이름 등 사용자 설정（브라우저 로컬스토리지에 저장）</li>
+    </ul>
+  </div>
+
+  <div class="policy-card">
+    <div class="card-header"><div class="card-icon">🎯</div><div class="card-title">이용 목적</div></div>
+    <p>수집된 정보는 다음 목적으로만 사용됩니다.</p>
+    <ul>
+      <li>영업 기회 목록 표시·필터링·정렬</li>
+      <li>활동 이력 및 다음 예정 행동 표시</li>
+      <li>사용자별 열 사용자 정의 설정 유지</li>
+      <li>AI 어시스턴트 분석 데이터 내보내기</li>
+    </ul>
+  </div>
+
+  <div class="policy-card">
+    <div class="card-header"><div class="card-icon">🚫</div><div class="card-title">제3자 제공</div></div>
+    <p>본 확장 프로그램은 수집한 데이터를 제3자에게 제공·판매·공유하지 않습니다. 모든 데이터 처리는 사용자의 브라우저 내에서 완결됩니다.</p>
+  </div>
+
+  <div class="policy-card">
+    <div class="card-header"><div class="card-icon">🌐</div><div class="card-title">외부 통신</div></div>
+    <p>본 확장 프로그램이 통신하는 외부 서버는 사용자가 현재 로그인된 Salesforce 조직뿐입니다. 분석·광고·추적 서비스와의 통신은 일절 수행하지 않습니다.</p>
+  </div>
+
+  <div class="policy-card">
+    <div class="card-header"><div class="card-icon">💻</div><div class="card-title">원격 코드</div></div>
+    <p>본 확장 프로그램은 원격 코드를 실행하지 않습니다. 모든 코드는 확장 프로그램 패키지에 번들되어 있으며 Chrome 웹 스토어의 심사 및 서명을 받았습니다.</p>
+  </div>
+
+  <div class="policy-card">
+    <div class="card-header"><div class="card-icon">💾</div><div class="card-title">데이터 보관</div></div>
+    <p>본 확장 프로그램은 성능 향상을 위해 다음 데이터를 브라우저 내에 캐시합니다.</p>
+    <ul>
+      <li><strong>localStorage:</strong> 열 표시 설정·정렬 순서·파트너 열 이름</li>
+      <li><strong>IndexedDB:</strong> 영업 기회 활동 데이터 캐시（로컬 전용, 클라우드 동기화 없음）</li>
+    </ul>
+    <p style="margin-top:8px">이 데이터는 외부로 전송되지 않으며 브라우저 데이터를 삭제하여 지울 수 있습니다.</p>
+  </div>
+
+  <div class="policy-card">
+    <div class="card-header"><div class="card-icon">👤</div><div class="card-title">미성년자</div></div>
+    <p>본 확장 프로그램은 기업 Salesforce 사용자를 위한 비즈니스 도구입니다. 미성년자를 대상으로 설계되지 않았습니다.</p>
+  </div>
+
+  <div class="policy-card">
+    <div class="card-header"><div class="card-icon">📝</div><div class="card-title">정책 변경</div></div>
+    <p>본 개인정보 처리방침은 예고 없이 변경될 수 있습니다. 중요한 변경 사항은 확장 프로그램의 업데이트 릴리스 노트를 통해 공지됩니다. 최신 버전은 항상 이 페이지에서 확인할 수 있습니다.</p>
+  </div>
+
+  <div class="policy-card">
+    <div class="card-header"><div class="card-icon">📬</div><div class="card-title">문의</div></div>
+    <p>본 개인정보 처리방침에 관한 문의는 Chrome 웹 스토어의 확장 프로그램 페이지에서 연락해 주시기 바랍니다.</p>
+  </div>
+</section>
+
+<!-- ════ 繁中（台灣）════ -->
+<section id="lang-tw" class="lang-section" role="tabpanel">
+  <p class="last-updated">🗓 最後更新：2025年1月</p>
+
+  <div class="policy-card">
+    <div class="card-header"><div class="card-icon">🛡️</div><div class="card-title">基本方針</div></div>
+    <p>Salesforce Opportunity Explorer（以下簡稱「本擴充功能」）致力於保護您的隱私權。本擴充功能是一款用於檢視與管理您在 Salesforce 中已具備存取權限之資料的工具，不會在未經您同意的情況下收集或對外傳送個人資料。</p>
+    <div class="highlight"><p>✅ 所有資料僅儲存於您的瀏覽器中，不會傳送至任何外部伺服器。</p></div>
+  </div>
+
+  <div class="policy-card">
+    <div class="card-header"><div class="card-icon">📋</div><div class="card-title">存取之資訊</div></div>
+    <p>本擴充功能存取以下資訊：</p>
+    <ul>
+      <li>Salesforce 的商機、客戶、聯絡人及活動資料</li>
+      <li>目前登入的使用者工作階段（不儲存認證資訊）</li>
+      <li>欄位顯示設定、排列順序及合作夥伴欄位名稱等個人化設定（儲存於瀏覽器的本機儲存空間）</li>
+    </ul>
+  </div>
+
+  <div class="policy-card">
+    <div class="card-header"><div class="card-icon">🎯</div><div class="card-title">利用目的</div></div>
+    <p>所存取的資訊僅用於以下目的：</p>
+    <ul>
+      <li>顯示、篩選及排序商機清單</li>
+      <li>顯示活動歷程及下次預定行動</li>
+      <li>保留每位使用者的欄位自訂設定</li>
+      <li>匯出供 AI 助理分析使用的資料</li>
+    </ul>
+  </div>
+
+  <div class="policy-card">
+    <div class="card-header"><div class="card-icon">🚫</div><div class="card-title">第三方揭露</div></div>
+    <p>本擴充功能不會將任何資料出售、共享或揭露給第三方。所有資料處理均在您的瀏覽器內完成。</p>
+  </div>
+
+  <div class="policy-card">
+    <div class="card-header"><div class="card-icon">🌐</div><div class="card-title">外部通訊</div></div>
+    <p>本擴充功能唯一進行通訊的外部伺服器，是您目前登入的 Salesforce 組織。不使用任何分析、廣告或追蹤服務。</p>
+  </div>
+
+  <div class="policy-card">
+    <div class="card-header"><div class="card-icon">💻</div><div class="card-title">遠端程式碼</div></div>
+    <p>本擴充功能不執行遠端程式碼。所有程式碼均已封裝於擴充功能套件中，並經過 Chrome 線上應用程式商店的審查與簽署。</p>
+  </div>
+
+  <div class="policy-card">
+    <div class="card-header"><div class="card-icon">💾</div><div class="card-title">資料儲存</div></div>
+    <p>本擴充功能為提升效能，在瀏覽器本機快取以下資料：</p>
+    <ul>
+      <li><strong>localStorage：</strong>欄位顯示設定、排列順序及合作夥伴欄位名稱</li>
+      <li><strong>IndexedDB：</strong>商機活動資料快取（僅限本機，不進行雲端同步）</li>
+    </ul>
+    <p style="margin-top:8px">這些資料不會對外傳送，可透過清除瀏覽器資料予以刪除。</p>
+  </div>
+
+  <div class="policy-card">
+    <div class="card-header"><div class="card-icon">👤</div><div class="card-title">未成年人</div></div>
+    <p>本擴充功能是專為企業 Salesforce 使用者設計的商業工具，並非針對未成年人所設計或提供。</p>
+  </div>
+
+  <div class="policy-card">
+    <div class="card-header"><div class="card-icon">📝</div><div class="card-title">政策變更</div></div>
+    <p>本隱私權政策得隨時更新。重大變更將於擴充功能的更新版本說明中公告。最新版本將持續發布於本頁面。</p>
+  </div>
+
+  <div class="policy-card">
+    <div class="card-header"><div class="card-icon">📬</div><div class="card-title">聯絡方式</div></div>
+    <p>如對本隱私權政策有任何疑問，請透過 Chrome 線上應用程式商店的擴充功能頁面與我們聯繫。</p>
+  </div>
+</section>
+
+<!-- ════ 繁中（香港）════ -->
+<section id="lang-hk" class="lang-section" role="tabpanel">
+  <p class="last-updated">🗓 最後更新：2025年1月</p>
+
+  <div class="policy-card">
+    <div class="card-header"><div class="card-icon">🛡️</div><div class="card-title">基本方針</div></div>
+    <p>Salesforce Opportunity Explorer（以下簡稱「本擴充程式」）致力於保護您的私隱。本擴充程式係一款用於查閱及管理您在 Salesforce 中已具備存取權限之資料的工具，不會在未經您同意的情況下收集或對外傳送個人資料。</p>
+    <div class="highlight"><p>✅ 所有資料只儲存於您的瀏覽器中，不會傳送至任何外部伺服器。</p></div>
+  </div>
+
+  <div class="policy-card">
+    <div class="card-header"><div class="card-icon">📋</div><div class="card-title">所存取的資料</div></div>
+    <p>本擴充程式存取以下資料：</p>
+    <ul>
+      <li>Salesforce 的商機、客戶、聯絡人及活動資料</li>
+      <li>現時登入的用戶工作階段（不儲存認證資料）</li>
+      <li>欄位顯示設定、排列次序及合作夥伴欄位名稱等個人化設定（儲存於瀏覽器本地儲存空間）</li>
+    </ul>
+  </div>
+
+  <div class="policy-card">
+    <div class="card-header"><div class="card-icon">🎯</div><div class="card-title">使用目的</div></div>
+    <p>所存取的資料僅用於以下目的：</p>
+    <ul>
+      <li>顯示、篩選及排序商機清單</li>
+      <li>顯示活動記錄及下次預定行動</li>
+      <li>保留每位用戶的欄位自訂設定</li>
+      <li>匯出供 AI 助理分析使用的資料</li>
+    </ul>
+  </div>
+
+  <div class="policy-card">
+    <div class="card-header"><div class="card-icon">🚫</div><div class="card-title">向第三方披露</div></div>
+    <p>本擴充程式不會將任何資料出售、共享或披露予第三方。所有資料處理均在您的瀏覽器內完成。</p>
+  </div>
+
+  <div class="policy-card">
+    <div class="card-header"><div class="card-icon">🌐</div><div class="card-title">外部通訊</div></div>
+    <p>本擴充程式唯一進行通訊的外部伺服器，係您現時登入的 Salesforce 組織。不使用任何分析、廣告或追蹤服務。</p>
+  </div>
+
+  <div class="policy-card">
+    <div class="card-header"><div class="card-icon">💻</div><div class="card-title">遠端程式碼</div></div>
+    <p>本擴充程式不執行遠端程式碼。所有程式碼均已封裝於擴充程式套件內，並經 Chrome 線上應用程式商店審查及簽署。</p>
+  </div>
+
+  <div class="policy-card">
+    <div class="card-header"><div class="card-icon">💾</div><div class="card-title">資料儲存</div></div>
+    <p>本擴充程式為提升效能，在瀏覽器本地快取以下資料：</p>
+    <ul>
+      <li><strong>localStorage：</strong>欄位顯示設定、排列次序及合作夥伴欄位名稱</li>
+      <li><strong>IndexedDB：</strong>商機活動資料快取（僅限本地，不進行雲端同步）</li>
+    </ul>
+    <p style="margin-top:8px">這些資料不會對外傳送，可透過清除瀏覽器資料予以刪除。</p>
+  </div>
+
+  <div class="policy-card">
+    <div class="card-header"><div class="card-icon">👤</div><div class="card-title">未成年人</div></div>
+    <p>本擴充程式係專為企業 Salesforce 用戶設計的商業工具，並非針對未成年人所設計或提供。</p>
+  </div>
+
+  <div class="policy-card">
+    <div class="card-header"><div class="card-icon">📝</div><div class="card-title">私隱政策變更</div></div>
+    <p>本私隱政策可隨時更新。重大變更將於擴充程式的更新版本說明中公告。最新版本將持續發布於本頁面。</p>
+  </div>
+
+  <div class="policy-card">
+    <div class="card-header"><div class="card-icon">📬</div><div class="card-title">聯絡</div></div>
+    <p>如對本私隱政策有任何疑問，請透過 Chrome 線上應用程式商店的擴充程式頁面與我們聯繫。</p>
+  </div>
+</section>
 
 </main>
 
 <footer>
-  &copy; 2026 kouji-kojima. All rights reserved.
+  <p>Salesforce Opportunity Explorer · <a href="https://chrome.google.com/webstore" target="_blank" rel="noopener">Chrome Web Store</a></p>
 </footer>
 
+<script>
+(function () {
+  'use strict';
+
+  const BADGES = {
+    ja: ['🚀 外部送信なし', '🔐 ローカル保存のみ', '👁️ 追跡なし'],
+    en: ['🚀 No external uploads', '🔐 Local storage only', '👁️ Zero tracking'],
+    ko: ['🚀 외부 전송 없음', '🔐 로컬 저장만', '👁️ 추적 없음'],
+    tw: ['🚀 不上傳外部', '🔐 僅本機儲存', '👁️ 零追蹤'],
+    hk: ['🚀 不上傳外部', '🔐 只本機儲存', '👁️ 零追蹤'],
+  };
+
+  const LANG_MAP = {
+    ja: ['ja'],
+    en: ['en'],
+    ko: ['ko'],
+    tw: ['zh-TW', 'zh-tw', 'zh-Hant-TW'],
+    hk: ['zh-HK', 'zh-hk', 'zh-MO', 'zh-mo', 'zh-Hant-HK'],
+  };
+
+  const tabs     = document.querySelectorAll('.lang-tab');
+  const sections = document.querySelectorAll('.lang-section');
+  const badgeBar = document.getElementById('badge-bar');
+
+  function renderBadges(lang) {
+    badgeBar.innerHTML = (BADGES[lang] || BADGES.ja).map(function (b) {
+      return '<span class="badge">' + b + '</span>';
+    }).join('');
+  }
+
+  function activate(lang) {
+    tabs.forEach(function (t) { t.classList.toggle('active', t.dataset.lang === lang); });
+    sections.forEach(function (s) {
+      var match = s.id === 'lang-' + lang;
+      s.classList.toggle('active', match);
+      s.setAttribute('aria-hidden', String(!match));
+    });
+    document.documentElement.lang =
+      lang === 'tw' ? 'zh-Hant-TW' : lang === 'hk' ? 'zh-Hant-HK' : lang;
+    renderBadges(lang);
+  }
+
+  function detectLang() {
+    var hash = location.hash.replace('#', '');
+    if (hash && LANG_MAP[hash]) return hash;
+
+    var navLangs = Array.from(navigator.languages || [navigator.language || 'ja']);
+    for (var i = 0; i < navLangs.length; i++) {
+      var nl = navLangs[i];
+      for (var id in LANG_MAP) {
+        var prefixes = LANG_MAP[id];
+        for (var j = 0; j < prefixes.length; j++) {
+          if (nl.toLowerCase().startsWith(prefixes[j].toLowerCase())) return id;
+        }
+      }
+    }
+    for (var i = 0; i < navLangs.length; i++) {
+      var base = navLangs[i].split('-')[0].toLowerCase();
+      for (var id in LANG_MAP) {
+        var prefixes = LANG_MAP[id];
+        for (var j = 0; j < prefixes.length; j++) {
+          if (prefixes[j].split('-')[0].toLowerCase() === base) return id;
+        }
+      }
+    }
+    return 'ja';
+  }
+
+  tabs.forEach(function (tab) {
+    tab.addEventListener('click', function (e) {
+      e.preventDefault();
+      var lang = tab.dataset.lang;
+      history.pushState(null, '', '#' + lang);
+      activate(lang);
+      tab.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+    });
+  });
+
+  window.addEventListener('popstate', function () { activate(detectLang()); });
+
+  // Dark mode
+  var themeBtn = document.getElementById('themeBtn');
+
+  function applyTheme(theme) {
+    document.documentElement.setAttribute('data-theme', theme);
+    themeBtn.textContent = theme === 'dark' ? '☀️' : '🌙';
+    localStorage.setItem('pp_theme', theme);
+  }
+
+  var saved = localStorage.getItem('pp_theme');
+  if (saved) {
+    applyTheme(saved);
+  } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+    applyTheme('dark');
+  }
+
+  themeBtn.addEventListener('click', function () {
+    var cur = document.documentElement.getAttribute('data-theme');
+    applyTheme(cur === 'dark' ? 'light' : 'dark');
+  });
+
+  activate(detectLang());
+})();
+</script>
 </body>
 </html>
