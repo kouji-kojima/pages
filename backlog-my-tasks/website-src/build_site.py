@@ -10,7 +10,6 @@ DIST = os.path.join(HERE, "dist")
 ASSETS_SRC = os.path.join(HERE, "assets")
 
 STORE_URL = "https://chromewebstore.google.com/detail/backlog-my-tasks/cangphedocncgiloahgkahplfppmfkhi"
-GITHUB_URL = "https://github.com/kouji-kojima/Backlog-My-Tasks"
 SITE_NAME = "Backlog My Tasks"
 SITE_TAGLINE = "Backlogを、もっと速く・もっと楽しく。"
 
@@ -120,7 +119,7 @@ def page_shell(filename, title, description, body, og_image="assets/img/13_game.
     </div>
     <div class="fbottom">
       <span>&copy; Backlog My Tasks</span>
-      <span><a href="{GITHUB_URL}" target="_blank" rel="noopener">GitHub</a> ・ <a href="{STORE_URL}" target="_blank" rel="noopener">Chrome ウェブストア</a></span>
+      <span><a href="{STORE_URL}" target="_blank" rel="noopener">Chrome ウェブストア</a></span>
     </div>
   </div>
 </footer>
@@ -883,7 +882,7 @@ def page_get_started():
     {cta_band(
         "さあ、今日から使ってみよう！",
         "Backlogを開く回数が、きっと減ります。タスク管理も、チームの進捗把握も、これ1つで。まずはインストールして、毎日の相棒にしてください。",
-        secondary=(GITHUB_URL, "GitHubで詳細を見る"),
+        secondary=("use-cases.html", "活用シーンを見る"),
     )}
   </div>
 </section>
