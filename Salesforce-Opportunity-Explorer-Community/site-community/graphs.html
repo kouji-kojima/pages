@@ -1,0 +1,503 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>グラフ・目標管理｜Salesforce Opportunity Explorer Community</title>
+<meta name="description" content="年度→半期→四半期→月別にドリルダウンできる売上・受注グラフと、7段階スコープの目標設定。">
+<meta name="theme-color" content="#032d60">
+<meta property="og:title" content="グラフ・目標管理｜Salesforce Opportunity Explorer Community">
+<meta property="og:description" content="年度→半期→四半期→月別にドリルダウンできる売上・受注グラフと、7段階スコープの目標設定。">
+<meta property="og:type" content="website">
+<style>
+:root {
+  --sky-950: #021b3d;
+  --sky-900: #032d60;
+  --sky-800: #04396f;
+  --sky-700: #054a95;
+  --sky-600: #0176d3;
+  --sky-500: #1b96ff;
+  --sky-400: #5eb3ff;
+  --sky-100: #e8f4fd;
+  --sky-50:  #f4f9fe;
+  --gold-500: #ffb75d;
+  --gold-600: #f5a343;
+  --ink-900: #0b1d33;
+  --ink-700: #33475b;
+  --ink-500: #64748b;
+  --white: #ffffff;
+  --line: #e2e8f0;
+  --bg: #ffffff;
+  --bg-alt: var(--sky-50);
+  --card: #ffffff;
+  --text: var(--ink-900);
+  --text-sub: var(--ink-500);
+  --shadow-sm: 0 1px 3px rgba(3,45,96,.08), 0 1px 2px rgba(3,45,96,.06);
+  --shadow-md: 0 8px 24px rgba(3,45,96,.10);
+  --shadow-lg: 0 24px 64px rgba(3,45,96,.16);
+  --radius: 18px;
+  --maxw: 1120px;
+}
+[data-theme="dark"] {
+  --bg: #061a30;
+  --bg-alt: #071f3a;
+  --card: #0b2748;
+  --text: #eaf2fc;
+  --text-sub: #9fb6d4;
+  --line: rgba(140,180,230,.18);
+  --sky-100: rgba(27,150,255,.14);
+  --sky-50: rgba(27,150,255,.08);
+  --shadow-sm: 0 1px 3px rgba(0,0,0,.35);
+  --shadow-md: 0 8px 28px rgba(0,0,0,.45);
+  --shadow-lg: 0 30px 70px rgba(0,0,0,.55);
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #061a30;
+    --bg-alt: #071f3a;
+    --card: #0b2748;
+    --text: #eaf2fc;
+    --text-sub: #9fb6d4;
+    --line: rgba(140,180,230,.18);
+    --sky-100: rgba(27,150,255,.14);
+    --sky-50: rgba(27,150,255,.08);
+    --shadow-sm: 0 1px 3px rgba(0,0,0,.35);
+    --shadow-md: 0 8px 28px rgba(0,0,0,.45);
+    --shadow-lg: 0 30px 70px rgba(0,0,0,.55);
+  }
+}
+* , *::before, *::after { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  margin: 0;
+  font-family: "Yu Gothic", "Hiragino Sans", "Noto Sans JP", -apple-system, BlinkMacSystemFont,
+               "Segoe UI", "Helvetica Neue", Arial, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.85;
+  -webkit-font-smoothing: antialiased;
+  transition: background .25s ease, color .25s ease;
+  overflow-x: hidden;
+}
+img { max-width: 100%; display: block; }
+a { color: inherit; text-decoration: none; }
+.wrap { max-width: var(--maxw); margin: 0 auto; padding: 0 24px; }
+.eyebrow {
+  display: inline-flex; align-items: center; gap: 8px;
+  font-size: 12.5px; font-weight: 800; letter-spacing: .12em;
+  color: var(--sky-600); text-transform: uppercase;
+  background: var(--sky-100); border: 1px solid rgba(1,118,211,.18);
+  padding: 6px 16px; border-radius: 999px; margin-bottom: 18px;
+}
+[data-theme="dark"] .eyebrow, @media (prefers-color-scheme: dark) { }
+h1, h2, h3, h4 { font-weight: 800; letter-spacing: -.02em; color: var(--text); margin: 0 0 .5em; }
+h1 { font-size: clamp(32px, 5.6vw, 56px); line-height: 1.18; }
+h2 { font-size: clamp(26px, 3.6vw, 38px); line-height: 1.28; }
+h3 { font-size: 20px; line-height: 1.4; }
+p { margin: 0 0 1em; color: var(--text); }
+.lead { font-size: clamp(16px, 1.9vw, 19px); color: var(--text-sub); max-width: 62ch; }
+.center { text-align: center; margin-left: auto; margin-right: auto; }
+
+/* ── Nav ── */
+.nav {
+  position: sticky; top: 0; z-index: 200;
+  background: color-mix(in srgb, var(--bg) 88%, transparent);
+  backdrop-filter: blur(14px) saturate(160%);
+  border-bottom: 1px solid var(--line);
+}
+.nav-inner { display: flex; align-items: center; justify-content: space-between; height: 68px; gap: 20px; }
+.brand { display: flex; align-items: center; gap: 10px; font-weight: 800; font-size: 16px; color: var(--text); white-space: nowrap; min-width: 0; flex-shrink: 1; overflow: hidden; }
+.brand-badge { flex-shrink: 0; }
+.brand-name { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; min-width: 0; }
+.nav-inner > div { flex-shrink: 0; }
+.brand-badge {
+  width: 34px; height: 34px; border-radius: 10px;
+  background: linear-gradient(135deg, var(--sky-600), var(--sky-900));
+  display: flex; align-items: center; justify-content: center; font-size: 17px;
+  box-shadow: var(--shadow-sm);
+}
+.edition-chip {
+  font-size: 11px; font-weight: 800; letter-spacing: .04em;
+  padding: 3px 10px; border-radius: 999px;
+  background: var(--sky-100); color: var(--sky-700); border: 1px solid rgba(1,118,211,.18);
+}
+.navlinks { display: flex; align-items: center; gap: 2px; flex-wrap: nowrap; overflow-x: auto; scrollbar-width: none; }
+.navlinks::-webkit-scrollbar { display: none; }
+.navlinks a {
+  font-size: 13.5px; font-weight: 600; color: var(--text-sub);
+  padding: 9px 12px; border-radius: 9px; white-space: nowrap; transition: all .15s;
+}
+.navlinks a:hover { color: var(--sky-600); background: var(--sky-50); }
+.navlinks a.active { color: var(--sky-600); background: var(--sky-100); }
+.nav-cta {
+  display: inline-flex; align-items: center; gap: 6px;
+  background: linear-gradient(135deg, var(--sky-600), var(--sky-500));
+  color: #fff !important; font-weight: 700; font-size: 13.5px;
+  padding: 9px 18px; border-radius: 999px; white-space: nowrap;
+  box-shadow: 0 6px 16px rgba(1,118,211,.30); transition: transform .15s, box-shadow .15s;
+}
+.nav-cta:hover { transform: translateY(-1px); box-shadow: 0 10px 22px rgba(1,118,211,.4); }
+.theme-btn {
+  width: 36px; height: 36px; border-radius: 10px; border: 1px solid var(--line);
+  background: var(--card); color: var(--text-sub); cursor: pointer; font-size: 15px;
+  display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+}
+.mobile-toggle { display: none; }
+
+/* ── Hero ── */
+.hero {
+  position: relative; overflow: hidden;
+  background: radial-gradient(ellipse 90% 70% at 50% -10%, var(--sky-700) 0%, var(--sky-900) 46%, var(--sky-950) 100%);
+  color: #fff; padding: 108px 24px 96px; text-align: center;
+}
+.hero::before {
+  content: ''; position: absolute; inset: 0; pointer-events: none; opacity: .5;
+  background:
+    radial-gradient(600px 300px at 15% 15%, rgba(27,150,255,.35), transparent 60%),
+    radial-gradient(700px 340px at 88% 30%, rgba(255,183,93,.18), transparent 60%);
+}
+.hero-inner { position: relative; max-width: 880px; margin: 0 auto; }
+.hero .eyebrow { background: rgba(255,255,255,.12); border-color: rgba(255,255,255,.22); color: #dceeff; }
+.hero h1 { color: #fff; }
+.hero h1 .accent { background: linear-gradient(90deg, var(--gold-500), #ffe1b3); -webkit-background-clip: text; background-clip: text; color: transparent; }
+.hero .lead { color: rgba(232,244,253,.86); max-width: 640px; margin: 22px auto 40px; }
+.hero-ctas { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; }
+.btn {
+  display: inline-flex; align-items: center; gap: 8px; font-weight: 700; font-size: 15px;
+  padding: 15px 30px; border-radius: 999px; transition: transform .15s, box-shadow .15s, background .15s;
+  cursor: pointer; border: none;
+}
+.btn-primary { background: linear-gradient(135deg, var(--gold-500), var(--gold-600)); color: #21140a; box-shadow: 0 10px 28px rgba(245,163,67,.4); }
+.btn-primary:hover { transform: translateY(-2px); box-shadow: 0 16px 34px rgba(245,163,67,.5); }
+.btn-ghost { background: rgba(255,255,255,.08); color: #fff; border: 1.5px solid rgba(255,255,255,.4); }
+.btn-ghost:hover { background: rgba(255,255,255,.16); }
+.btn-outline { background: transparent; color: var(--sky-600); border: 1.5px solid var(--sky-600); }
+.btn-outline:hover { background: var(--sky-50); }
+
+.hero-stats { position: relative; display: flex; justify-content: center; gap: 48px; margin-top: 64px; flex-wrap: wrap; }
+.hero-stat { text-align: center; }
+.hero-stat .num { font-size: 32px; font-weight: 800; color: #fff; }
+.hero-stat .lbl { font-size: 12.5px; color: rgba(232,244,253,.65); letter-spacing: .04em; margin-top: 2px; }
+
+/* ── Sections ── */
+section.block { padding: 88px 0; }
+section.block.alt { background: var(--bg-alt); }
+.section-head { max-width: 680px; margin: 0 auto 56px; text-align: center; }
+.section-head .eyebrow { display: inline-flex; }
+
+/* ── Cards / grids ── */
+.grid { display: grid; gap: 22px; }
+.grid-3 { grid-template-columns: repeat(3, 1fr); }
+.grid-2 { grid-template-columns: repeat(2, 1fr); }
+.grid-4 { grid-template-columns: repeat(4, 1fr); }
+@media (max-width: 980px) { .grid-3, .grid-4 { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 640px) { .grid-2, .grid-3, .grid-4 { grid-template-columns: 1fr; } }
+
+.card {
+  background: var(--card); border: 1px solid var(--line); border-radius: var(--radius);
+  padding: 30px 26px; box-shadow: var(--shadow-sm); transition: transform .2s, box-shadow .2s, border-color .2s;
+}
+.card:hover { transform: translateY(-4px); box-shadow: var(--shadow-md); border-color: rgba(1,118,211,.25); }
+.card .icon {
+  width: 52px; height: 52px; border-radius: 14px; display: flex; align-items: center; justify-content: center;
+  font-size: 24px; background: linear-gradient(135deg, var(--sky-100), var(--sky-50)); margin-bottom: 18px;
+}
+.card h3 { margin-bottom: 10px; }
+.card p { color: var(--text-sub); font-size: 14.5px; margin-bottom: 0; }
+.card .tag {
+  display: inline-block; font-size: 10.5px; font-weight: 800; letter-spacing: .05em;
+  background: var(--gold-500); color: #21140a; padding: 2px 9px; border-radius: 999px; margin-bottom: 10px;
+}
+.card.compact { padding: 22px 20px; }
+
+.feature-row { display: flex; gap: 40px; align-items: center; padding: 64px 0; border-bottom: 1px solid var(--line); }
+.feature-row:last-child { border-bottom: none; }
+.feature-row.rev { flex-direction: row-reverse; }
+.feature-row .fr-text { flex: 1.1; }
+.feature-row .fr-visual { flex: 1; }
+.feature-row h3 { font-size: 24px; margin-bottom: 14px; }
+.feature-row .fr-num {
+  display: inline-flex; align-items: center; justify-content: center; width: 30px; height: 30px;
+  border-radius: 9px; background: var(--sky-100); color: var(--sky-700); font-weight: 800; font-size: 13px; margin-bottom: 14px;
+}
+.bullets { list-style: none; padding: 0; margin: 18px 0 0; }
+.bullets li { position: relative; padding-left: 26px; margin-bottom: 10px; color: var(--text-sub); font-size: 14.5px; }
+.bullets li::before { content: '✓'; position: absolute; left: 0; top: 0; color: var(--sky-600); font-weight: 800; }
+@media (max-width: 860px) { .feature-row, .feature-row.rev { flex-direction: column; } }
+
+.visual-card {
+  background: linear-gradient(160deg, var(--sky-900), var(--sky-950));
+  border-radius: 20px; padding: 32px; box-shadow: var(--shadow-lg); color: #dceeff;
+  min-height: 220px; display: flex; flex-direction: column; justify-content: center; gap: 10px;
+  border: 1px solid rgba(255,255,255,.08);
+}
+.visual-card .vc-icon { font-size: 40px; margin-bottom: 6px; }
+.visual-card .vc-line { display: flex; align-items: center; gap: 10px; font-size: 13.5px; color: rgba(220,238,255,.85); }
+.visual-card .vc-line .dot { width: 8px; height: 8px; border-radius: 50%; background: var(--gold-500); flex-shrink: 0; }
+
+.stat-band { background: linear-gradient(135deg, var(--sky-900), var(--sky-700)); padding: 64px 0; }
+.stat-grid { display: grid; grid-template-columns: repeat(4,1fr); gap: 24px; text-align: center; }
+@media (max-width: 780px) { .stat-grid { grid-template-columns: repeat(2,1fr); } }
+.stat-grid .num { font-size: 34px; font-weight: 800; color: #fff; }
+.stat-grid .lbl { font-size: 13px; color: rgba(232,244,253,.75); margin-top: 4px; }
+
+.cta-band {
+  background: linear-gradient(135deg, var(--sky-600), var(--sky-900));
+  border-radius: 28px; padding: 64px 40px; text-align: center; color: #fff;
+  position: relative; overflow: hidden; margin: 0 24px;
+}
+.cta-band::before {
+  content: ''; position: absolute; inset: 0;
+  background: radial-gradient(500px 260px at 85% 0%, rgba(255,183,93,.25), transparent 60%);
+}
+.cta-band h2 { color: #fff; position: relative; }
+.cta-band p { color: rgba(232,244,253,.85); position: relative; max-width: 520px; margin: 0 auto 28px; }
+.cta-band .hero-ctas { position: relative; }
+
+table.cmp { width: 100%; border-collapse: collapse; background: var(--card); border-radius: var(--radius); overflow: hidden; box-shadow: var(--shadow-sm); }
+table.cmp th, table.cmp td { padding: 14px 18px; text-align: left; border-bottom: 1px solid var(--line); font-size: 14px; }
+table.cmp th { background: var(--sky-900); color: #fff; font-weight: 700; font-size: 13px; }
+table.cmp tr:last-child td { border-bottom: none; }
+table.cmp td:first-child { font-weight: 700; color: var(--text); white-space: nowrap; }
+table.cmp .yes { color: var(--sky-600); font-weight: 800; }
+table.cmp .no { color: var(--text-sub); }
+
+.faq-item { border-bottom: 1px solid var(--line); padding: 22px 0; }
+.faq-item summary { cursor: pointer; font-weight: 700; font-size: 15.5px; list-style: none; display: flex; justify-content: space-between; align-items: center; gap: 12px; }
+.faq-item summary::-webkit-details-marker { display: none; }
+.faq-item summary::after { content: '+'; font-size: 20px; color: var(--sky-600); font-weight: 400; transition: transform .2s; flex-shrink: 0; }
+.faq-item[open] summary::after { transform: rotate(45deg); }
+.faq-item p { margin-top: 12px; color: var(--text-sub); font-size: 14.5px; }
+
+.steps { counter-reset: step; }
+.step { display: flex; gap: 20px; padding: 26px 0; border-bottom: 1px solid var(--line); }
+.step:last-child { border-bottom: none; }
+.step .step-num {
+  counter-increment: step; flex-shrink: 0; width: 42px; height: 42px; border-radius: 12px;
+  background: linear-gradient(135deg, var(--sky-600), var(--sky-900)); color: #fff; font-weight: 800;
+  display: flex; align-items: center; justify-content: center; font-size: 16px;
+}
+.step .step-num::before { content: counter(step); }
+
+.badge-row { display: flex; gap: 10px; flex-wrap: wrap; justify-content: center; margin-top: 28px; }
+.pill { font-size: 12.5px; font-weight: 700; padding: 7px 15px; border-radius: 999px; background: var(--sky-50); border: 1px solid var(--line); color: var(--text-sub); }
+
+.breadcrumb { font-size: 13px; color: var(--text-sub); padding: 20px 0 0; }
+.breadcrumb a { color: var(--sky-600); font-weight: 600; }
+.page-hero { padding: 64px 0 20px; text-align: center; }
+.page-hero .eyebrow { }
+.page-hero .lead { margin: 14px auto 0; }
+
+.toc { display: flex; flex-wrap: wrap; gap: 10px; justify-content: center; margin: 32px 0 8px; }
+.toc a { font-size: 13px; font-weight: 700; color: var(--sky-700); background: var(--sky-50); border: 1px solid var(--line); padding: 8px 16px; border-radius: 999px; }
+.toc a:hover { background: var(--sky-100); }
+
+footer.site-footer { background: var(--sky-950); color: rgba(232,244,253,.7); padding: 64px 0 28px; margin-top: 40px; }
+.footer-grid { display: grid; grid-template-columns: 2fr repeat(3, 1fr); gap: 40px; padding-bottom: 40px; border-bottom: 1px solid rgba(255,255,255,.1); }
+@media (max-width: 780px) { .footer-grid { grid-template-columns: 1fr 1fr; } }
+.footer-grid h4 { color: #fff; font-size: 13px; letter-spacing: .04em; margin-bottom: 16px; }
+.footer-grid a { display: block; font-size: 13.5px; color: rgba(232,244,253,.65); margin-bottom: 10px; }
+.footer-grid a:hover { color: #fff; }
+.footer-brand { display: flex; align-items: center; gap: 10px; font-weight: 800; color: #fff; margin-bottom: 12px; }
+.footer-bottom { display: flex; justify-content: space-between; align-items: center; padding-top: 24px; font-size: 12.5px; flex-wrap: wrap; gap: 12px; }
+
+/* コンテンツは常に可視状態がデフォルト（JS未実行・低速回線・印刷・クローラー等でも
+   本文が読めるようにするため）。.inはJS側でスクロールイン時にごく控えめな演出だけを足す。 */
+.reveal { opacity: 1; transform: none; }
+.reveal.pre-in { opacity: 0; transform: translateY(14px); }
+.reveal.pre-in.in { opacity: 1; transform: translateY(0); transition: opacity .5s ease, transform .5s ease; }
+
+@media (max-width: 860px) {
+  .navlinks { display: none; }
+  .mobile-toggle { display: flex; width: 36px; height: 36px; align-items: center; justify-content: center; border: 1px solid var(--line); border-radius: 10px; background: var(--card); cursor: pointer; }
+  .nav-cta.desktop-only { display: none; }
+  .mobile-panel { display: none; flex-direction: column; padding: 10px 24px 20px; border-bottom: 1px solid var(--line); background: var(--bg); }
+  .mobile-panel.open { display: flex; }
+  .mobile-panel a { padding: 12px 4px; font-weight: 600; color: var(--text); border-bottom: 1px solid var(--line); }
+  section.block { padding: 60px 0; }
+  .stat-grid { gap: 30px; }
+  .wrap { padding: 0 18px; }
+}
+@media (max-width: 480px) {
+  .edition-chip { display: none; }
+  .brand-name { max-width: 46vw; }
+}
+</style>
+</head>
+<body>
+
+<header class="nav">
+  <div class="wrap nav-inner">
+    <a class="brand" href="index.html">
+      <span class="brand-badge">🔍</span>
+      <span class="brand-name">Salesforce Opportunity Explorer</span>
+      <span class="edition-chip">Community版</span>
+    </a>
+    <nav class="navlinks">
+      <a href="index.html">ホーム</a>
+<a href="why.html">導入メリット</a>
+<a href="features.html">機能一覧</a>
+<a href="ai-features.html">AI機能</a>
+<a href="graphs.html" class="active">グラフ分析</a>
+<a href="whats-new.html">新機能</a>
+<a href="faq.html">FAQ</a>
+<a href="get-started.html">導入方法</a>
+    </nav>
+    <div style="display:flex;align-items:center;gap:10px;">
+      <button class="theme-btn" id="themeBtn" aria-label="テーマ切替">🌙</button>
+      <a class="nav-cta desktop-only" href="get-started.html">✨ 今すぐ始める</a>
+      <button class="mobile-toggle" id="mobileToggle" aria-label="メニュー">☰</button>
+    </div>
+  </div>
+  <div class="mobile-panel" id="mobilePanel">
+    <a href="index.html">ホーム</a>
+<a href="why.html">導入メリット</a>
+<a href="features.html">機能一覧</a>
+<a href="ai-features.html">AI機能</a>
+<a href="graphs.html">グラフ分析</a>
+<a href="whats-new.html">新機能</a>
+<a href="faq.html">FAQ</a>
+<a href="get-started.html">導入方法</a>
+    <a href="get-started.html">✨ 今すぐ始める</a>
+  </div>
+</header>
+
+
+<div class="page-hero wrap">
+  <span class="eyebrow">ANALYTICS</span>
+  <h1 style="font-size:clamp(28px,4.2vw,42px);">売上グラフ・受注グラフ</h1>
+  <p class="lead center">売上・原価・利益を年度単位から月単位まで自在にドリルダウン。目標を入力すれば達成率がリアルタイムで表示されます。</p>
+</div>
+<section class="block"><div class="wrap">
+<div class="feature-row reveal">
+  <div class="fr-text">
+    <div class="fr-num">01</div>
+    <h3>📊 ドリルダウン分析</h3>
+    <p class="lead" style="font-size:15px;">棒グラフを左クリックで年度→半期→四半期→月別へ、右クリックで1段階戻る。ホバーで金額内訳をツールチップ表示します。</p>
+    <ul class="bullets"><li>受注済とパイプラインを色分け表示</li>
+<li>パイプライン表（フェーズ×月のクロス集計）にも切替可能</li>
+<li>商談商品フィルターで商品単位のグラフにも対応</li></ul>
+  </div>
+  <div class="fr-visual">
+    <div class="visual-card">
+      <div class="vc-icon">📊</div>
+      <div class="vc-line"><span class="dot"></span>棒グラフ左クリック → 詳細ドリルダウン</div>
+<div class="vc-line"><span class="dot"></span>右クリックで1段階戻る</div>
+<div class="vc-line"><span class="dot"></span>ホバーで金額内訳をチェック</div>
+    </div>
+  </div>
+</div>
+
+<div class="feature-row rev reveal">
+  <div class="fr-text">
+    <div class="fr-num">02</div>
+    <h3>🎯 目標設定は7段階スコープ</h3>
+    <p class="lead" style="font-size:15px;">商談商品・所有者・契約営業部門・扱い部課・所属組織・親部門・全体——最も具体的な絞り込み条件を優先して目標を保存します。</p>
+    <ul class="bullets"><li>年度・半期・四半期の単位で目標額を入力</li>
+<li>達成済/パイプライン/超過を灰色シマシマの3層グラフで表示</li>
+<li>設定単位はスコープごとにブラウザへ記憶</li></ul>
+  </div>
+  <div class="fr-visual">
+    <div class="visual-card">
+      <div class="vc-icon">🎯</div>
+      <div class="vc-line"><span class="dot"></span>商談商品 > 所有者 > 契約営業部門</div>
+<div class="vc-line"><span class="dot"></span>> 扱い部課 > 所属組織 > 親部門 > 全体</div>
+<div class="vc-line"><span class="dot"></span>達成率(%)をリアルタイム表示</div>
+    </div>
+  </div>
+</div>
+</div></section><section class="block alt"><div class="wrap">
+<div class="cta-band reveal">
+  <h2>商談商品も、もっと深掘りできます</h2>
+  <p>商談商品専用のCSV・トレンドグラフ・フィルターをチェック。</p>
+  <div class="hero-ctas"><a class="btn btn-primary" href="products.html">商談商品機能を見る</a><a class="btn btn-outline" href="features.html">機能一覧へ戻る</a></div>
+</div>
+</div></section>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="footer-grid">
+      <div>
+        <div class="footer-brand"><span class="brand-badge">🔍</span> Salesforce Opportunity Explorer</div>
+        <p style="max-width:32ch;font-size:13.5px;color:rgba(232,244,253,.6);">
+          商談を、もっと自由に。顧客とのご縁を、もっと楽しく。<br>Community版（一般公開）
+        </p>
+      </div>
+      <div><h4>サイトマップ</h4><a href="index.html">ホーム</a>
+<a href="why.html">導入メリット</a>
+<a href="features.html">機能一覧</a>
+<a href="explorer.html">商談エクスプローラー</a>
+<a href="graphs.html">グラフ・目標管理</a>
+<a href="summary-kanban.html">商談サマリー・カンバン</a>
+<a href="products.html">商談商品機能</a>
+<a href="ai-features.html">AI機能</a>
+<a href="insight-rank.html">Insight Rank</a>
+<a href="account-tools.html">取引先分析ツール</a></div>
+      <div><h4>もっと見る</h4><a href="pipeline.html">パイプライン分析</a>
+<a href="data-quality.html">データ品質・予測</a>
+<a href="side-panel.html">サイドパネル</a>
+<a href="productivity.html">生産性向上機能</a>
+<a href="csv-security.html">CSV・セキュリティ</a>
+<a href="backup-settings.html">バックアップ・設定</a>
+<a href="whats-new.html">新機能</a>
+<a href="faq.html">FAQ</a>
+<a href="get-started.html">導入方法</a>
+<a href="contact.html">お問い合わせ</a></div>
+      <div>
+        <h4>お問い合わせ</h4>
+        <a href="contact.html">お問い合わせ</a>
+        <a href="faq.html">よくある質問</a>
+        <a href="get-started.html">導入ガイド</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>&copy; Salesforce Opportunity Explorer. This is a third-party extension and is not affiliated with Salesforce, Inc.</span>
+      <span>Made for teams who love their pipeline.</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+(function () {
+  'use strict';
+  var themeBtn = document.getElementById('themeBtn');
+  function applyTheme(t) {
+    document.documentElement.setAttribute('data-theme', t);
+    if (themeBtn) themeBtn.textContent = t === 'dark' ? '☀️' : '🌙';
+    try { localStorage.setItem('sfx_site_theme', t); } catch (e) {}
+  }
+  var saved = null;
+  try { saved = localStorage.getItem('sfx_site_theme'); } catch (e) {}
+  if (saved) applyTheme(saved);
+  else if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) applyTheme('dark');
+  if (themeBtn) {
+    themeBtn.addEventListener('click', function () {
+      var cur = document.documentElement.getAttribute('data-theme') === 'dark' ? 'dark' : 'light';
+      applyTheme(cur === 'dark' ? 'light' : 'dark');
+    });
+  }
+
+  var toggle = document.getElementById('mobileToggle');
+  var panel = document.getElementById('mobilePanel');
+  if (toggle && panel) {
+    toggle.addEventListener('click', function () { panel.classList.toggle('open'); });
+  }
+
+  // 演出はあくまで任意強化。デフォルトで可視（CSSの.revealはopacity:1）なので、
+  // JSが未実行/失敗しても本文は最初から読める。ここでは初期ビューポート外の要素にだけ
+  // 「.pre-in を付けてスクロールで.inを追加」というフェードイン演出を後乗せする。
+  if ('IntersectionObserver' in window) {
+    var vh = window.innerHeight || 800;
+    document.querySelectorAll('.reveal').forEach(function (el) {
+      var r = el.getBoundingClientRect();
+      if (r.top > vh * 0.9) el.classList.add('pre-in');
+    });
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) { if (e.isIntersecting) e.target.classList.add('in'); });
+    }, { threshold: 0.12 });
+    document.querySelectorAll('.reveal.pre-in').forEach(function (el) { io.observe(el); });
+  }
+})();
+</script>
+</body>
+</html>
