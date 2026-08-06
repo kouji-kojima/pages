@@ -1,0 +1,144 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>作る・取り込む・使い回す | Backlog My Tasks</title>
+<meta name="description" content="タスク作成・CSV一括登録／出力・コメントテンプレート・フィルタープリセット・ピン留めなど、登録と使い回しを効率化する機能。">
+<link rel="canonical" href="https://kouji-kojima.github.io/pages/backlog-my-tasks/website-src/dist/ko/task-creation.html">
+<link rel="alternate" hreflang="ja" href="https://kouji-kojima.github.io/pages/backlog-my-tasks/website-src/dist/task-creation.html">
+<link rel="alternate" hreflang="en" href="https://kouji-kojima.github.io/pages/backlog-my-tasks/website-src/dist/en/task-creation.html">
+<link rel="alternate" hreflang="ko" href="https://kouji-kojima.github.io/pages/backlog-my-tasks/website-src/dist/ko/task-creation.html">
+<link rel="alternate" hreflang="zh-Hant-TW" href="https://kouji-kojima.github.io/pages/backlog-my-tasks/website-src/dist/zh-TW/task-creation.html">
+<link rel="alternate" hreflang="zh-Hant-HK" href="https://kouji-kojima.github.io/pages/backlog-my-tasks/website-src/dist/zh-HK/task-creation.html">
+<link rel="alternate" hreflang="x-default" href="https://kouji-kojima.github.io/pages/backlog-my-tasks/website-src/dist/task-creation.html">
+<meta property="og:title" content="作る・取り込む・使い回す | Backlog My Tasks">
+<meta property="og:description" content="タスク作成・CSV一括登録／出力・コメントテンプレート・フィルタープリセット・ピン留めなど、登録と使い回しを効率化する機能。">
+<meta property="og:image" content="https://kouji-kojima.github.io/pages/backlog-my-tasks/website-src/dist/assets/img/04_summary.jpg">
+<meta property="og:url" content="https://kouji-kojima.github.io/pages/backlog-my-tasks/website-src/dist/ko/task-creation.html">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="ko">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="../assets/img/favicon.png">
+<link rel="stylesheet" href="../assets/css/style.css">
+</head>
+<body>
+<header id="site-header">
+  <div class="wrap bar">
+    <a href="index.html" class="brand"><img src="../assets/img/logo.png" alt=""><span>Backlog My Tasks</span></a>
+    <nav id="site-nav">
+      <a href="index.html">ホーム</a>
+<a href="views.html">表示ビュー</a>
+<a href="daily-features.html">便利機能</a>
+<a href="dashboard.html">ダッシュボード</a>
+<a href="game.html">Backlog Quest</a>
+<a href="use-cases.html">活用シーン</a>
+<a href="get-started.html">導入方法</a>
+    </nav>
+    <details class="lang-switch">
+      <summary>🇰🇷 한국어</summary>
+      <div class="lang-switch-menu"><a href="../task-creation.html">🇯🇵 日本語</a>
+<a href="../en/task-creation.html">🇺🇸 English</a>
+<a href="../ko/task-creation.html" class="active">🇰🇷 한국어</a>
+<a href="../zh-TW/task-creation.html">🇹🇼 繁體中文</a>
+<a href="../zh-HK/task-creation.html">🇭🇰 繁體中文（香港）</a></div>
+    </details>
+    <a class="btn btn-primary header-cta" href="https://chromewebstore.google.com/detail/backlog-my-tasks/cangphedocncgiloahgkahplfppmfkhi" target="_blank" rel="noopener">Chromeに追加</a>
+    <button id="nav-toggle" aria-label="メニュー">☰</button>
+  </div>
+</header>
+
+
+<section class="page-hero">
+  <div class="wrap inner">
+    <div class="breadcrumb"><a href="index.html">ホーム</a> / 登録・テンプレート</div>
+    <div class="eyebrow">便利機能</div>
+    <h1>作る・取り込む・使い回す。</h1>
+    <p class="lead">新規作成もCSV一括登録も、テンプレートの使い回しも自在に。毎回ゼロから入力する手間をなくします。</p>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="grid grid-3">
+<div class="card">
+          <div class="icon">📝</div>
+          <h3>タスク作成</h3>
+          <p>プロジェクト・種別・担当者・マイルストーン・親課題を指定して新規作成</p>
+        </div>
+<div class="card">
+          <div class="icon">📥</div>
+          <h3>CSV一括登録</h3>
+          <p>CSVから複数タスクをまとめて登録。テンプレCSVのダウンロードにも対応</p>
+        </div>
+<div class="card">
+          <div class="icon">📤</div>
+          <h3>CSV出力</h3>
+          <p>現在の一覧をBOM付きUTF-8で出力。参照列＋一括登録用列を1ファイルに</p>
+        </div>
+<div class="card">
+          <div class="icon">💬</div>
+          <h3>コメントテンプレート</h3>
+          <p>よく使う返信を保存し、メンション付きで素早く投稿</p>
+        </div>
+<div class="card">
+          <div class="icon">🔖</div>
+          <h3>フィルタープリセット</h3>
+          <p>フィルター・検索・グループ設定を名前付きで保存・呼び出し</p>
+        </div>
+<div class="card">
+          <div class="icon">📌</div>
+          <h3>ピン留め</h3>
+          <p>重要タスクを最上部に固定＋Backlogのウォッチにも自動登録</p>
+        </div>
+</div>
+    <div class="mt"><div class="cta-band">
+      <h2>登録の手間を、限りなくゼロに。</h2>
+      <p>既存タスクの複製・CSV一括登録・テンプレートで、毎回の入力作業を減らせます。</p>
+      <div class="cta-row">
+        <a class="btn btn-on-dark" href="https://chromewebstore.google.com/detail/backlog-my-tasks/cangphedocncgiloahgkahplfppmfkhi" target="_blank" rel="noopener">Chromeに追加</a>
+        <a class="btn btn-ghost" style="background:rgba(255,255,255,.12);color:#fff;border-color:rgba(255,255,255,.3)" href="dashboard.html">ダッシュボードを見る</a>
+      </div>
+    </div></div>
+  </div>
+</section>
+
+
+<footer id="site-footer">
+  <div class="wrap">
+    <div class="fgrid">
+      <div>
+        <div class="fbrand"><img src="../assets/img/logo.png" alt="">Backlog My Tasks</div>
+        <p>Backlog の自分担当タスクを、複数スペース横断でまとめて確認・操作できる Chrome 拡張機能。7つの表示ビューとプロジェクトダッシュボードで、日々のタスク管理とチームの進捗把握をもっと楽に。</p>
+      </div>
+      <div><h5>表示ビュー</h5><ul><li><a href="views.html">7つの表示ビュー</a></li>
+<li><a href="view-list.html">リスト</a></li>
+<li><a href="view-matrix.html">マトリックス</a></li>
+<li><a href="view-kanban.html">カンバン</a></li>
+<li><a href="view-gantt.html">ガント</a></li>
+<li><a href="view-calendar.html">カレンダー</a></li>
+<li><a href="reports.html">バーンダウン／ワークロード</a></li></ul></div>
+<div><h5>便利機能</h5><ul><li><a href="daily-features.html">毎日が変わる便利機能</a></li>
+<li><a href="speed-features.html">もっと速く・見える化</a></li>
+<li><a href="task-creation.html">作る・取り込む・使い回す</a></li></ul></div>
+<div><h5>ダッシュボード</h5><ul><li><a href="dashboard.html">ダッシュボード概要</a></li>
+<li><a href="dashboard-project.html">プロジェクト別ダッシュボード</a></li>
+<li><a href="dashboard-gantt.html">プロジェクト全体ガント</a></li>
+<li><a href="dashboard-cross-space.html">スペース横断／ユーザ棚卸</a></li>
+<li><a href="dashboard-organization.html">組織（部門管理）</a></li></ul></div>
+<div><h5>その他</h5><ul><li><a href="game.html">Backlog Quest</a></li>
+<li><a href="use-cases.html">活用シーン</a></li>
+<li><a href="security-i18n.html">多言語・セキュリティ</a></li>
+<li><a href="feature-map.html">全機能マップ</a></li>
+<li><a href="get-started.html">導入方法</a></li></ul></div>
+
+    </div>
+    <div class="fbottom">
+      <span>&copy; Backlog My Tasks</span>
+      <span><a href="https://chromewebstore.google.com/detail/backlog-my-tasks/cangphedocncgiloahgkahplfppmfkhi" target="_blank" rel="noopener">Chrome ウェブストア</a></span>
+    </div>
+  </div>
+</footer>
+<script src="../assets/js/main.js"></script>
+</body>
+</html>

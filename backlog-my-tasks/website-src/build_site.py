@@ -2,19 +2,88 @@
 """Backlog My Tasks 紹介サイト ジェネレーター。
 docs/build_deck.py（紹介PPT）と同じ「Pythonでコンポーネントを組み立てて静的出力する」方針。
 出力は docs/website-src/dist/ 配下（そのまま GitHub Pages の gh-pages ブランチ直下へコピーする）。
+
+多言語対応（v2）: 拡張機能本体（src/i18n.js）と同じ5言語（ja/en/ko/zh_TW/zh_HK）に対応する。
+- 文言は日本語版の page_xxx() 関数をそのまま「原文（翻訳キー）」として使い、helper関数
+  （feature_grid/showcase/section_head 等）とpage_xxx()内の生テキストを _() でラップする。
+  _() は i18n/translations.json（{原文: {en:..., ko:..., zh_TW:..., zh_HK:...}}）を引く
+  ヘルパーで、訳が無ければ日本語原文にフォールバックする（欠落を静かに握りつぶさないよう、
+  フォールバックしたキーは MISSING に集計してビルド末尾に警告表示する）。
+- 出力先はロケールごとに ja=dist/直下（既存URLを維持）、他は dist/<dir>/ 配下
+  （en/ko/zh-TW/zh-HK）。アセット（assets/）は dist/assets/ に1つだけ配置し、
+  サブディレクトリのページからは ../assets/... で参照する。
+- ヘッダーに <details> ベース（JS不要）の言語切り替えメニューを追加し、
+  hreflang alternate タグ・og:locale・canonical も言語ごとに出力する。
 """
-import os, shutil, html
+import os, shutil, html, json
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 DIST = os.path.join(HERE, "dist")
 ASSETS_SRC = os.path.join(HERE, "assets")
+I18N_PATH = os.path.join(HERE, "i18n", "translations.json")
 
 STORE_URL = "https://chromewebstore.google.com/detail/backlog-my-tasks/cangphedocncgiloahgkahplfppmfkhi"
 SITE_NAME = "Backlog My Tasks"
 SITE_TAGLINE = "Backlogを、もっと速く・もっと楽しく。"
+# GitHub Pages の既定URL（カスタムドメイン未設定のため。CNAME等を追加したら要更新。
+# README.mdの紹介サイトリンクと同じURLに揃えている）
+BASE_URL = "https://kouji-kojima.github.io/pages/backlog-my-tasks/website-src/dist"
 
 # ════════════════════════════════════════════════════════════
-# ナビゲーション定義
+# 多言語設定
+# ════════════════════════════════════════════════════════════
+LANGS = ["ja", "en", "ko", "zh_TW", "zh_HK"]
+LANG_INFO = {
+    "ja":    {"html_lang": "ja",         "dir": ""},
+    "en":    {"html_lang": "en",         "dir": "en"},
+    "ko":    {"html_lang": "ko",         "dir": "ko"},
+    "zh_TW": {"html_lang": "zh-Hant-TW", "dir": "zh-TW"},
+    "zh_HK": {"html_lang": "zh-Hant-HK", "dir": "zh-HK"},
+}
+# 言語名は自言語表記（endonym）。サイトの表示言語に関わらず変えない（国際的な慣習）
+LANG_ENDONYM = {
+    "ja":    ("🇯🇵", "日本語"),
+    "en":    ("🇺🇸", "English"),
+    "ko":    ("🇰🇷", "한국어"),
+    "zh_TW": ("🇹🇼", "繁體中文"),
+    "zh_HK": ("🇭🇰", "繁體中文（香港）"),
+}
+
+try:
+    with open(I18N_PATH, encoding="utf-8") as f:
+        TR = json.load(f)
+except FileNotFoundError:
+    TR = {}
+
+CURRENT_LANG = "ja"
+CURRENT_ASSET_PREFIX = ""
+ALL_STRINGS = set()  # _()に渡された全原文（翻訳対象の棚卸し用）
+MISSING = set()      # (lang, text) — 訳が無く原文フォールバックしたもの
+
+
+def _(text):
+    """翻訳ヘルパー。TR[原文][lang] があればそれを、無ければ原文（日本語）を返す。"""
+    if text is None or text == "":
+        return text
+    ALL_STRINGS.add(text)
+    if CURRENT_LANG == "ja":
+        return text
+    entry = TR.get(text)
+    if entry and entry.get(CURRENT_LANG):
+        return entry[CURRENT_LANG]
+    MISSING.add((CURRENT_LANG, text))
+    return text
+
+
+def lang_switch_href(target_lang, current_lang, filename):
+    cur_dir = LANG_INFO[current_lang]["dir"]
+    tgt_dir = LANG_INFO[target_lang]["dir"]
+    prefix = "../" if cur_dir else ""
+    return f"{prefix}{tgt_dir + '/' if tgt_dir else ''}{filename}"
+
+
+# ════════════════════════════════════════════════════════════
+# ナビゲーション定義（原文＝日本語。表示時に _() で訳す）
 # ════════════════════════════════════════════════════════════
 HEADER_NAV = [
     ("index.html", "ホーム"),
@@ -46,6 +115,7 @@ FOOTER_COLS = [
         ("dashboard-project.html", "プロジェクト別ダッシュボード"),
         ("dashboard-gantt.html", "プロジェクト全体ガント"),
         ("dashboard-cross-space.html", "スペース横断／ユーザ棚卸"),
+        ("dashboard-organization.html", "組織（部門管理）"),
     ]),
     ("その他", [
         ("game.html", "Backlog Quest"),
@@ -56,7 +126,7 @@ FOOTER_COLS = [
     ]),
 ]
 
-PAGE_META = {}  # filename -> (title, description) 登録用
+PAGE_META = {}  # filename -> (title, description) 登録用（ja分のみ集計）
 
 
 # ════════════════════════════════════════════════════════════
@@ -66,43 +136,68 @@ def e(s):
     return html.escape(s, quote=False)
 
 
-def page_shell(filename, title, description, body, og_image="assets/img/13_game.jpg"):
+def page_shell(lang, filename, title, description, body, og_image="assets/img/13_game.jpg"):
+    info = LANG_INFO[lang]
+    ap = CURRENT_ASSET_PREFIX
     active_cls = ' class="active"'
     nav_html = "\n".join(
-        f'<a href="{href}"{active_cls if href == filename else ""}>{e(label)}</a>'
+        f'<a href="{href}"{active_cls if href == filename else ""}>{e(_(label))}</a>'
         for href, label in HEADER_NAV
     )
     footer_cols = ""
     for col_title, links in FOOTER_COLS:
-        items = "\n".join(f'<li><a href="{href}">{e(label)}</a></li>' for href, label in links)
-        footer_cols += f'<div><h5>{e(col_title)}</h5><ul>{items}</ul></div>\n'
+        items = "\n".join(f'<li><a href="{href}">{e(_(label))}</a></li>' for href, label in links)
+        footer_cols += f'<div><h5>{e(_(col_title))}</h5><ul>{items}</ul></div>\n'
 
-    full_title = f"{title} | {SITE_NAME}" if title != SITE_NAME else f"{SITE_NAME} — {SITE_TAGLINE}"
+    site_tagline = _(SITE_TAGLINE)
+    full_title = f"{title} | {SITE_NAME}" if title != SITE_NAME else f"{SITE_NAME} — {site_tagline}"
+
+    page_path = f"{info['dir']}/{filename}" if info["dir"] else filename
+    canonical = f"{BASE_URL}/{page_path}"
+    og_image_abs = f"{BASE_URL}/{og_image}"
+    hreflang_links = "\n".join(
+        f'<link rel="alternate" hreflang="{LANG_INFO[l]["html_lang"]}" href="{BASE_URL}/{(LANG_INFO[l]["dir"] + "/") if LANG_INFO[l]["dir"] else ""}{filename}">'
+        for l in LANGS
+    )
+    hreflang_links += f'\n<link rel="alternate" hreflang="x-default" href="{BASE_URL}/{filename}">'
+
+    def _switch_item(l):
+        active_attr = ' class="active"' if l == lang else ""
+        return f'<a href="{lang_switch_href(l, lang, filename)}"{active_attr}>{LANG_ENDONYM[l][0]} {e(LANG_ENDONYM[l][1])}</a>'
+    switch_items = "\n".join(_switch_item(l) for l in LANGS)
 
     return f"""<!doctype html>
-<html lang="ja">
+<html lang="{info['html_lang']}">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>{e(full_title)}</title>
 <meta name="description" content="{e(description)}">
+<link rel="canonical" href="{canonical}">
+{hreflang_links}
 <meta property="og:title" content="{e(full_title)}">
 <meta property="og:description" content="{e(description)}">
-<meta property="og:image" content="{og_image}">
+<meta property="og:image" content="{og_image_abs}">
+<meta property="og:url" content="{canonical}">
 <meta property="og:type" content="website">
+<meta property="og:locale" content="{info['html_lang'].replace('-', '_')}">
 <meta name="twitter:card" content="summary_large_image">
-<link rel="icon" href="assets/img/favicon.png">
-<link rel="stylesheet" href="assets/css/style.css">
+<link rel="icon" href="{ap}assets/img/favicon.png">
+<link rel="stylesheet" href="{ap}assets/css/style.css">
 </head>
 <body>
 <header id="site-header">
   <div class="wrap bar">
-    <a href="index.html" class="brand"><img src="assets/img/logo.png" alt=""><span>{SITE_NAME}</span></a>
+    <a href="index.html" class="brand"><img src="{ap}assets/img/logo.png" alt=""><span>{SITE_NAME}</span></a>
     <nav id="site-nav">
       {nav_html}
     </nav>
-    <a class="btn btn-primary header-cta" href="{STORE_URL}" target="_blank" rel="noopener">Chromeに追加</a>
-    <button id="nav-toggle" aria-label="メニュー">☰</button>
+    <details class="lang-switch">
+      <summary>{LANG_ENDONYM[lang][0]} {e(LANG_ENDONYM[lang][1])}</summary>
+      <div class="lang-switch-menu">{switch_items}</div>
+    </details>
+    <a class="btn btn-primary header-cta" href="{STORE_URL}" target="_blank" rel="noopener">{e(_("Chromeに追加"))}</a>
+    <button id="nav-toggle" aria-label="{e(_("メニュー"))}">☰</button>
   </div>
 </header>
 
@@ -112,41 +207,41 @@ def page_shell(filename, title, description, body, og_image="assets/img/13_game.
   <div class="wrap">
     <div class="fgrid">
       <div>
-        <div class="fbrand"><img src="assets/img/logo.png" alt="">{SITE_NAME}</div>
-        <p>Backlog の自分担当タスクを、複数スペース横断でまとめて確認・操作できる Chrome 拡張機能。7つの表示ビューとプロジェクトダッシュボードで、日々のタスク管理とチームの進捗把握をもっと楽に。</p>
+        <div class="fbrand"><img src="{ap}assets/img/logo.png" alt="">{SITE_NAME}</div>
+        <p>{_("Backlog の自分担当タスクを、複数スペース横断でまとめて確認・操作できる Chrome 拡張機能。7つの表示ビューとプロジェクトダッシュボードで、日々のタスク管理とチームの進捗把握をもっと楽に。")}</p>
       </div>
       {footer_cols}
     </div>
     <div class="fbottom">
       <span>&copy; Backlog My Tasks</span>
-      <span><a href="{STORE_URL}" target="_blank" rel="noopener">Chrome ウェブストア</a></span>
+      <span><a href="{STORE_URL}" target="_blank" rel="noopener">{e(_("Chrome ウェブストア"))}</a></span>
     </div>
   </div>
 </footer>
-<script src="assets/js/main.js"></script>
+<script src="{ap}assets/js/main.js"></script>
 </body>
 </html>
 """
 
 
 def page_hero(eyebrow, title, lead, crumb=None):
-    crumb_html = f'<div class="breadcrumb"><a href="index.html">ホーム</a> / {e(crumb)}</div>' if crumb else ""
+    crumb_html = f'<div class="breadcrumb"><a href="index.html">{e(_("ホーム"))}</a> / {e(_(crumb))}</div>' if crumb else ""
     return f"""<section class="page-hero">
   <div class="wrap inner">
     {crumb_html}
-    <div class="eyebrow">{e(eyebrow)}</div>
-    <h1>{title}</h1>
-    <p class="lead">{lead}</p>
+    <div class="eyebrow">{e(_(eyebrow))}</div>
+    <h1>{_(title)}</h1>
+    <p class="lead">{_(lead)}</p>
   </div>
 </section>
 """
 
 
 def section_head(eyebrow, title, lead=""):
-    lead_html = f"<p>{lead}</p>" if lead else ""
+    lead_html = f"<p>{_(lead)}</p>" if lead else ""
     return f"""<div class="section-head">
-      <div class="eyebrow">{e(eyebrow)}</div>
-      <h2>{title}</h2>
+      <div class="eyebrow">{e(_(eyebrow))}</div>
+      <h2>{_(title)}</h2>
       {lead_html}
     </div>"""
 
@@ -158,8 +253,8 @@ def feature_grid(items, cols=4, dark=False):
     for emoji, title, desc in items:
         cards += f"""<div class="{cls}">
           <div class="icon">{emoji}</div>
-          <h3>{e(title)}</h3>
-          <p>{desc}</p>
+          <h3>{e(_(title))}</h3>
+          <p>{_(desc)}</p>
         </div>\n"""
     return f'<div class="grid grid-{cols}">\n{cards}</div>'
 
@@ -170,25 +265,25 @@ def showcase(img, alt, bullets, reverse=False):
     for title, desc in bullets:
         b_html += f"""<div class="bullet">
           <div class="dot"></div>
-          <div><h4>{e(title)}</h4><p>{desc}</p></div>
+          <div><h4>{e(_(title))}</h4><p>{_(desc)}</p></div>
         </div>\n"""
     rev = " reverse" if reverse else ""
     return f"""<div class="showcase{rev}">
-      <div class="frame"><img src="assets/img/{img}" alt="{e(alt)}" loading="lazy"></div>
+      <div class="frame"><img src="{CURRENT_ASSET_PREFIX}assets/img/{img}" alt="{e(_(alt))}" loading="lazy"></div>
       <div class="bullets">{b_html}</div>
     </div>"""
 
 
 def stat_bar(stats):
     """stats: list of (num, label)"""
-    items = "".join(f'<div class="stat"><div class="num">{e(n)}</div><div class="lbl">{e(l)}</div></div>' for n, l in stats)
+    items = "".join(f'<div class="stat"><div class="num">{e(n)}</div><div class="lbl">{e(_(l))}</div></div>' for n, l in stats)
     return f'<div class="stat-bar">{items}</div>'
 
 
 def pain_grid(items):
     """items: list of (emoji, title, desc)"""
     cards = "".join(
-        f'<div class="pain"><div class="emoji">{emoji}</div><h4>{e(title)}</h4><p>{desc}</p></div>'
+        f'<div class="pain"><div class="emoji">{emoji}</div><h4>{e(_(title))}</h4><p>{_(desc)}</p></div>'
         for emoji, title, desc in items
     )
     return f'<div class="pain-grid">{cards}</div>'
@@ -196,12 +291,12 @@ def pain_grid(items):
 
 def scenario(emoji, tag, title, scene, howto, result):
     """howto: list of (title, desc)"""
-    howto_html = "".join(f'<div><strong>{e(t)}</strong><p>{d}</p></div>' for t, d in howto)
+    howto_html = "".join(f'<div><strong>{e(_(t))}</strong><p>{_(d)}</p></div>' for t, d in howto)
     return f"""<div class="scenario">
-      <div class="sc-head"><span class="emoji">{emoji}</span><h3>{e(title)}</h3><span class="tag">{e(tag)}</span></div>
-      <div class="sc-row scene"><div class="sc-label">😩 よくあるシーン</div><p>{scene}</p></div>
-      <div class="sc-row howto"><div class="sc-label">💡 こう使う</div><div class="howto-list">{howto_html}</div></div>
-      <div class="sc-row result"><div class="sc-label">🎉 効果</div><p>{result}</p></div>
+      <div class="sc-head"><span class="emoji">{emoji}</span><h3>{e(_(title))}</h3><span class="tag">{e(_(tag))}</span></div>
+      <div class="sc-row scene"><div class="sc-label">😩 {e(_("よくあるシーン"))}</div><p>{_(scene)}</p></div>
+      <div class="sc-row howto"><div class="sc-label">💡 {e(_("こう使う"))}</div><div class="howto-list">{howto_html}</div></div>
+      <div class="sc-row result"><div class="sc-label">🎉 {e(_("効果"))}</div><p>{_(result)}</p></div>
     </div>"""
 
 
@@ -211,8 +306,8 @@ def steps(items):
     for i, (title, desc) in enumerate(items, 1):
         s += f"""<div class="step">
           <div class="num">{i}</div>
-          <h3>{e(title)}</h3>
-          <p>{desc}</p>
+          <h3>{e(_(title))}</h3>
+          <p>{_(desc)}</p>
         </div>\n"""
     return f'<div class="steps">{s}</div>'
 
@@ -221,27 +316,29 @@ def cta_band(title, lead, primary_label="Chromeに追加", secondary=None):
     sec_html = ""
     if secondary:
         href, label = secondary
-        sec_html = f'<a class="btn btn-ghost" style="background:rgba(255,255,255,.12);color:#fff;border-color:rgba(255,255,255,.3)" href="{href}">{e(label)}</a>'
+        sec_html = f'<a class="btn btn-ghost" style="background:rgba(255,255,255,.12);color:#fff;border-color:rgba(255,255,255,.3)" href="{href}">{e(_(label))}</a>'
     return f"""<div class="cta-band">
-      <h2>{title}</h2>
-      <p>{lead}</p>
+      <h2>{_(title)}</h2>
+      <p>{_(lead)}</p>
       <div class="cta-row">
-        <a class="btn btn-on-dark" href="{STORE_URL}" target="_blank" rel="noopener">{e(primary_label)}</a>
+        <a class="btn btn-on-dark" href="{STORE_URL}" target="_blank" rel="noopener">{e(_(primary_label))}</a>
         {sec_html}
       </div>
     </div>"""
 
 
 def lang_grid():
-    langs = [("🇯🇵", "日本語", "ja"), ("🇺🇸", "English", "en"), ("🇰🇷", "한국어", "ko"),
-             ("🇹🇼", "繁體中文", "zh_TW"), ("🇭🇰", "繁體中文（香港）", "zh_HK")]
-    items = "".join(f'<div class="lang"><div class="flag">{f}</div><div class="name">{e(n)}</div><div class="code">{c}</div></div>' for f, n, c in langs)
+    # 言語名は自言語表記のため翻訳しない（LANG_ENDONYMと同じ一覧をそのまま流用）
+    items = "".join(
+        f'<div class="lang"><div class="flag">{f}</div><div class="name">{e(n)}</div><div class="code">{c}</div></div>'
+        for c, (f, n) in LANG_ENDONYM.items()
+    )
     return f'<div class="lang-grid">{items}</div>'
 
 
 def map_card(emoji, title, items):
-    lis = "".join(f"<li>{e(i)}</li>" for i in items)
-    return f'<div class="map-card"><h3>{emoji} {e(title)}</h3><ul>{lis}</ul></div>'
+    lis = "".join(f"<li>{e(_(i))}</li>" for i in items)
+    return f'<div class="map-card"><h3>{emoji} {e(_(title))}</h3><ul>{lis}</ul></div>'
 
 
 def linked_grid(items, cols=4):
@@ -250,34 +347,39 @@ def linked_grid(items, cols=4):
     for href, emoji, title, desc in items:
         cards += f"""<a class="card" href="{href}">
           <div class="icon">{emoji}</div>
-          <h3>{e(title)}</h3>
-          <p>{desc}</p>
+          <h3>{e(_(title))}</h3>
+          <p>{_(desc)}</p>
         </a>\n"""
     return f'<div class="grid grid-{cols}">\n{cards}</div>'
 
 
-def write_page(filename, title, description, body, og_image="assets/img/13_game.jpg"):
-    PAGE_META[filename] = (title, description)
-    with open(os.path.join(DIST, filename), "w", encoding="utf-8") as f:
-        f.write(page_shell(filename, title, description, body, og_image))
-    print("WROTE", filename)
+def write_page(lang, filename, title, description, body, og_image="assets/img/13_game.jpg"):
+    title_t = title if title == SITE_NAME else _(title)
+    desc_t = _(description)
+    if lang == "ja":
+        PAGE_META[filename] = (title_t, desc_t)
+    out_dir = os.path.join(DIST, LANG_INFO[lang]["dir"]) if LANG_INFO[lang]["dir"] else DIST
+    os.makedirs(out_dir, exist_ok=True)
+    with open(os.path.join(out_dir, filename), "w", encoding="utf-8") as f:
+        f.write(page_shell(lang, filename, title_t, desc_t, body, og_image))
+    print("WROTE", lang, filename)
 
 
 # ════════════════════════════════════════════════════════════
 # 01. index.html ── ホーム（メリット訴求 → 概要）
 # ════════════════════════════════════════════════════════════
-def page_index():
+def page_index(lang):
     body = f"""
 <section class="hero">
   <div class="wrap">
-    <div class="kicker">🧩 Chrome拡張機能・7つの表示ビュー・5言語対応</div>
-    <h1>毎日のタスク管理を、<br><span class="accent">もっと速く・もっと楽に。</span></h1>
-    <p class="lead">Backlog の自分担当タスクを、複数スペース横断でまとめて確認・操作できる Chrome 拡張機能。ブラウザのポップアップを開くだけで、状態変更もコメント返信も、これ1つで完結します。</p>
+    <div class="kicker">{_("🧩 Chrome拡張機能・7つの表示ビュー・5言語対応")}</div>
+    <h1>{_('毎日のタスク管理を、<br><span class="accent">もっと速く・もっと楽に。</span>')}</h1>
+    <p class="lead">{_("Backlog の自分担当タスクを、複数スペース横断でまとめて確認・操作できる Chrome 拡張機能。ブラウザのポップアップを開くだけで、状態変更もコメント返信も、これ1つで完結します。")}</p>
     <div class="cta-row">
-      <a class="btn btn-primary" href="{STORE_URL}" target="_blank" rel="noopener">Chromeに追加</a>
-      <a class="btn btn-ghost" style="background:rgba(255,255,255,.08);color:#fff;border-color:rgba(255,255,255,.28)" href="get-started.html">導入方法を見る</a>
+      <a class="btn btn-primary" href="{STORE_URL}" target="_blank" rel="noopener">{e(_("Chromeに追加"))}</a>
+      <a class="btn btn-ghost" style="background:rgba(255,255,255,.08);color:#fff;border-color:rgba(255,255,255,.28)" href="get-started.html">{e(_("導入方法を見る"))}</a>
     </div>
-    <p class="fineprint">APIキーは端末内でAES-256暗号化・外部サーバーへの送信ゼロ。導入は3ステップ、すぐ使えます。</p>
+    <p class="fineprint">{_("APIキーは端末内でAES-256暗号化・外部サーバーへの送信ゼロ。導入は3ステップ、すぐ使えます。")}</p>
   </div>
 </section>
 
@@ -290,7 +392,7 @@ def page_index():
         ("💬","コメントに気づかない","返信が来ていたのに、タスクを開くまで分からなかった"),
         ("📊","進捗が見えない","チーム全体の状況や遅延プロジェクトを把握するのに時間がかかる"),
     ])}
-    <div class="pain-arrow">→ Backlog My Tasks なら、その全部を<br class="pain-arrow-br">ブラウザのポップアップだけで解決できます。</div>
+    <div class="pain-arrow">{_('→ Backlog My Tasks なら、その全部を<br class="pain-arrow-br">ブラウザのポップアップだけで解決できます。')}</div>
   </div>
 </section>
 
@@ -332,7 +434,7 @@ def page_index():
         ("🛡️","装備でアバターが変化","武器・防具・兜・盾を全11〜12段階で収集。装備すると見た目にも即反映"),
         ("🐲","ボス戦・隠しボス","10Lvごとにボスが出現。条件達成で隠しボスも姿を現す"),
     ], cols=4, dark=True)}
-    <p class="center mt"><a class="btn btn-on-dark" href="game.html">Backlog Questをもっと見る →</a></p>
+    <p class="center mt"><a class="btn btn-on-dark" href="game.html">{e(_("Backlog Questをもっと見る →"))}</a></p>
   </div>
 </section>
 
@@ -342,7 +444,7 @@ def page_index():
   </div>
 </section>
 """
-    write_page("index.html", SITE_NAME,
+    write_page(lang, "index.html", SITE_NAME,
                "Backlogの自分担当タスクを複数スペース横断でまとめて管理するChrome拡張機能。7つの表示ビュー・プロジェクトダッシュボード・5言語対応。",
                body, "assets/img/01_list.jpg")
 
@@ -350,7 +452,7 @@ def page_index():
 # ════════════════════════════════════════════════════════════
 # 02. views.html ── 表示ビュー ハブ
 # ════════════════════════════════════════════════════════════
-def page_views():
+def page_views(lang):
     body = f"""
 {page_hero("表示ビュー", "7つの表示ビューで、自由に見える化。", "同じタスクを、リスト・カレンダー・マトリックス・ガント・カンバン・サマリー・バーンダウンの7つの視点で。タブ切替でいつでも視点を切り替えられます。", "表示ビュー")}
 <section>
@@ -368,7 +470,7 @@ def page_views():
   </div>
 </section>
 """
-    write_page("views.html", "7つの表示ビュー",
+    write_page(lang, "views.html", "7つの表示ビュー",
                "リスト・カレンダー・マトリックス・ガント・カンバン・サマリー・バーンダウン。タブ切替で自由に視点を変えられます。",
                body, "assets/img/01_list.jpg")
 
@@ -376,7 +478,7 @@ def page_views():
 # ════════════════════════════════════════════════════════════
 # 03. view-list.html
 # ════════════════════════════════════════════════════════════
-def page_view_list():
+def page_view_list(lang):
     body = f"""
 {page_hero("表示ビュー ─ リスト", "リスト ─ 一番使う、メインビュー。", "毎朝の確認をワンクリックで。期限別に自動整列されたタスク一覧から、状態変更・コメント返信までここで完結します。", "リスト")}
 <section>
@@ -391,7 +493,7 @@ def page_view_list():
   </div>
 </section>
 """
-    write_page("view-list.html", "リストビュー",
+    write_page(lang, "view-list.html", "リストビュー",
                "期限別グループ表示・クイックフィルター・全文検索・一括操作・コメント通知でゼロ見落としを実現するメインビュー。",
                body, "assets/img/01_list.jpg")
 
@@ -399,7 +501,7 @@ def page_view_list():
 # ════════════════════════════════════════════════════════════
 # 04. view-matrix.html
 # ════════════════════════════════════════════════════════════
-def page_view_matrix():
+def page_view_matrix(lang):
     body = f"""
 {page_hero("表示ビュー ─ マトリックス", "マトリックス ─ 優先順位を直感で。", "アイゼンハワーの4象限で、緊急度×重要度からタスクを自動配置。どれから手をつけるべきかが一目で分かります。", "マトリックス")}
 <section>
@@ -413,7 +515,7 @@ def page_view_matrix():
   </div>
 </section>
 """
-    write_page("view-matrix.html", "マトリックスビュー",
+    write_page(lang, "view-matrix.html", "マトリックスビュー",
                "アイゼンハワーの4象限で緊急度×重要度からタスクを自動配置。優先度は宝石カラーで一目瞭然。",
                body, "assets/img/03_matrix.jpg")
 
@@ -421,7 +523,7 @@ def page_view_matrix():
 # ════════════════════════════════════════════════════════════
 # 05. view-kanban.html
 # ════════════════════════════════════════════════════════════
-def page_view_kanban():
+def page_view_kanban(lang):
     body = f"""
 {page_hero("表示ビュー ─ カンバン", "カンバン ─ ドラッグ＆ドロップで状態変更。", "未対応・処理中・処理済み・完了の4列でチーム全体の進捗をひと目で把握。カードを動かすだけでBacklogへ即反映されます。", "カンバン")}
 <section>
@@ -436,7 +538,7 @@ def page_view_kanban():
   </div>
 </section>
 """
-    write_page("view-kanban.html", "カンバンビュー",
+    write_page(lang, "view-kanban.html", "カンバンビュー",
                "未対応・処理中・処理済み・完了をドラッグ＆ドロップで移動。WIP制限や遅延ハイライトにも対応。",
                body, "assets/img/08_kanban.jpg")
 
@@ -444,7 +546,7 @@ def page_view_kanban():
 # ════════════════════════════════════════════════════════════
 # 06. view-gantt.html
 # ════════════════════════════════════════════════════════════
-def page_view_gantt():
+def page_view_gantt(lang):
     body = f"""
 {page_hero("表示ビュー ─ ガント", "ガント ─ 親子タスクを時系列で。", "階層ツリーとタイムラインで、期間・依存関係・進捗をまとめて可視化。バーをドラッグするだけで日程調整が完結します。", "ガント")}
 <section>
@@ -460,7 +562,7 @@ def page_view_gantt():
   </div>
 </section>
 """
-    write_page("view-gantt.html", "ガントビュー",
+    write_page(lang, "view-gantt.html", "ガントビュー",
                "親子タスクの階層ツリー、バードラッグでの日程変更、依存関係とクリティカルパス、マイルストーン表示に対応。",
                body, "assets/img/07_gantt.jpg")
 
@@ -468,7 +570,7 @@ def page_view_gantt():
 # ════════════════════════════════════════════════════════════
 # 07. view-calendar.html
 # ════════════════════════════════════════════════════════════
-def page_view_calendar():
+def page_view_calendar(lang):
     body = f"""
 {page_hero("表示ビュー ─ カレンダー", "カレンダー ─ 月単位で期限を俯瞰。", "タスクを期限日のマスに配置。当月の締切バランスがひと目で分かり、月末の慌てもなくなります。", "カレンダー")}
 <section>
@@ -483,7 +585,7 @@ def page_view_calendar():
   </div>
 </section>
 """
-    write_page("view-calendar.html", "カレンダービュー",
+    write_page(lang, "view-calendar.html", "カレンダービュー",
                "月単位・7週間ローリング表示で期限を俯瞰。危険度をカラー表示し、締切の偏りに早めに気づけます。",
                body, "assets/img/02_calendar.jpg")
 
@@ -491,7 +593,7 @@ def page_view_calendar():
 # ════════════════════════════════════════════════════════════
 # 08. reports.html ── バーンダウン／ワークロード
 # ════════════════════════════════════════════════════════════
-def page_reports():
+def page_reports(lang):
     body = f"""
 {page_hero("表示ビュー ─ レポート", "レポート ─ 予実と工数を可視化。", "バーンダウンで進捗の予定と実績を追い、ワークロードで担当者ごとの負荷をひと目で把握できます。", "レポート")}
 <section>
@@ -510,7 +612,7 @@ def page_reports():
   </div>
 </section>
 """
-    write_page("reports.html", "バーンダウン／ワークロード",
+    write_page(lang, "reports.html", "バーンダウン／ワークロード",
                "予定・実績の2ラインで進捗を追跡するバーンダウンと、担当者別の負荷を可視化するワークロード。",
                body, "assets/img/05_burndown.jpg")
 
@@ -518,7 +620,7 @@ def page_reports():
 # ════════════════════════════════════════════════════════════
 # 09. daily-features.html
 # ════════════════════════════════════════════════════════════
-def page_daily_features():
+def page_daily_features(lang):
     body = f"""
 {page_hero("便利機能", "毎日が変わる、便利機能たち。", "コメント検知・タイマー・通知・オフライン対応など、地味だけど毎日効いてくる機能を集めました。", "毎日が変わる便利機能")}
 <section>
@@ -548,7 +650,7 @@ def page_daily_features():
   </div>
 </section>
 """
-    write_page("daily-features.html", "毎日が変わる便利機能",
+    write_page(lang, "daily-features.html", "毎日が変わる便利機能",
                "新着コメント自動検知・タイマー・スヌーズ・通知・オフライン対応・健全性スコア・日報週報ドラフトなど、日々のタスク管理を支える機能。",
                body, "assets/img/04_summary.jpg")
 
@@ -556,7 +658,7 @@ def page_daily_features():
 # ════════════════════════════════════════════════════════════
 # 10. speed-features.html
 # ════════════════════════════════════════════════════════════
-def page_speed_features():
+def page_speed_features(lang):
     body = f"""
 {page_hero("便利機能", "もっと速く、もっと見える化。", "登録も分析も、数秒で終わらせる機能たち。1件のタスクから多くの操作がその場で完結します。", "もっと速く・見える化")}
 <section>
@@ -584,7 +686,7 @@ def page_speed_features():
   </div>
 </section>
 """
-    write_page("speed-features.html", "もっと速く・見える化",
+    write_page(lang, "speed-features.html", "もっと速く・見える化",
                "クイック登録バー・複製登録・負荷ヒートマップ・リードタイム分析・カンバンWIP制限・クイック編集モーダルなど、スピードを上げる機能。",
                body, "assets/img/04_summary.jpg")
 
@@ -592,7 +694,7 @@ def page_speed_features():
 # ════════════════════════════════════════════════════════════
 # 11. task-creation.html
 # ════════════════════════════════════════════════════════════
-def page_task_creation():
+def page_task_creation(lang):
     body = f"""
 {page_hero("便利機能", "作る・取り込む・使い回す。", "新規作成もCSV一括登録も、テンプレートの使い回しも自在に。毎回ゼロから入力する手間をなくします。", "登録・テンプレート")}
 <section>
@@ -609,7 +711,7 @@ def page_task_creation():
   </div>
 </section>
 """
-    write_page("task-creation.html", "作る・取り込む・使い回す",
+    write_page(lang, "task-creation.html", "作る・取り込む・使い回す",
                "タスク作成・CSV一括登録／出力・コメントテンプレート・フィルタープリセット・ピン留めなど、登録と使い回しを効率化する機能。",
                body, "assets/img/04_summary.jpg")
 
@@ -617,7 +719,7 @@ def page_task_creation():
 # ════════════════════════════════════════════════════════════
 # 12. dashboard.html ── ダッシュボード ハブ
 # ════════════════════════════════════════════════════════════
-def page_dashboard():
+def page_dashboard(lang):
     body = f"""
 {page_hero("👑 ダッシュボード", "プロジェクトダッシュボードで、チーム全体を俯瞰。", "全ユーザーに表示される管理タブ（ユーザ棚卸のみ管理者専用）。所属プロジェクトが自動表示され、API呼び出しはデータ管理タブのみです。", "ダッシュボード")}
 <section>
@@ -630,12 +732,13 @@ def page_dashboard():
         ("dashboard-cross-space.html","👥","全員ワークロード","スペース全担当者の工数を集計。残業h／完了h横棒グラフ、API追加呼び出しゼロ"),
         ("dashboard.html","📦","データ管理","API呼び出しはこのタブだけ。アクティブ／非アクティブ分類で取得不要プロジェクトを除外"),
         ("dashboard-cross-space.html","👤","ユーザ棚卸（管理者専用）","全ユーザの最終ログイン状況。1年以上未ログインを赤強調し、スペースから削除も可能"),
+        ("dashboard-organization.html","🏢","組織（部門管理）","部門ツリーを登録してプロジェクトを割り当て、部門単位でプロジェクトを分析"),
     ], cols=4)}
     <div class="mt">{cta_band("週次報告の準備を、数分で。", "健全性スコア・完了率・遅延hが自動集計され、横並びで比較できます。", secondary=("dashboard-cross-space.html","スペース横断サマリーを見る"))}</div>
   </div>
 </section>
 """
-    write_page("dashboard.html", "プロジェクトダッシュボード",
+    write_page(lang, "dashboard.html", "プロジェクトダッシュボード",
                "プロジェクト別ダッシュボード・全タスク・ガント・スペース横断サマリー・全員ワークロード・データ管理・ユーザ棚卸をまとめた管理タブ。",
                body, "assets/img/09_admin_project.jpg")
 
@@ -643,7 +746,7 @@ def page_dashboard():
 # ════════════════════════════════════════════════════════════
 # 13. dashboard-project.html
 # ════════════════════════════════════════════════════════════
-def page_dashboard_project():
+def page_dashboard_project(lang):
     body = f"""
 {page_hero("ダッシュボード", "プロジェクト別ダッシュボード ─ KPIを一画面で。", "総タスク数から健全性スコアまで、プロジェクトの状態がひと目で分かります。", "プロジェクト別ダッシュボード")}
 <section>
@@ -658,7 +761,7 @@ def page_dashboard_project():
   </div>
 </section>
 """
-    write_page("dashboard-project.html", "プロジェクト別ダッシュボード",
+    write_page(lang, "dashboard-project.html", "プロジェクト別ダッシュボード",
                "KPIカード・前回／先週の差分ビュー・ベロシティグラフ・未アサインのその場解消など、プロジェクトの状態を一画面で確認。",
                body, "assets/img/09_admin_project.jpg")
 
@@ -666,7 +769,7 @@ def page_dashboard_project():
 # ════════════════════════════════════════════════════════════
 # 14. dashboard-gantt.html
 # ════════════════════════════════════════════════════════════
-def page_dashboard_gantt():
+def page_dashboard_gantt(lang):
     body = f"""
 {page_hero("ダッシュボード", "ガント（プロジェクト全体） ─ 時系列で俯瞰。", "選択プロジェクトの全タスク（全担当者）を1枚のガントに集約。個人ガントと同じUIで、そのまま日程調整までできます。", "プロジェクト全体ガント")}
 <section>
@@ -681,7 +784,7 @@ def page_dashboard_gantt():
   </div>
 </section>
 """
-    write_page("dashboard-gantt.html", "プロジェクト全体ガント",
+    write_page(lang, "dashboard-gantt.html", "プロジェクト全体ガント",
                "選択プロジェクトの全タスク・全担当者を1枚のガントに集約。個人ガントと同じUIで日程調整もその場で完結。",
                body, "assets/img/07_gantt.jpg")
 
@@ -689,7 +792,7 @@ def page_dashboard_gantt():
 # ════════════════════════════════════════════════════════════
 # 15. dashboard-cross-space.html
 # ════════════════════════════════════════════════════════════
-def page_dashboard_cross_space():
+def page_dashboard_cross_space(lang):
     body = f"""
 {page_hero("ダッシュボード", "スペース横断で、全プロジェクトを俯瞰。", "複数スペースの状態をまとめて比較し、休眠アカウントも一目で見つけられます。", "スペース横断・ユーザ棚卸")}
 <section>
@@ -705,19 +808,43 @@ def page_dashboard_cross_space():
         ("休眠アカウントを発見","1年以上未ログインを赤でハイライト＆自動ソート"),
         ("ライセンス棚卸に最適","不要アカウントはその場でスペースから削除（スペース管理者専用）"),
     ], reverse=True)}
-    <div class="mt">{cta_band("危険プロジェクトに、早期着手。", "遅延率で自動フラグが立つので、手を打つべきプロジェクトがひと目で分かります。", secondary=("game.html","Backlog Questを見る"))}</div>
+    <div class="mt">{cta_band("危険プロジェクトに、早期着手。", "遅延率で自動フラグが立つので、手を打つべきプロジェクトがひと目で分かります。", secondary=("dashboard-organization.html","組織（部門管理）を見る"))}</div>
   </div>
 </section>
 """
-    write_page("dashboard-cross-space.html", "スペース横断サマリー／ユーザ棚卸",
+    write_page(lang, "dashboard-cross-space.html", "スペース横断サマリー／ユーザ棚卸",
                "全プロジェクトの完了率・遅延h・健全性スコアを横並びで比較。ユーザ棚卸で休眠アカウントも発見できます。",
                body, "assets/img/10_admin_space.jpg")
 
 
 # ════════════════════════════════════════════════════════════
+# 15.5. dashboard-organization.html
+# ════════════════════════════════════════════════════════════
+def page_dashboard_organization(lang):
+    body = f"""
+{page_hero("ダッシュボード", "組織 ─ 部門ごとに、プロジェクトを見える化。", "部門ツリーを登録してプロジェクトを割り当てると、部門単位での進捗把握やスペース横断の絞り込みに使えます。組織データはブラウザだけに保存され、外部には送信されません。", "組織（部門管理）")}
+<section>
+  <div class="wrap">
+    {showcase("14_admin_org.jpg", "組織タブのスクリーンショット", [
+        ("親子関係を自由に設定できる部門ツリー","親部門を選んで名前を入力するだけで、何階層でも部門を追加。表示順の並び替え・折りたたみ・削除にも対応"),
+        ("一覧表示とグラフィカルな組織図を切り替え","箱＋接続線で部門構成を可視化する組織図モードも搭載"),
+        ("プロジェクトを部門に割り当てて分析","データ管理タブのプルダウンから部門を割り当てるだけで、部門別プロジェクト分析やスペース横断の部門フィルターで活用できる"),
+        ("配下の部門もまとめて集計","部門を選ぶと、その部門と子・孫部門のプロジェクトをまとめて進捗率・遅延工数などを集計"),
+        ("組織データはブラウザにローカル保存","Backlog側やアカウント間で同期されないため、安心して社内の組織構成をそのまま登録できる。エクスポート／インポートで他のPCへの持ち出しも可能"),
+    ])}
+    <div class="mt">{cta_band("部門ごとの進捗を、迷わず把握。", "組織ツリーを作れば、あとはプロジェクトを紐づけるだけ。部門別の状況がいつでも一目で分かります。", secondary=("dashboard-cross-space.html","スペース横断サマリーを見る"))}</div>
+  </div>
+</section>
+"""
+    write_page(lang, "dashboard-organization.html", "組織（部門管理）",
+               "部門ツリーを登録し、プロジェクトを部門に割り当てて部門単位で進捗を分析できる管理者機能。組織データはブラウザにローカル保存され外部に送信されません。",
+               body, "assets/img/14_admin_org.jpg")
+
+
+# ════════════════════════════════════════════════════════════
 # 16. game.html ── Backlog Quest
 # ════════════════════════════════════════════════════════════
-def page_game():
+def page_game(lang):
     body = f"""
 {page_hero("🎮 Backlog Quest（ログクエ）", "Backlogを使うほど、キャラクターが育っていく。", "日々のタスク処理が、そのまま経験値になる実績連動RPG。正式リリース済み・デフォルトON。不要な場合はオプション画面からいつでもオフに切替できます。", "Backlog Quest")}
 <section>
@@ -741,7 +868,7 @@ def page_game():
   </div>
 </section>
 """
-    write_page("game.html", "Backlog Quest（ログクエ）",
+    write_page(lang, "game.html", "Backlog Quest（ログクエ）",
                "Backlogの利用状況に応じてXP・ゴールドを獲得しレベルアップする実績連動RPG。8職業・装備収集・ボス戦・進化するペットを搭載。",
                body, "assets/img/13_game.jpg")
 
@@ -749,7 +876,7 @@ def page_game():
 # ════════════════════════════════════════════════════════════
 # 17. use-cases.html ── 活用シーン
 # ════════════════════════════════════════════════════════════
-def page_use_cases():
+def page_use_cases(lang):
     scenarios = [
         ("📋", "リスト活用術", "朝の確認を1分に",
          "複数プロジェクトに散らばった自分の担当タスクを、毎朝Backlogで1件ずつ開いて確認するのに10分以上かかっていませんか？どれから手をつけるべきかもすぐには分かりません。",
@@ -787,7 +914,7 @@ def page_use_cases():
           ("ボス戦や実績解除がちょっとした息抜きに","10Lvごとのボス戦、装備収集、隠しボス・実績バッジが日々の作業に区切りを作る")],
          "タスク処理そのものが楽しみに変わり、継続利用のモチベーションが上がる。"),
     ]
-    cards = "".join(scenario(em, "活用シーン", title, scene, howto, result) for em, title, _, scene, howto, result in
+    cards = "".join(scenario(em, "活用シーン", title, scene, howto, result) for em, title, _s, scene, howto, result in
                      [(s[0], s[1], s[2], s[3], s[4], s[5]) for s in scenarios])
     body = f"""
 {page_hero("活用シーン", "こんな使い方で、もっと便利に。", "機能を知っているだけでは終わらせない。「よくあるシーン」→「こう使う」→「効果」の3ステップで、現場でそのまま使える活用術を紹介します。", "活用シーン")}
@@ -798,7 +925,7 @@ def page_use_cases():
   </div>
 </section>
 """
-    write_page("use-cases.html", "活用シーン",
+    write_page(lang, "use-cases.html", "活用シーン",
                "リスト・カレンダー・マトリックス・ガント・カンバン・ダッシュボード・Backlog Questの現場で使える活用術を、シーン→使い方→効果の3ステップで紹介。",
                body, "assets/img/04_summary.jpg")
 
@@ -806,7 +933,7 @@ def page_use_cases():
 # ════════════════════════════════════════════════════════════
 # 18. security-i18n.html
 # ════════════════════════════════════════════════════════════
-def page_security_i18n():
+def page_security_i18n(lang):
     body = f"""
 {page_hero("多言語・セキュリティ", "世界中で、安心して使える。", "5言語に完全対応。プライバシー・ファーストの設計で、大切なAPIキーもしっかり守ります。", "多言語・セキュリティ")}
 <section>
@@ -828,7 +955,7 @@ def page_security_i18n():
   </div>
 </section>
 """
-    write_page("security-i18n.html", "多言語・セキュリティ",
+    write_page(lang, "security-i18n.html", "多言語・セキュリティ",
                "日本語・英語・韓国語・繁体字中国語（台湾・香港）の5言語対応。APIキーはAES-256-GCM暗号化、外部送信なし、トラッキングなし。",
                body, "assets/img/09_admin_project.jpg")
 
@@ -836,7 +963,7 @@ def page_security_i18n():
 # ════════════════════════════════════════════════════════════
 # 19. feature-map.html
 # ════════════════════════════════════════════════════════════
-def page_feature_map():
+def page_feature_map(lang):
     cats = [
         ("📊", "表示ビュー（7）", ["リスト / カレンダー", "マトリックス / ガント", "カンバン / サマリー", "バーンダウン（タブ切替で全て自動更新）"]),
         ("✏️", "タスク操作", ["状態・担当者・期限変更", "クイック編集 / 一括操作", "右クリックメニュー / 複製", "ピン留め / スヌーズ / メモ"]),
@@ -856,7 +983,7 @@ def page_feature_map():
   </div>
 </section>
 """
-    write_page("feature-map.html", "全機能マップ",
+    write_page(lang, "feature-map.html", "全機能マップ",
                "表示ビュー・タスク操作・計測通知検知・検索フィルター・ダッシュボード・基盤設定・Backlog Questの全機能を一覧で紹介。",
                body, "assets/img/04_summary.jpg")
 
@@ -864,7 +991,7 @@ def page_feature_map():
 # ════════════════════════════════════════════════════════════
 # 20. get-started.html ── 導入方法 + 最終CTA
 # ════════════════════════════════════════════════════════════
-def page_get_started():
+def page_get_started(lang):
     body = f"""
 {page_hero("導入方法", "導入はカンタン、3ステップ。", "インストールしてから使い始めるまで、数分もかかりません。", "導入方法")}
 <section>
@@ -874,7 +1001,7 @@ def page_get_started():
         ("スペースURLとAPIキー", "拡張機能アイコンを右クリック → オプション → スペースURLとAPIキーを入力（最大10スペース登録可）"),
         ("アイコンをクリック！", "ツールバーのアイコンをクリック → 自分のタスクが一覧表示、すぐ使えます"),
     ])}
-    <p class="center mt" style="font-size:14px;color:var(--sub)">💡 APIキーの取得：Backlog → 個人設定 → API → 「登録」ボタンで発行</p>
+    <p class="center mt" style="font-size:14px;color:var(--sub)">{_("💡 APIキーの取得：Backlog → 個人設定 → API → 「登録」ボタンで発行")}</p>
   </div>
 </section>
 <section class="dark">
@@ -887,7 +1014,7 @@ def page_get_started():
   </div>
 </section>
 """
-    write_page("get-started.html", "導入方法",
+    write_page(lang, "get-started.html", "導入方法",
                "Chromeウェブストアから追加してスペースURLとAPIキーを入力するだけ。3ステップで今日からBacklog My Tasksが使えます。",
                body, "assets/img/01_list.jpg")
 
@@ -895,35 +1022,48 @@ def page_get_started():
 # ════════════════════════════════════════════════════════════
 # ビルド実行
 # ════════════════════════════════════════════════════════════
+PAGE_FUNCS = [
+    page_index, page_views, page_view_list, page_view_matrix, page_view_kanban,
+    page_view_gantt, page_view_calendar, page_reports, page_daily_features,
+    page_speed_features, page_task_creation, page_dashboard, page_dashboard_project,
+    page_dashboard_gantt, page_dashboard_cross_space, page_dashboard_organization, page_game, page_use_cases,
+    page_security_i18n, page_feature_map, page_get_started,
+]
+
+
 def main():
+    global CURRENT_LANG, CURRENT_ASSET_PREFIX
+
     if os.path.isdir(DIST):
         shutil.rmtree(DIST)
     os.makedirs(DIST)
     shutil.copytree(ASSETS_SRC, os.path.join(DIST, "assets"))
     open(os.path.join(DIST, ".nojekyll"), "w").close()
 
-    page_index()
-    page_views()
-    page_view_list()
-    page_view_matrix()
-    page_view_kanban()
-    page_view_gantt()
-    page_view_calendar()
-    page_reports()
-    page_daily_features()
-    page_speed_features()
-    page_task_creation()
-    page_dashboard()
-    page_dashboard_project()
-    page_dashboard_gantt()
-    page_dashboard_cross_space()
-    page_game()
-    page_use_cases()
-    page_security_i18n()
-    page_feature_map()
-    page_get_started()
+    for lang in LANGS:
+        CURRENT_LANG = lang
+        CURRENT_ASSET_PREFIX = "" if not LANG_INFO[lang]["dir"] else "../"
+        for fn in PAGE_FUNCS:
+            fn(lang)
 
-    print(f"\nTOTAL PAGES: {len(PAGE_META)}")
+    print(f"\nTOTAL PAGES: {len(PAGE_META)} x {len(LANGS)} languages = {len(PAGE_META) * len(LANGS)} files")
+
+    # 翻訳の棚卸し：TRに存在しない原文（＝いずれかの非ja言語で日本語のままフォールバックした文言）を警告表示
+    if MISSING:
+        by_lang = {}
+        for lang, text in MISSING:
+            by_lang.setdefault(lang, set()).add(text)
+        print(f"\n[WARN] 未翻訳（日本語へフォールバック）が {len(MISSING)} 件あります:")
+        for lang in sorted(by_lang):
+            print(f"  {lang}: {len(by_lang[lang])} 件")
+    else:
+        print("\n[OK] 全言語で未翻訳フォールバックはありません")
+
+    # 翻訳対象文言の棚卸し出力（翻訳データ作成・更新時に参照する）
+    strings_path = os.path.join(HERE, "i18n", "source_strings.json")
+    with open(strings_path, "w", encoding="utf-8") as f:
+        json.dump(sorted(ALL_STRINGS), f, ensure_ascii=False, indent=2)
+    print(f"[INFO] 翻訳対象文言一覧を書き出しました: {strings_path} ({len(ALL_STRINGS)}件)")
 
 
 if __name__ == "__main__":

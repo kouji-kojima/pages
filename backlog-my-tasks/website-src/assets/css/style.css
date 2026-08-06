@@ -73,6 +73,28 @@ ul{margin:0;padding:0;list-style:none;}
 .header-cta{flex-shrink:0;}
 #nav-toggle{display:none;background:none;border:none;font-size:24px;color:var(--navy);cursor:pointer;padding:4px 8px;}
 
+/* ── 言語切り替え（<details>ベース、JS不要） ── */
+.lang-switch{position:relative;flex-shrink:0;}
+.lang-switch summary{
+  list-style:none;cursor:pointer;font-size:13px;font-weight:600;color:var(--navy);
+  padding:8px 12px;border:1.5px solid var(--border);border-radius:999px;white-space:nowrap;
+  display:flex;align-items:center;gap:6px;transition:.15s;
+}
+.lang-switch summary::-webkit-details-marker{display:none;}
+.lang-switch summary::after{content:"▾";font-size:10px;color:var(--sub);margin-left:2px;}
+.lang-switch summary:hover{border-color:var(--green);color:var(--green-deep);}
+.lang-switch[open] summary{border-color:var(--green);color:var(--green-deep);}
+.lang-switch-menu{
+  position:absolute;top:calc(100% + 8px);right:0;z-index:110;min-width:190px;
+  background:#fff;border:1px solid var(--border);border-radius:12px;box-shadow:var(--shadow-md);
+  padding:6px;display:flex;flex-direction:column;gap:2px;
+}
+.lang-switch-menu a{
+  display:block;padding:8px 10px;border-radius:8px;font-size:13.5px;font-weight:600;color:var(--ink);
+}
+.lang-switch-menu a:hover{background:var(--green-tint);color:var(--green-deep);}
+.lang-switch-menu a.active{background:var(--green-tint);color:var(--green-deep);}
+
 /* ── ヒーロー ── */
 .hero{
   position:relative;overflow:hidden;
@@ -276,6 +298,8 @@ section.dark .section-head .eyebrow{color:var(--green);}
   #site-nav.open{display:flex;}
   #site-nav a{padding:12px 8px;border-bottom:1px solid var(--border);border-radius:0;}
   .header-cta{display:none;}
+  .lang-switch summary{padding:6px 8px;font-size:12px;}
+  .lang-switch-menu{right:auto;left:0;}
   .grid-2,.grid-3,.grid-4{grid-template-columns:1fr;}
   .pain-grid{grid-template-columns:1fr;}
   .stat-bar{grid-template-columns:repeat(2,1fr);}
