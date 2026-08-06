@@ -106,7 +106,7 @@ p { margin: 0 0 1em; color: var(--text); }
   border-bottom: 1px solid var(--line);
 }
 .nav-inner { display: flex; align-items: center; justify-content: space-between; height: 68px; gap: 20px; }
-.brand { display: flex; align-items: center; gap: 10px; font-weight: 800; font-size: 16px; color: var(--text); white-space: nowrap; min-width: 0; flex-shrink: 1; overflow: hidden; }
+.brand { display: flex; align-items: center; gap: 10px; font-weight: 800; font-size: 16px; color: var(--text); white-space: nowrap; min-width: 0; flex-shrink: 0; overflow: hidden; }
 .brand-badge { flex-shrink: 0; }
 .brand-name { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; min-width: 0; }
 .nav-inner > div { flex-shrink: 0; }
@@ -143,6 +143,7 @@ p { margin: 0 0 1em; color: var(--text); }
   display: flex; align-items: center; justify-content: center; flex-shrink: 0;
 }
 .mobile-toggle { display: none; }
+.mobile-panel { display: none; }
 
 /* ── Hero ── */
 .hero {
@@ -331,7 +332,7 @@ footer.site-footer { background: var(--sky-950); color: rgba(232,244,253,.7); pa
     <a class="brand" href="index.html">
       <span class="brand-badge">🔍</span>
       <span class="brand-name">Salesforce Opportunity Explorer</span>
-      <span class="edition-chip">Community版</span>
+      <span class="edition-chip">Community</span>
     </a>
     <nav class="navlinks">
       <a href="index.html">ホーム</a>
@@ -344,6 +345,7 @@ footer.site-footer { background: var(--sky-950); color: rgba(232,244,253,.7); pa
 <a href="get-started.html">導入方法</a>
     </nav>
     <div style="display:flex;align-items:center;gap:10px;">
+      <a class="pill" style="flex-shrink:0;" href="en/data-quality.html">🇺🇸 EN</a>
       <button class="theme-btn" id="themeBtn" aria-label="テーマ切替">🌙</button>
       <a class="nav-cta desktop-only" href="get-started.html">✨ 今すぐ始める</a>
       <button class="mobile-toggle" id="mobileToggle" aria-label="メニュー">☰</button>
@@ -358,6 +360,7 @@ footer.site-footer { background: var(--sky-950); color: rgba(232,244,253,.7); pa
 <a href="whats-new.html">新機能</a>
 <a href="faq.html">FAQ</a>
 <a href="get-started.html">導入方法</a>
+    <a href="en/data-quality.html">English</a>
     <a href="get-started.html">✨ 今すぐ始める</a>
   </div>
 </header>
