@@ -3,8 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>ガントビュー | Backlog My Tasks</title>
-<meta name="description" content="親子タスクの階層ツリー、バードラッグでの日程変更、依存関係とクリティカルパス、マイルストーン表示に対応。">
+<title>甘特圖檢視 | Backlog My Tasks</title>
+<meta name="description" content="支援父子任務的階層樹狀結構、以拖曳長條變更日程、相依關係與關鍵路徑，以及里程碑顯示。">
 <link rel="canonical" href="https://kouji-kojima.github.io/pages/backlog-my-tasks/website-src/dist/zh-TW/view-gantt.html">
 <link rel="alternate" hreflang="ja" href="https://kouji-kojima.github.io/pages/backlog-my-tasks/website-src/dist/view-gantt.html">
 <link rel="alternate" hreflang="en" href="https://kouji-kojima.github.io/pages/backlog-my-tasks/website-src/dist/en/view-gantt.html">
@@ -12,8 +12,8 @@
 <link rel="alternate" hreflang="zh-Hant-TW" href="https://kouji-kojima.github.io/pages/backlog-my-tasks/website-src/dist/zh-TW/view-gantt.html">
 <link rel="alternate" hreflang="zh-Hant-HK" href="https://kouji-kojima.github.io/pages/backlog-my-tasks/website-src/dist/zh-HK/view-gantt.html">
 <link rel="alternate" hreflang="x-default" href="https://kouji-kojima.github.io/pages/backlog-my-tasks/website-src/dist/view-gantt.html">
-<meta property="og:title" content="ガントビュー | Backlog My Tasks">
-<meta property="og:description" content="親子タスクの階層ツリー、バードラッグでの日程変更、依存関係とクリティカルパス、マイルストーン表示に対応。">
+<meta property="og:title" content="甘特圖檢視 | Backlog My Tasks">
+<meta property="og:description" content="支援父子任務的階層樹狀結構、以拖曳長條變更日程、相依關係與關鍵路徑，以及里程碑顯示。">
 <meta property="og:image" content="https://kouji-kojima.github.io/pages/backlog-my-tasks/website-src/dist/assets/img/07_gantt.jpg">
 <meta property="og:url" content="https://kouji-kojima.github.io/pages/backlog-my-tasks/website-src/dist/zh-TW/view-gantt.html">
 <meta property="og:type" content="website">
@@ -27,12 +27,12 @@
   <div class="wrap bar">
     <a href="index.html" class="brand"><img src="../assets/img/logo.png" alt=""><span>Backlog My Tasks</span></a>
     <nav id="site-nav">
-      <a href="index.html">ホーム</a>
-<a href="views.html">表示ビュー</a>
-<a href="daily-features.html">便利機能</a>
-<a href="dashboard.html">ダッシュボード</a>
+      <a href="index.html">首頁</a>
+<a href="views.html">顯示檢視</a>
+<a href="daily-features.html">便利功能</a>
+<a href="dashboard.html">儀表板</a>
 <a href="game.html">Backlog Quest</a>
-<a href="use-cases.html">活用シーン</a>
+<a href="use-cases.html">活用情境</a>
 <a href="get-started.html">導入方法</a>
     </nav>
     <details class="lang-switch">
@@ -43,53 +43,53 @@
 <a href="../zh-TW/view-gantt.html" class="active">🇹🇼 繁體中文</a>
 <a href="../zh-HK/view-gantt.html">🇭🇰 繁體中文（香港）</a></div>
     </details>
-    <a class="btn btn-primary header-cta" href="https://chromewebstore.google.com/detail/backlog-my-tasks/cangphedocncgiloahgkahplfppmfkhi" target="_blank" rel="noopener">Chromeに追加</a>
-    <button id="nav-toggle" aria-label="メニュー">☰</button>
+    <a class="btn btn-primary header-cta" href="https://chromewebstore.google.com/detail/backlog-my-tasks/cangphedocncgiloahgkahplfppmfkhi" target="_blank" rel="noopener">加到Chrome</a>
+    <button id="nav-toggle" aria-label="選單">☰</button>
   </div>
 </header>
 
 
 <section class="page-hero">
   <div class="wrap inner">
-    <div class="breadcrumb"><a href="index.html">ホーム</a> / ガント</div>
-    <div class="eyebrow">表示ビュー ─ ガント</div>
-    <h1>ガント ─ 親子タスクを時系列で。</h1>
-    <p class="lead">階層ツリーとタイムラインで、期間・依存関係・進捗をまとめて可視化。バーをドラッグするだけで日程調整が完結します。</p>
+    <div class="breadcrumb"><a href="index.html">首頁</a> / 甘特圖</div>
+    <div class="eyebrow">顯示檢視 ─ 甘特圖</div>
+    <h1>甘特圖 ─ 以時間序列呈現父子任務。</h1>
+    <p class="lead">以階層樹狀結構與時間軸，將期間、相依關係、進度一併視覺化。只要拖曳長條，即可完成日程調整。</p>
   </div>
 </section>
 
 <section>
   <div class="wrap">
     <div class="showcase">
-      <div class="frame"><img src="../assets/img/07_gantt.jpg" alt="ガントビューのスクリーンショット" loading="lazy"></div>
+      <div class="frame"><img src="../assets/img/07_gantt.jpg" alt="甘特圖檢視的畫面截圖" loading="lazy"></div>
       <div class="bullets"><div class="bullet">
           <div class="dot"></div>
-          <div><h4>階層ツリー＋タイムライン</h4><p>親子タスクの構造を保ちながら期間を可視化。完了タスク非表示も対応</p></div>
+          <div><h4>階層樹狀結構＋時間軸</h4><p>在保留父子任務結構的同時將期間視覺化，也支援隱藏已完成的任務</p></div>
         </div>
 <div class="bullet">
           <div class="dot"></div>
-          <div><h4>バーをドラッグして日程変更</h4><p>開始日・期限日をドラッグで直接変更。Backlogへ即反映。依存する後続タスクへの自動日程シフトも確認付きで実行</p></div>
+          <div><h4>拖曳長條變更日程</h4><p>可直接以拖曳方式變更開始日、期限日，並立即反映到Backlog。相依的後續任務也會在確認後自動執行日程位移</p></div>
         </div>
 <div class="bullet">
           <div class="dot"></div>
-          <div><h4>カミナリ線で進捗が一目</h4><p>各タスクの進捗ラインをつなぐカミナリ線で、遅れ・先行をすぐ把握</p></div>
+          <div><h4>以閃電線一眼掌握進度</h4><p>以連接各任務進度線的閃電線，立即掌握延遲或超前的情形</p></div>
         </div>
 <div class="bullet">
           <div class="dot"></div>
-          <div><h4>依存関係とクリティカルパス</h4><p>タスク間の先行→後続を矢印で可視化。遅延警告と最長経路の強調表示</p></div>
+          <div><h4>相依關係與關鍵路徑</h4><p>以箭頭將任務之間的前置→後續關係視覺化。提供延遲警告與最長路徑的強調顯示</p></div>
         </div>
 <div class="bullet">
           <div class="dot"></div>
-          <div><h4>マイルストーン◆・進捗ロールアップ・高速表示</h4><p>マイルストーン期限を可視化し、親タスクには子の完了率を表示。大規模プロジェクトも仮想スクロールで軽快に動作</p></div>
+          <div><h4>里程碑◆・進度彙總・高速顯示</h4><p>將里程碑期限視覺化，父任務會顯示子任務的完成率。即使是大型專案，也能透過虛擬捲動流暢運作</p></div>
         </div>
 </div>
     </div>
     <div class="mt"><div class="cta-band">
-      <h2>スケジュール調整をその場で。</h2>
-      <p>バーをドラッグして期限変更、後続タスクへの自動シフトまでガント画面だけで完結します。</p>
+      <h2>當場完成行程調整。</h2>
+      <p>拖曳長條變更期限，甚至連自動位移後續任務，都能只在甘特圖畫面中完成。</p>
       <div class="cta-row">
-        <a class="btn btn-on-dark" href="https://chromewebstore.google.com/detail/backlog-my-tasks/cangphedocncgiloahgkahplfppmfkhi" target="_blank" rel="noopener">Chromeに追加</a>
-        <a class="btn btn-ghost" style="background:rgba(255,255,255,.12);color:#fff;border-color:rgba(255,255,255,.3)" href="use-cases.html">活用シーンを見る</a>
+        <a class="btn btn-on-dark" href="https://chromewebstore.google.com/detail/backlog-my-tasks/cangphedocncgiloahgkahplfppmfkhi" target="_blank" rel="noopener">加到Chrome</a>
+        <a class="btn btn-ghost" style="background:rgba(255,255,255,.12);color:#fff;border-color:rgba(255,255,255,.3)" href="use-cases.html">查看活用情境</a>
       </div>
     </div></div>
   </div>
@@ -101,33 +101,33 @@
     <div class="fgrid">
       <div>
         <div class="fbrand"><img src="../assets/img/logo.png" alt="">Backlog My Tasks</div>
-        <p>Backlog の自分担当タスクを、複数スペース横断でまとめて確認・操作できる Chrome 拡張機能。7つの表示ビューとプロジェクトダッシュボードで、日々のタスク管理とチームの進捗把握をもっと楽に。</p>
+        <p>可跨多個Backlog空間，統整檢視與操作自己負責任務的Chrome擴充功能。透過7種顯示檢視與專案儀表板，讓每天的任務管理與掌握團隊進度更加輕鬆。</p>
       </div>
-      <div><h5>表示ビュー</h5><ul><li><a href="views.html">7つの表示ビュー</a></li>
-<li><a href="view-list.html">リスト</a></li>
-<li><a href="view-matrix.html">マトリックス</a></li>
-<li><a href="view-kanban.html">カンバン</a></li>
-<li><a href="view-gantt.html">ガント</a></li>
-<li><a href="view-calendar.html">カレンダー</a></li>
-<li><a href="reports.html">バーンダウン／ワークロード</a></li></ul></div>
-<div><h5>便利機能</h5><ul><li><a href="daily-features.html">毎日が変わる便利機能</a></li>
-<li><a href="speed-features.html">もっと速く・見える化</a></li>
-<li><a href="task-creation.html">作る・取り込む・使い回す</a></li></ul></div>
-<div><h5>ダッシュボード</h5><ul><li><a href="dashboard.html">ダッシュボード概要</a></li>
-<li><a href="dashboard-project.html">プロジェクト別ダッシュボード</a></li>
-<li><a href="dashboard-gantt.html">プロジェクト全体ガント</a></li>
-<li><a href="dashboard-cross-space.html">スペース横断／ユーザ棚卸</a></li>
+      <div><h5>顯示檢視</h5><ul><li><a href="views.html">7種顯示檢視</a></li>
+<li><a href="view-list.html">清單</a></li>
+<li><a href="view-matrix.html">矩陣</a></li>
+<li><a href="view-kanban.html">看板</a></li>
+<li><a href="view-gantt.html">甘特圖</a></li>
+<li><a href="view-calendar.html">行事曆</a></li>
+<li><a href="reports.html">燃盡圖／工作負荷</a></li></ul></div>
+<div><h5>便利功能</h5><ul><li><a href="daily-features.html">讓每一天都不一樣的便利功能</a></li>
+<li><a href="speed-features.html">更快速・視覺化</a></li>
+<li><a href="task-creation.html">建立・匯入・重複使用</a></li></ul></div>
+<div><h5>儀表板</h5><ul><li><a href="dashboard.html">儀表板概觀</a></li>
+<li><a href="dashboard-project.html">各專案儀表板</a></li>
+<li><a href="dashboard-gantt.html">整個專案甘特圖</a></li>
+<li><a href="dashboard-cross-space.html">跨空間／使用者盤點</a></li>
 <li><a href="dashboard-organization.html">組織（部門管理）</a></li></ul></div>
-<div><h5>その他</h5><ul><li><a href="game.html">Backlog Quest</a></li>
-<li><a href="use-cases.html">活用シーン</a></li>
-<li><a href="security-i18n.html">多言語・セキュリティ</a></li>
-<li><a href="feature-map.html">全機能マップ</a></li>
+<div><h5>其他</h5><ul><li><a href="game.html">Backlog Quest</a></li>
+<li><a href="use-cases.html">活用情境</a></li>
+<li><a href="security-i18n.html">多語言・安全性</a></li>
+<li><a href="feature-map.html">全功能地圖</a></li>
 <li><a href="get-started.html">導入方法</a></li></ul></div>
 
     </div>
     <div class="fbottom">
       <span>&copy; Backlog My Tasks</span>
-      <span><a href="https://chromewebstore.google.com/detail/backlog-my-tasks/cangphedocncgiloahgkahplfppmfkhi" target="_blank" rel="noopener">Chrome ウェブストア</a></span>
+      <span><a href="https://chromewebstore.google.com/detail/backlog-my-tasks/cangphedocncgiloahgkahplfppmfkhi" target="_blank" rel="noopener">Chrome線上應用程式商店</a></span>
     </div>
   </div>
 </footer>

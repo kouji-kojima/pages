@@ -3,8 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>スペース横断サマリー／ユーザ棚卸 | Backlog My Tasks</title>
-<meta name="description" content="全プロジェクトの完了率・遅延h・健全性スコアを横並びで比較。ユーザ棚卸で休眠アカウントも発見できます。">
+<title>스페이스 통합 요약 / 사용자 목록 | Backlog My Tasks</title>
+<meta name="description" content="모든 프로젝트의 완료율・지연 시간・건전성 점수를 나란히 비교할 수 있습니다. 사용자 목록으로 휴면 계정도 찾을 수 있습니다.">
 <link rel="canonical" href="https://kouji-kojima.github.io/pages/backlog-my-tasks/website-src/dist/ko/dashboard-cross-space.html">
 <link rel="alternate" hreflang="ja" href="https://kouji-kojima.github.io/pages/backlog-my-tasks/website-src/dist/dashboard-cross-space.html">
 <link rel="alternate" hreflang="en" href="https://kouji-kojima.github.io/pages/backlog-my-tasks/website-src/dist/en/dashboard-cross-space.html">
@@ -12,8 +12,8 @@
 <link rel="alternate" hreflang="zh-Hant-TW" href="https://kouji-kojima.github.io/pages/backlog-my-tasks/website-src/dist/zh-TW/dashboard-cross-space.html">
 <link rel="alternate" hreflang="zh-Hant-HK" href="https://kouji-kojima.github.io/pages/backlog-my-tasks/website-src/dist/zh-HK/dashboard-cross-space.html">
 <link rel="alternate" hreflang="x-default" href="https://kouji-kojima.github.io/pages/backlog-my-tasks/website-src/dist/dashboard-cross-space.html">
-<meta property="og:title" content="スペース横断サマリー／ユーザ棚卸 | Backlog My Tasks">
-<meta property="og:description" content="全プロジェクトの完了率・遅延h・健全性スコアを横並びで比較。ユーザ棚卸で休眠アカウントも発見できます。">
+<meta property="og:title" content="스페이스 통합 요약 / 사용자 목록 | Backlog My Tasks">
+<meta property="og:description" content="모든 프로젝트의 완료율・지연 시간・건전성 점수를 나란히 비교할 수 있습니다. 사용자 목록으로 휴면 계정도 찾을 수 있습니다.">
 <meta property="og:image" content="https://kouji-kojima.github.io/pages/backlog-my-tasks/website-src/dist/assets/img/10_admin_space.jpg">
 <meta property="og:url" content="https://kouji-kojima.github.io/pages/backlog-my-tasks/website-src/dist/ko/dashboard-cross-space.html">
 <meta property="og:type" content="website">
@@ -27,13 +27,13 @@
   <div class="wrap bar">
     <a href="index.html" class="brand"><img src="../assets/img/logo.png" alt=""><span>Backlog My Tasks</span></a>
     <nav id="site-nav">
-      <a href="index.html">ホーム</a>
-<a href="views.html">表示ビュー</a>
-<a href="daily-features.html">便利機能</a>
-<a href="dashboard.html">ダッシュボード</a>
+      <a href="index.html">홈</a>
+<a href="views.html">보기 화면</a>
+<a href="daily-features.html">편의 기능</a>
+<a href="dashboard.html">대시보드</a>
 <a href="game.html">Backlog Quest</a>
-<a href="use-cases.html">活用シーン</a>
-<a href="get-started.html">導入方法</a>
+<a href="use-cases.html">활용 사례</a>
+<a href="get-started.html">도입 방법</a>
     </nav>
     <details class="lang-switch">
       <summary>🇰🇷 한국어</summary>
@@ -43,62 +43,62 @@
 <a href="../zh-TW/dashboard-cross-space.html">🇹🇼 繁體中文</a>
 <a href="../zh-HK/dashboard-cross-space.html">🇭🇰 繁體中文（香港）</a></div>
     </details>
-    <a class="btn btn-primary header-cta" href="https://chromewebstore.google.com/detail/backlog-my-tasks/cangphedocncgiloahgkahplfppmfkhi" target="_blank" rel="noopener">Chromeに追加</a>
-    <button id="nav-toggle" aria-label="メニュー">☰</button>
+    <a class="btn btn-primary header-cta" href="https://chromewebstore.google.com/detail/backlog-my-tasks/cangphedocncgiloahgkahplfppmfkhi" target="_blank" rel="noopener">Chrome에 추가</a>
+    <button id="nav-toggle" aria-label="메뉴">☰</button>
   </div>
 </header>
 
 
 <section class="page-hero">
   <div class="wrap inner">
-    <div class="breadcrumb"><a href="index.html">ホーム</a> / スペース横断・ユーザ棚卸</div>
-    <div class="eyebrow">ダッシュボード</div>
-    <h1>スペース横断で、全プロジェクトを俯瞰。</h1>
-    <p class="lead">複数スペースの状態をまとめて比較し、休眠アカウントも一目で見つけられます。</p>
+    <div class="breadcrumb"><a href="index.html">홈</a> / 스페이스 통합・사용자 목록</div>
+    <div class="eyebrow">대시보드</div>
+    <h1>여러 스페이스에 걸쳐 모든 프로젝트를 한눈에.</h1>
+    <p class="lead">여러 스페이스의 상태를 한번에 비교할 수 있고, 휴면 계정도 한눈에 찾을 수 있습니다.</p>
   </div>
 </section>
 
 <section>
   <div class="wrap">
     <div class="showcase">
-      <div class="frame"><img src="../assets/img/10_admin_space.jpg" alt="スペース横断サマリーのスクリーンショット" loading="lazy"></div>
+      <div class="frame"><img src="../assets/img/10_admin_space.jpg" alt="스페이스 통합 요약 스크린샷" loading="lazy"></div>
       <div class="bullets"><div class="bullet">
           <div class="dot"></div>
-          <div><h4>全プロジェクトを俯瞰</h4><p>完了率・遅延h・健全性スコアを横並びで比較</p></div>
+          <div><h4>모든 프로젝트를 한눈에</h4><p>완료율・지연 시간・건전성 점수를 나란히 비교</p></div>
         </div>
 <div class="bullet">
           <div class="dot"></div>
-          <div><h4>リスクを自動検出</h4><p>遅延率50%以上=🔴、20%以上=🟡で自動フラグ</p></div>
+          <div><h4>위험을 자동으로 감지</h4><p>지연율 50% 이상=🔴, 20% 이상=🟡으로 자동 표시</p></div>
         </div>
 <div class="bullet">
           <div class="dot"></div>
-          <div><h4>マイルストーン横断ビュー</h4><p>全プロジェクトの締切と完了率をまとめて確認</p></div>
+          <div><h4>마일스톤 통합 뷰</h4><p>모든 프로젝트의 마감일과 완료율을 한번에 확인</p></div>
         </div>
 </div>
     </div>
     <div class="divider"></div>
     <div class="showcase reverse">
-      <div class="frame"><img src="../assets/img/12_admin_users.jpg" alt="ユーザ棚卸のスクリーンショット" loading="lazy"></div>
+      <div class="frame"><img src="../assets/img/12_admin_users.jpg" alt="사용자 목록 스크린샷" loading="lazy"></div>
       <div class="bullets"><div class="bullet">
           <div class="dot"></div>
-          <div><h4>最終ログインを可視化</h4><p>全ユーザのログイン日と経過日数を一覧表示</p></div>
+          <div><h4>마지막 로그인을 시각화</h4><p>모든 사용자의 로그인 날짜와 경과 일수를 목록으로 표시</p></div>
         </div>
 <div class="bullet">
           <div class="dot"></div>
-          <div><h4>休眠アカウントを発見</h4><p>1年以上未ログインを赤でハイライト＆自動ソート</p></div>
+          <div><h4>휴면 계정 찾기</h4><p>1년 이상 미로그인 계정은 빨간색으로 강조 표시하고 자동 정렬</p></div>
         </div>
 <div class="bullet">
           <div class="dot"></div>
-          <div><h4>ライセンス棚卸に最適</h4><p>不要アカウントはその場でスペースから削除（スペース管理者専用）</p></div>
+          <div><h4>라이선스 점검에 최적</h4><p>필요 없는 계정은 그 자리에서 스페이스에서 삭제(스페이스 관리자 전용)</p></div>
         </div>
 </div>
     </div>
     <div class="mt"><div class="cta-band">
-      <h2>危険プロジェクトに、早期着手。</h2>
-      <p>遅延率で自動フラグが立つので、手を打つべきプロジェクトがひと目で分かります。</p>
+      <h2>위험한 프로젝트에 일찌감치 착수.</h2>
+      <p>지연율에 따라 자동으로 플래그가 표시되므로 손을 써야 할 프로젝트를 한눈에 알 수 있습니다.</p>
       <div class="cta-row">
-        <a class="btn btn-on-dark" href="https://chromewebstore.google.com/detail/backlog-my-tasks/cangphedocncgiloahgkahplfppmfkhi" target="_blank" rel="noopener">Chromeに追加</a>
-        <a class="btn btn-ghost" style="background:rgba(255,255,255,.12);color:#fff;border-color:rgba(255,255,255,.3)" href="dashboard-organization.html">組織（部門管理）を見る</a>
+        <a class="btn btn-on-dark" href="https://chromewebstore.google.com/detail/backlog-my-tasks/cangphedocncgiloahgkahplfppmfkhi" target="_blank" rel="noopener">Chrome에 추가</a>
+        <a class="btn btn-ghost" style="background:rgba(255,255,255,.12);color:#fff;border-color:rgba(255,255,255,.3)" href="dashboard-organization.html">조직(부서 관리) 보기</a>
       </div>
     </div></div>
   </div>
@@ -110,33 +110,33 @@
     <div class="fgrid">
       <div>
         <div class="fbrand"><img src="../assets/img/logo.png" alt="">Backlog My Tasks</div>
-        <p>Backlog の自分担当タスクを、複数スペース横断でまとめて確認・操作できる Chrome 拡張機能。7つの表示ビューとプロジェクトダッシュボードで、日々のタスク管理とチームの進捗把握をもっと楽に。</p>
+        <p>Backlog에서 자신에게 할당된 태스크를 여러 스페이스에 걸쳐 한곳에서 확인·조작할 수 있는 Chrome 확장 프로그램입니다. 7가지 보기 화면과 프로젝트 대시보드로 일상적인 태스크 관리와 팀 진행 상황 파악을 한결 편하게 만들어 줍니다.</p>
       </div>
-      <div><h5>表示ビュー</h5><ul><li><a href="views.html">7つの表示ビュー</a></li>
-<li><a href="view-list.html">リスト</a></li>
-<li><a href="view-matrix.html">マトリックス</a></li>
-<li><a href="view-kanban.html">カンバン</a></li>
-<li><a href="view-gantt.html">ガント</a></li>
-<li><a href="view-calendar.html">カレンダー</a></li>
-<li><a href="reports.html">バーンダウン／ワークロード</a></li></ul></div>
-<div><h5>便利機能</h5><ul><li><a href="daily-features.html">毎日が変わる便利機能</a></li>
-<li><a href="speed-features.html">もっと速く・見える化</a></li>
-<li><a href="task-creation.html">作る・取り込む・使い回す</a></li></ul></div>
-<div><h5>ダッシュボード</h5><ul><li><a href="dashboard.html">ダッシュボード概要</a></li>
-<li><a href="dashboard-project.html">プロジェクト別ダッシュボード</a></li>
-<li><a href="dashboard-gantt.html">プロジェクト全体ガント</a></li>
-<li><a href="dashboard-cross-space.html">スペース横断／ユーザ棚卸</a></li>
-<li><a href="dashboard-organization.html">組織（部門管理）</a></li></ul></div>
-<div><h5>その他</h5><ul><li><a href="game.html">Backlog Quest</a></li>
-<li><a href="use-cases.html">活用シーン</a></li>
-<li><a href="security-i18n.html">多言語・セキュリティ</a></li>
-<li><a href="feature-map.html">全機能マップ</a></li>
-<li><a href="get-started.html">導入方法</a></li></ul></div>
+      <div><h5>보기 화면</h5><ul><li><a href="views.html">7가지 보기 화면</a></li>
+<li><a href="view-list.html">리스트</a></li>
+<li><a href="view-matrix.html">매트릭스</a></li>
+<li><a href="view-kanban.html">칸반</a></li>
+<li><a href="view-gantt.html">간트</a></li>
+<li><a href="view-calendar.html">캘린더</a></li>
+<li><a href="reports.html">번다운 / 워크로드</a></li></ul></div>
+<div><h5>편의 기능</h5><ul><li><a href="daily-features.html">매일이 달라지는 편의 기능</a></li>
+<li><a href="speed-features.html">더 빠르게・시각화</a></li>
+<li><a href="task-creation.html">만들고・가져오고・재사용하기</a></li></ul></div>
+<div><h5>대시보드</h5><ul><li><a href="dashboard.html">대시보드 개요</a></li>
+<li><a href="dashboard-project.html">프로젝트별 대시보드</a></li>
+<li><a href="dashboard-gantt.html">프로젝트 전체 간트</a></li>
+<li><a href="dashboard-cross-space.html">스페이스 통합 / 사용자 목록</a></li>
+<li><a href="dashboard-organization.html">조직(부서 관리)</a></li></ul></div>
+<div><h5>기타</h5><ul><li><a href="game.html">Backlog Quest</a></li>
+<li><a href="use-cases.html">활용 사례</a></li>
+<li><a href="security-i18n.html">다국어・보안</a></li>
+<li><a href="feature-map.html">전체 기능 맵</a></li>
+<li><a href="get-started.html">도입 방법</a></li></ul></div>
 
     </div>
     <div class="fbottom">
       <span>&copy; Backlog My Tasks</span>
-      <span><a href="https://chromewebstore.google.com/detail/backlog-my-tasks/cangphedocncgiloahgkahplfppmfkhi" target="_blank" rel="noopener">Chrome ウェブストア</a></span>
+      <span><a href="https://chromewebstore.google.com/detail/backlog-my-tasks/cangphedocncgiloahgkahplfppmfkhi" target="_blank" rel="noopener">Chrome 웹 스토어</a></span>
     </div>
   </div>
 </footer>

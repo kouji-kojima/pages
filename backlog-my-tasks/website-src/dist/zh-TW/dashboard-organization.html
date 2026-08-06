@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>組織（部門管理） | Backlog My Tasks</title>
-<meta name="description" content="部門ツリーを登録し、プロジェクトを部門に割り当てて部門単位で進捗を分析できる管理者機能。組織データはブラウザにローカル保存され外部に送信されません。">
+<meta name="description" content="登錄部門樹狀結構並將專案指派給部門，即可以部門為單位分析進度的管理者功能。組織資料儲存在瀏覽器本機，不會傳送到外部。">
 <link rel="canonical" href="https://kouji-kojima.github.io/pages/backlog-my-tasks/website-src/dist/zh-TW/dashboard-organization.html">
 <link rel="alternate" hreflang="ja" href="https://kouji-kojima.github.io/pages/backlog-my-tasks/website-src/dist/dashboard-organization.html">
 <link rel="alternate" hreflang="en" href="https://kouji-kojima.github.io/pages/backlog-my-tasks/website-src/dist/en/dashboard-organization.html">
@@ -13,7 +13,7 @@
 <link rel="alternate" hreflang="zh-Hant-HK" href="https://kouji-kojima.github.io/pages/backlog-my-tasks/website-src/dist/zh-HK/dashboard-organization.html">
 <link rel="alternate" hreflang="x-default" href="https://kouji-kojima.github.io/pages/backlog-my-tasks/website-src/dist/dashboard-organization.html">
 <meta property="og:title" content="組織（部門管理） | Backlog My Tasks">
-<meta property="og:description" content="部門ツリーを登録し、プロジェクトを部門に割り当てて部門単位で進捗を分析できる管理者機能。組織データはブラウザにローカル保存され外部に送信されません。">
+<meta property="og:description" content="登錄部門樹狀結構並將專案指派給部門，即可以部門為單位分析進度的管理者功能。組織資料儲存在瀏覽器本機，不會傳送到外部。">
 <meta property="og:image" content="https://kouji-kojima.github.io/pages/backlog-my-tasks/website-src/dist/assets/img/14_admin_org.jpg">
 <meta property="og:url" content="https://kouji-kojima.github.io/pages/backlog-my-tasks/website-src/dist/zh-TW/dashboard-organization.html">
 <meta property="og:type" content="website">
@@ -27,12 +27,12 @@
   <div class="wrap bar">
     <a href="index.html" class="brand"><img src="../assets/img/logo.png" alt=""><span>Backlog My Tasks</span></a>
     <nav id="site-nav">
-      <a href="index.html">ホーム</a>
-<a href="views.html">表示ビュー</a>
-<a href="daily-features.html">便利機能</a>
-<a href="dashboard.html">ダッシュボード</a>
+      <a href="index.html">首頁</a>
+<a href="views.html">顯示檢視</a>
+<a href="daily-features.html">便利功能</a>
+<a href="dashboard.html">儀表板</a>
 <a href="game.html">Backlog Quest</a>
-<a href="use-cases.html">活用シーン</a>
+<a href="use-cases.html">活用情境</a>
 <a href="get-started.html">導入方法</a>
     </nav>
     <details class="lang-switch">
@@ -43,53 +43,53 @@
 <a href="../zh-TW/dashboard-organization.html" class="active">🇹🇼 繁體中文</a>
 <a href="../zh-HK/dashboard-organization.html">🇭🇰 繁體中文（香港）</a></div>
     </details>
-    <a class="btn btn-primary header-cta" href="https://chromewebstore.google.com/detail/backlog-my-tasks/cangphedocncgiloahgkahplfppmfkhi" target="_blank" rel="noopener">Chromeに追加</a>
-    <button id="nav-toggle" aria-label="メニュー">☰</button>
+    <a class="btn btn-primary header-cta" href="https://chromewebstore.google.com/detail/backlog-my-tasks/cangphedocncgiloahgkahplfppmfkhi" target="_blank" rel="noopener">加到Chrome</a>
+    <button id="nav-toggle" aria-label="選單">☰</button>
   </div>
 </header>
 
 
 <section class="page-hero">
   <div class="wrap inner">
-    <div class="breadcrumb"><a href="index.html">ホーム</a> / 組織（部門管理）</div>
-    <div class="eyebrow">ダッシュボード</div>
-    <h1>組織 ─ 部門ごとに、プロジェクトを見える化。</h1>
-    <p class="lead">部門ツリーを登録してプロジェクトを割り当てると、部門単位での進捗把握やスペース横断の絞り込みに使えます。組織データはブラウザだけに保存され、外部には送信されません。</p>
+    <div class="breadcrumb"><a href="index.html">首頁</a> / 組織（部門管理）</div>
+    <div class="eyebrow">儀表板</div>
+    <h1>組織 ─ 依部門將專案視覺化。</h1>
+    <p class="lead">登錄部門樹狀結構並指派專案後，即可用於以部門為單位掌握進度，或作為跨空間篩選的依據。組織資料只會儲存在瀏覽器中，不會傳送到外部。</p>
   </div>
 </section>
 
 <section>
   <div class="wrap">
     <div class="showcase">
-      <div class="frame"><img src="../assets/img/14_admin_org.jpg" alt="組織タブのスクリーンショット" loading="lazy"></div>
+      <div class="frame"><img src="../assets/img/14_admin_org.jpg" alt="組織分頁的畫面截圖" loading="lazy"></div>
       <div class="bullets"><div class="bullet">
           <div class="dot"></div>
-          <div><h4>親子関係を自由に設定できる部門ツリー</h4><p>親部門を選んで名前を入力するだけで、何階層でも部門を追加。表示順の並び替え・折りたたみ・削除にも対応</p></div>
+          <div><h4>可自由設定父子關係的部門樹狀結構</h4><p>只要選擇父部門並輸入名稱，即可新增任意層級的部門。也支援調整顯示順序、摺疊、刪除</p></div>
         </div>
 <div class="bullet">
           <div class="dot"></div>
-          <div><h4>一覧表示とグラフィカルな組織図を切り替え</h4><p>箱＋接続線で部門構成を可視化する組織図モードも搭載</p></div>
+          <div><h4>可在清單顯示與圖形化組織圖之間切換</h4><p>也內建以方框＋連接線將部門結構視覺化的組織圖模式</p></div>
         </div>
 <div class="bullet">
           <div class="dot"></div>
-          <div><h4>プロジェクトを部門に割り当てて分析</h4><p>データ管理タブのプルダウンから部門を割り当てるだけで、部門別プロジェクト分析やスペース横断の部門フィルターで活用できる</p></div>
+          <div><h4>將專案指派給部門後進行分析</h4><p>只要在資料管理分頁的下拉選單中指派部門，即可用於部門別專案分析與跨空間的部門篩選</p></div>
         </div>
 <div class="bullet">
           <div class="dot"></div>
-          <div><h4>配下の部門もまとめて集計</h4><p>部門を選ぶと、その部門と子・孫部門のプロジェクトをまとめて進捗率・遅延工数などを集計</p></div>
+          <div><h4>所屬的下級部門也會一併彙總</h4><p>選擇部門後，即可統整彙總該部門與子部門、孫部門的專案進度率、延遲工時等</p></div>
         </div>
 <div class="bullet">
           <div class="dot"></div>
-          <div><h4>組織データはブラウザにローカル保存</h4><p>Backlog側やアカウント間で同期されないため、安心して社内の組織構成をそのまま登録できる。エクスポート／インポートで他のPCへの持ち出しも可能</p></div>
+          <div><h4>組織資料儲存在瀏覽器本機</h4><p>由於不會與Backlog端或帳號之間同步，可以放心直接登錄公司內部的組織架構。也可透過匯出／匯入將資料帶到其他電腦</p></div>
         </div>
 </div>
     </div>
     <div class="mt"><div class="cta-band">
-      <h2>部門ごとの進捗を、迷わず把握。</h2>
-      <p>組織ツリーを作れば、あとはプロジェクトを紐づけるだけ。部門別の状況がいつでも一目で分かります。</p>
+      <h2>毫不猶豫地掌握各部門的進度。</h2>
+      <p>只要建立組織樹狀結構，接下來只需將專案連結上去。各部門的狀況隨時都能一目了然。</p>
       <div class="cta-row">
-        <a class="btn btn-on-dark" href="https://chromewebstore.google.com/detail/backlog-my-tasks/cangphedocncgiloahgkahplfppmfkhi" target="_blank" rel="noopener">Chromeに追加</a>
-        <a class="btn btn-ghost" style="background:rgba(255,255,255,.12);color:#fff;border-color:rgba(255,255,255,.3)" href="dashboard-cross-space.html">スペース横断サマリーを見る</a>
+        <a class="btn btn-on-dark" href="https://chromewebstore.google.com/detail/backlog-my-tasks/cangphedocncgiloahgkahplfppmfkhi" target="_blank" rel="noopener">加到Chrome</a>
+        <a class="btn btn-ghost" style="background:rgba(255,255,255,.12);color:#fff;border-color:rgba(255,255,255,.3)" href="dashboard-cross-space.html">查看跨空間摘要</a>
       </div>
     </div></div>
   </div>
@@ -101,33 +101,33 @@
     <div class="fgrid">
       <div>
         <div class="fbrand"><img src="../assets/img/logo.png" alt="">Backlog My Tasks</div>
-        <p>Backlog の自分担当タスクを、複数スペース横断でまとめて確認・操作できる Chrome 拡張機能。7つの表示ビューとプロジェクトダッシュボードで、日々のタスク管理とチームの進捗把握をもっと楽に。</p>
+        <p>可跨多個Backlog空間，統整檢視與操作自己負責任務的Chrome擴充功能。透過7種顯示檢視與專案儀表板，讓每天的任務管理與掌握團隊進度更加輕鬆。</p>
       </div>
-      <div><h5>表示ビュー</h5><ul><li><a href="views.html">7つの表示ビュー</a></li>
-<li><a href="view-list.html">リスト</a></li>
-<li><a href="view-matrix.html">マトリックス</a></li>
-<li><a href="view-kanban.html">カンバン</a></li>
-<li><a href="view-gantt.html">ガント</a></li>
-<li><a href="view-calendar.html">カレンダー</a></li>
-<li><a href="reports.html">バーンダウン／ワークロード</a></li></ul></div>
-<div><h5>便利機能</h5><ul><li><a href="daily-features.html">毎日が変わる便利機能</a></li>
-<li><a href="speed-features.html">もっと速く・見える化</a></li>
-<li><a href="task-creation.html">作る・取り込む・使い回す</a></li></ul></div>
-<div><h5>ダッシュボード</h5><ul><li><a href="dashboard.html">ダッシュボード概要</a></li>
-<li><a href="dashboard-project.html">プロジェクト別ダッシュボード</a></li>
-<li><a href="dashboard-gantt.html">プロジェクト全体ガント</a></li>
-<li><a href="dashboard-cross-space.html">スペース横断／ユーザ棚卸</a></li>
+      <div><h5>顯示檢視</h5><ul><li><a href="views.html">7種顯示檢視</a></li>
+<li><a href="view-list.html">清單</a></li>
+<li><a href="view-matrix.html">矩陣</a></li>
+<li><a href="view-kanban.html">看板</a></li>
+<li><a href="view-gantt.html">甘特圖</a></li>
+<li><a href="view-calendar.html">行事曆</a></li>
+<li><a href="reports.html">燃盡圖／工作負荷</a></li></ul></div>
+<div><h5>便利功能</h5><ul><li><a href="daily-features.html">讓每一天都不一樣的便利功能</a></li>
+<li><a href="speed-features.html">更快速・視覺化</a></li>
+<li><a href="task-creation.html">建立・匯入・重複使用</a></li></ul></div>
+<div><h5>儀表板</h5><ul><li><a href="dashboard.html">儀表板概觀</a></li>
+<li><a href="dashboard-project.html">各專案儀表板</a></li>
+<li><a href="dashboard-gantt.html">整個專案甘特圖</a></li>
+<li><a href="dashboard-cross-space.html">跨空間／使用者盤點</a></li>
 <li><a href="dashboard-organization.html">組織（部門管理）</a></li></ul></div>
-<div><h5>その他</h5><ul><li><a href="game.html">Backlog Quest</a></li>
-<li><a href="use-cases.html">活用シーン</a></li>
-<li><a href="security-i18n.html">多言語・セキュリティ</a></li>
-<li><a href="feature-map.html">全機能マップ</a></li>
+<div><h5>其他</h5><ul><li><a href="game.html">Backlog Quest</a></li>
+<li><a href="use-cases.html">活用情境</a></li>
+<li><a href="security-i18n.html">多語言・安全性</a></li>
+<li><a href="feature-map.html">全功能地圖</a></li>
 <li><a href="get-started.html">導入方法</a></li></ul></div>
 
     </div>
     <div class="fbottom">
       <span>&copy; Backlog My Tasks</span>
-      <span><a href="https://chromewebstore.google.com/detail/backlog-my-tasks/cangphedocncgiloahgkahplfppmfkhi" target="_blank" rel="noopener">Chrome ウェブストア</a></span>
+      <span><a href="https://chromewebstore.google.com/detail/backlog-my-tasks/cangphedocncgiloahgkahplfppmfkhi" target="_blank" rel="noopener">Chrome線上應用程式商店</a></span>
     </div>
   </div>
 </footer>
