@@ -3,11 +3,12 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" type="image/png" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAIAAAD8GO2jAAABPklEQVR4nGNk1k1goCVg+c/ASFsLGBhpbcGoDwhaMHh88K+wEpnL1N9OjC4mBkZGYhCa6VD7iNDIxMDASBD9K6jA7qeCCoJ6GZmMsvAFS34ZMpfx6mcI4782LyIQJnbhMYGRySgbh9GlWI1GBqjWdGM1h3Aqwmo0XAphBw5zGJmMc9Hd5ZwG14bHdIR6JMWMe2ehyaKnIlJNZ0CNmP/OafhS0X+nVFJNx2KHUyqymUwoCEMDJvjnHY/fDgYGFGNRg4gQgJiOyw4kC3AEEeOBBfjc3qmDlY3NEyhBxIjpCeQEjsVEu7O47MD0AY2Ka4SZtCmukcxEL+wYDy3BGg1M5VcYGBiYti5EsMuvYDH56mfGQ0tQCztLLCXlf9vo/9q8JGUFqAWHl6KLMFmiF/TUBYOpyiTXglEfELRgqPsAADoVZSwaHPoRAAAAAElFTkSuQmCC">
 <title>What's New | Salesforce Opportunity Explorer Community</title>
-<meta name="description" content="Product-level enhancements, an expanded target-setting scope, cascading filters, and more — the latest updates.">
+<meta name="description" content="Bulk-log ToDos from meeting notes via AI, a Manager Dashboard, Excel export, saving memos to Salesforce, and 20+ more features — the v22.0.0 updates.">
 <meta name="theme-color" content="#032d60">
 <meta property="og:title" content="What's New | Salesforce Opportunity Explorer Community">
-<meta property="og:description" content="Product-level enhancements, an expanded target-setting scope, cascading filters, and more — the latest updates.">
+<meta property="og:description" content="Bulk-log ToDos from meeting notes via AI, a Manager Dashboard, Excel export, saving memos to Salesforce, and 20+ more features — the v22.0.0 updates.">
 <meta property="og:type" content="website">
 <style>
 :root {
@@ -374,30 +375,72 @@ footer.site-footer { background: var(--sky-950); color: rgba(232,244,253,.7); pa
 <section class="block"><div class="wrap"><div class="grid grid-2">
 <div class="card reveal">
   
-  <div class="icon">📦</div>
-  <h3>Product CSV & Product Trend</h3>
-  <p>New: a CSV expanded to one row per product, and a sparkline of each product's past 5 years of won amount.</p>
+  <div class="icon">🗣</div>
+  <h3>Meeting Notes to TODOs</h3>
+  <p>Paste meeting notes/transcripts and generate an AI prompt that extracts action items, then bulk-log Tasks across opportunities. Works with any AI response (e.g. Health Check), too.</p>
 </div>
 
 <div class="card reveal">
   
-  <div class="icon">🎯</div>
-  <h3>Expanded target-setting scope</h3>
-  <p>Targets can now be set per product, owner, sales office, and sales group too — priority is resolved automatically across 7 scope levels, including a new monthly input.</p>
+  <div class="icon">⚡</div>
+  <h3>Quick Activity Logging enhanced</h3>
+  <p>Save frequent subject/comment combos as templates, dictate comments by voice, chain into logging the next action, and download an .ics file when logging an Event.</p>
 </div>
 
 <div class="card reveal">
   
-  <div class="icon">🔗</div>
-  <h3>Cascading filters, expanded</h3>
-  <p>Selecting a parent department now narrows affiliation, sales group, sales office, owner, and product candidates automatically. Selecting an affiliation narrows further still.</p>
+  <div class="icon">📌</div>
+  <h3>Bulk Task logging & My Task List</h3>
+  <p>Log the same follow-up Task across selected opportunities or the Top 10. Review your own open Tasks sorted by due date, and mark complete or snooze.</p>
 </div>
 
 <div class="card reveal">
   
-  <div class="icon">📜</div>
-  <h3>Sticky-header scrolling in Summary</h3>
-  <p>Every aggregation table now scrolls independently with its header pinned — column names stay visible no matter how many rows there are.</p>
+  <div class="icon">⏰</div>
+  <h3>No-next-action alert</h3>
+  <p>Open opportunities with no next action scheduled now appear in a dedicated alert, with one-click ToDo logging. Stage changes also prompt a follow-up ToDo suggestion.</p>
+</div>
+
+<div class="card reveal">
+  
+  <div class="icon">👤</div>
+  <h3>Contact linking & voice input</h3>
+  <p>Optionally link a contact to a Task/Event. Dictate into the comments field using the browser's built-in speech recognition (nothing sent externally).</p>
+</div>
+
+<div class="card reveal">
+  
+  <div class="icon">🗂</div>
+  <h3>Quick logging from Kanban & Side Panel</h3>
+  <p>Kanban cards gained a "+ToDo" button, and the side panel now shows a Top 3 with inline quick ToDo logging.</p>
+</div>
+
+<div class="card reveal">
+  
+  <div class="icon">👔</div>
+  <h3>Manager Dashboard & Cross-sell Discovery</h3>
+  <p>Cross-view opportunity KPIs per direct report. Discover well-selling products each account hasn't been offered yet.</p>
+</div>
+
+<div class="card reveal">
+  
+  <div class="icon">📅</div>
+  <h3>Calendar View & Weekly Reminder</h3>
+  <p>See your Tasks/Events in a monthly calendar. Get a digest notification every Monday for deals stalled 60+ days.</p>
+</div>
+
+<div class="card reveal">
+  
+  <div class="icon">🔒</div>
+  <h3>Save memos to Salesforce & Offline queue</h3>
+  <p>Memos can now sync to Salesforce and be shared across your team where supported. Changes made offline are queued and auto-synced.</p>
+</div>
+
+<div class="card reveal">
+  
+  <div class="icon">📊</div>
+  <h3>Excel & Slack/Teams export for the Weekly Report</h3>
+  <p>Download the weekly report as a real Excel (.xlsx) file, or copy a formatted summary for Slack/Teams.</p>
 </div>
 </div><p class="center" style="margin-top:24px;"><a class="btn btn-outline" href="get-started.html">Get the latest version →</a></p></div></section>
 
@@ -419,9 +462,12 @@ footer.site-footer { background: var(--sky-950); color: rgba(232,244,253,.7); pa
 <a href="products.html">Product Features</a>
 <a href="ai-features.html">AI Features</a>
 <a href="insight-rank.html">Insight Rank</a>
-<a href="account-tools.html">Account Tools</a></div>
-      <div><h4>More</h4><a href="pipeline.html">Pipeline Analytics</a>
-<a href="data-quality.html">Data Quality & Forecast</a>
+<a href="account-tools.html">Account Tools</a>
+<a href="pipeline.html">Pipeline Analytics</a>
+<a href="data-quality.html">Data Quality & Forecast</a></div>
+      <div><h4>More</h4><a href="sales-knowledge.html">Sales Knowledge</a>
+<a href="team-management.html">Team Management</a>
+<a href="notifications.html">Notifications</a>
 <a href="side-panel.html">Side Panel</a>
 <a href="productivity.html">Productivity</a>
 <a href="csv-security.html">CSV & Security</a>

@@ -3,11 +3,12 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" type="image/png" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAIAAAD8GO2jAAABPklEQVR4nGNk1k1goCVg+c/ASFsLGBhpbcGoDwhaMHh88K+wEpnL1N9OjC4mBkZGYhCa6VD7iNDIxMDASBD9K6jA7qeCCoJ6GZmMsvAFS34ZMpfx6mcI4782LyIQJnbhMYGRySgbh9GlWI1GBqjWdGM1h3Aqwmo0XAphBw5zGJmMc9Hd5ZwG14bHdIR6JMWMe2ehyaKnIlJNZ0CNmP/OafhS0X+nVFJNx2KHUyqymUwoCEMDJvjnHY/fDgYGFGNRg4gQgJiOyw4kC3AEEeOBBfjc3qmDlY3NEyhBxIjpCeQEjsVEu7O47MD0AY2Ka4SZtCmukcxEL+wYDy3BGg1M5VcYGBiYti5EsMuvYDH56mfGQ0tQCztLLCXlf9vo/9q8JGUFqAWHl6KLMFmiF/TUBYOpyiTXglEfELRgqPsAADoVZSwaHPoRAAAAAElFTkSuQmCC">
 <title>新機能｜Salesforce Opportunity Explorer Community</title>
-<meta name="description" content="商談商品まわりの機能強化、目標設定スコープの拡張、絞り込み候補の連動など最新のアップデート内容。">
+<meta name="description" content="会議メモからのAI TODO一括登録、マネージャーダッシュボード、Excel出力、Salesforce保存化など20以上の新機能を含む、v22.0.0の最新アップデート内容。">
 <meta name="theme-color" content="#032d60">
 <meta property="og:title" content="新機能｜Salesforce Opportunity Explorer Community">
-<meta property="og:description" content="商談商品まわりの機能強化、目標設定スコープの拡張、絞り込み候補の連動など最新のアップデート内容。">
+<meta property="og:description" content="会議メモからのAI TODO一括登録、マネージャーダッシュボード、Excel出力、Salesforce保存化など20以上の新機能を含む、v22.0.0の最新アップデート内容。">
 <meta property="og:type" content="website">
 <style>
 :root {
@@ -374,30 +375,72 @@ footer.site-footer { background: var(--sky-950); color: rgba(232,244,253,.7); pa
 <section class="block"><div class="wrap"><div class="grid grid-2">
 <div class="card reveal">
   
-  <div class="icon">📦</div>
-  <h3>商談商品CSV・商品別トレンド</h3>
-  <p>商談商品1件＝1行に展開したCSVダウンロードと、商品ごとの過去5年受注額推移をスパークライン表示する新機能を追加。</p>
+  <div class="icon">🗣</div>
+  <h3>会議メモ→AI TODO一括登録</h3>
+  <p>会議メモ/トランスクリプトを貼り付けるとAIでアクションアイテムを抽出し、複数商談へのTask登録を一括実行。AI健康診断など他のAI回答からの一括登録にも対応。</p>
 </div>
 
 <div class="card reveal">
   
-  <div class="icon">🎯</div>
-  <h3>目標設定スコープを拡張</h3>
-  <p>商談商品・所有者・契約営業部門・扱い部課(事業部門)でも個別に目標額を設定可能に。優先順位は7段階のスコープで自動判定されます。</p>
+  <div class="icon">⚡</div>
+  <h3>クイック活動記録を強化</h3>
+  <p>よく使う件名・説明をテンプレート保存、音声入力、登録後の「続けて次も登録」アクション連鎖、行動(Event)登録時の.icsダウンロードに対応。</p>
 </div>
 
 <div class="card reveal">
   
-  <div class="icon">🔗</div>
-  <h3>絞り込み候補の連動を拡張</h3>
-  <p>親部門を選ぶと所属組織・扱い部課・契約営業部門・所有者・商談商品の候補が自動で絞り込まれるように。所属組織も選ぶとさらに絞り込みが深まります。</p>
+  <div class="icon">📌</div>
+  <h3>一括Task登録・自分のTask一覧</h3>
+  <p>選択した複数商談や「今日の一手」TOP10へまとめてフォローTaskを登録。自分が担当するオープンなTaskを期日順に確認し、完了・スヌーズも可能に。</p>
 </div>
 
 <div class="card reveal">
   
-  <div class="icon">📜</div>
-  <h3>商談サマリーにスクロール対応</h3>
-  <p>各集計テーブルにヘッダー固定（sticky）付きスクロールを追加。行数が多くても列名を見失いません。</p>
+  <div class="icon">⏰</div>
+  <h3>次回アクション未設定アラート</h3>
+  <p>次回アクションが1件も無いオープン商談を一覧表示し、その場でクイックToDo登録。ステージ変更時もフォローToDo登録を提案します。</p>
+</div>
+
+<div class="card reveal">
+  
+  <div class="icon">👤</div>
+  <h3>取引先責任者の紐付け・音声入力</h3>
+  <p>Task/Eventに取引先責任者を任意で紐付け可能に。ブラウザ内蔵の音声認識でコメント欄に音声入力もできます（外部送信なし）。</p>
+</div>
+
+<div class="card reveal">
+  
+  <div class="icon">🗂</div>
+  <h3>カンバン・サイドパネルにもクイック登録</h3>
+  <p>カンバンカードの「+ToDo」ボタン、サイドパネルのTOP3表示から、その場でクイックToDo登録ができるようになりました。</p>
+</div>
+
+<div class="card reveal">
+  
+  <div class="icon">👔</div>
+  <h3>マネージャーダッシュボード・クロスセル発見</h3>
+  <p>直属の部下ごとの商談KPIを横断表示。取引先ごとに未提案の売れ筋商品も提案します。</p>
+</div>
+
+<div class="card reveal">
+  
+  <div class="icon">📅</div>
+  <h3>カレンダービュー・週次リマインダー</h3>
+  <p>自分のTask/Eventを月間カレンダー表示。停滞商談は毎週月曜に自動通知でリマインドします。</p>
+</div>
+
+<div class="card reveal">
+  
+  <div class="icon">🔒</div>
+  <h3>商談メモのSalesforce保存化・オフライン編集キュー</h3>
+  <p>対応組織ではメモをSalesforceにも保存しチーム間で共有。オフライン中の変更も自動キューイングして復帰時に同期します。</p>
+</div>
+
+<div class="card reveal">
+  
+  <div class="icon">📊</div>
+  <h3>週次レポートのExcel・Slack/Teams出力</h3>
+  <p>真のExcel(.xlsx)ファイルとしてダウンロード、またはSlack/Teams共有用テキストをコピーできます。</p>
 </div>
 </div><p class="center" style="margin-top:24px;"><a class="btn btn-outline" href="get-started.html">最新版を導入する →</a></p></div></section>
 
@@ -419,9 +462,12 @@ footer.site-footer { background: var(--sky-950); color: rgba(232,244,253,.7); pa
 <a href="products.html">商談商品機能</a>
 <a href="ai-features.html">AI機能</a>
 <a href="insight-rank.html">Insight Rank</a>
-<a href="account-tools.html">取引先分析ツール</a></div>
-      <div><h4>もっと見る</h4><a href="pipeline.html">パイプライン分析</a>
-<a href="data-quality.html">データ品質・予測</a>
+<a href="account-tools.html">取引先分析ツール</a>
+<a href="pipeline.html">パイプライン分析</a>
+<a href="data-quality.html">データ品質・予測</a></div>
+      <div><h4>もっと見る</h4><a href="sales-knowledge.html">営業ナレッジ</a>
+<a href="team-management.html">チーム管理</a>
+<a href="notifications.html">通知・リマインダー</a>
 <a href="side-panel.html">サイドパネル</a>
 <a href="productivity.html">生産性向上機能</a>
 <a href="csv-security.html">CSV・セキュリティ</a>

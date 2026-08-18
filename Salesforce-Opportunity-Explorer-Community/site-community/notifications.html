@@ -1,14 +1,14 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ja">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link rel="icon" type="image/png" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAIAAAD8GO2jAAABPklEQVR4nGNk1k1goCVg+c/ASFsLGBhpbcGoDwhaMHh88K+wEpnL1N9OjC4mBkZGYhCa6VD7iNDIxMDASBD9K6jA7qeCCoJ6GZmMsvAFS34ZMpfx6mcI4782LyIQJnbhMYGRySgbh9GlWI1GBqjWdGM1h3Aqwmo0XAphBw5zGJmMc9Hd5ZwG14bHdIR6JMWMe2ehyaKnIlJNZ0CNmP/OafhS0X+nVFJNx2KHUyqymUwoCEMDJvjnHY/fDgYGFGNRg4gQgJiOyw4kC3AEEeOBBfjc3qmDlY3NEyhBxIjpCeQEjsVEu7O47MD0AY2Ka4SZtCmukcxEL+wYDy3BGg1M5VcYGBiYti5EsMuvYDH56mfGQ0tQCztLLCXlf9vo/9q8JGUFqAWHl6KLMFmiF/TUBYOpyiTXglEfELRgqPsAADoVZSwaHPoRAAAAAElFTkSuQmCC">
-<title>Get Started | Salesforce Opportunity Explorer</title>
-<meta name="description" content="Setup takes 30 seconds — get started right now from the internal distribution site (restricted).">
+<title>通知・リマインダー｜Salesforce Opportunity Explorer Community</title>
+<meta name="description" content="高リスク商談・ステージ変更・目標未達リスク・フォローアップ期日超過など、必要な通知だけを種類ごとにON/OFF。">
 <meta name="theme-color" content="#032d60">
-<meta property="og:title" content="Get Started | Salesforce Opportunity Explorer">
-<meta property="og:description" content="Setup takes 30 seconds — get started right now from the internal distribution site (restricted).">
+<meta property="og:title" content="通知・リマインダー｜Salesforce Opportunity Explorer Community">
+<meta property="og:description" content="高リスク商談・ステージ変更・目標未達リスク・フォローアップ期日超過など、必要な通知だけを種類ごとにON/OFF。">
 <meta property="og:type" content="website">
 <style>
 :root {
@@ -333,50 +333,139 @@ footer.site-footer { background: var(--sky-950); color: rgba(232,244,253,.7); pa
     <a class="brand" href="index.html">
       <span class="brand-badge">🔍</span>
       <span class="brand-name">Salesforce Opportunity Explorer</span>
-      <span class="edition-chip">Internal</span>
+      <span class="edition-chip">Community</span>
     </a>
     <nav class="navlinks">
-      <a href="index.html">Home</a>
-<a href="why.html">Why Explorer</a>
-<a href="features.html">Features</a>
-<a href="ai-features.html">AI Features</a>
-<a href="graphs.html">Graph Analytics</a>
-<a href="whats-new.html">What's New</a>
+      <a href="index.html">ホーム</a>
+<a href="why.html">導入メリット</a>
+<a href="features.html">機能一覧</a>
+<a href="ai-features.html">AI機能</a>
+<a href="graphs.html">グラフ分析</a>
+<a href="whats-new.html">新機能</a>
 <a href="faq.html">FAQ</a>
-<a href="get-started.html" class="active">Get Started</a>
+<a href="get-started.html">導入方法</a>
     </nav>
     <div style="display:flex;align-items:center;gap:10px;">
-      <a class="pill" style="flex-shrink:0;" href="../get-started.html">🇯🇵 日本語</a>
-      <button class="theme-btn" id="themeBtn" aria-label="Toggle theme">🌙</button>
-      <a class="nav-cta desktop-only" href="get-started.html">✨ Get Started</a>
-      <button class="mobile-toggle" id="mobileToggle" aria-label="Menu">☰</button>
+      <a class="pill" style="flex-shrink:0;" href="en/notifications.html">🇺🇸 EN</a>
+      <button class="theme-btn" id="themeBtn" aria-label="テーマ切替">🌙</button>
+      <a class="nav-cta desktop-only" href="get-started.html">✨ 今すぐ始める</a>
+      <button class="mobile-toggle" id="mobileToggle" aria-label="メニュー">☰</button>
     </div>
   </div>
   <div class="mobile-panel" id="mobilePanel">
-    <a href="index.html">Home</a>
-<a href="why.html">Why Explorer</a>
-<a href="features.html">Features</a>
-<a href="ai-features.html">AI Features</a>
-<a href="graphs.html">Graph Analytics</a>
-<a href="whats-new.html">What's New</a>
+    <a href="index.html">ホーム</a>
+<a href="why.html">導入メリット</a>
+<a href="features.html">機能一覧</a>
+<a href="ai-features.html">AI機能</a>
+<a href="graphs.html">グラフ分析</a>
+<a href="whats-new.html">新機能</a>
 <a href="faq.html">FAQ</a>
-<a href="get-started.html">Get Started</a>
-    <a href="../get-started.html">日本語</a>
-    <a href="get-started.html">✨ Get Started</a>
+<a href="get-started.html">導入方法</a>
+    <a href="en/notifications.html">English</a>
+    <a href="get-started.html">✨ 今すぐ始める</a>
   </div>
 </header>
 
 
 <div class="page-hero wrap">
-  <span class="eyebrow">GET STARTED</span>
-  <h1 style="font-size:clamp(28px,4.2vw,42px);">Let's Get Started</h1>
-  <p class="lead center">Three steps and you're set up. Your opportunity management changes starting today.</p>
+  <span class="eyebrow">NOTIFICATIONS</span>
+  <h1 style="font-size:clamp(28px,4.2vw,42px);">🔔 通知・リマインダー</h1>
+  <p class="lead center">「気づいたら手遅れ」を無くす。停滞・リスク・期日超過を、必要な分だけ通知します。</p>
 </div>
-<section class="block"><div class="wrap"><div class="steps" style="max-width:680px;margin:0 auto;"><div class="step reveal"><div class="step-num"></div><div><h3>Visit the internal distribution site (restricted)</h3><p style="color:var(--text-sub);">Open the distribution page via the link on your internal portal.</p></div></div><div class="step reveal"><div class="step-num"></div><div><h3>Load the extension</h3><p style="color:var(--text-sub);">Unzip the download, then in Chrome go to chrome://extensions, enable Developer Mode, and choose "Load unpacked."</p></div></div><div class="step reveal"><div class="step-num"></div><div><h3>Open Salesforce Lightning</h3><p style="color:var(--text-sub);">Open the target Salesforce Lightning page and the panel appears automatically in the bottom right. Data refreshes automatically from then on.</p></div></div></div></div></section><section class="block alt"><div class="wrap"><div class="card reveal center" style="max-width:640px;margin:0 auto;"><h3>🔔 About Notification Permissions</h3><p>On first launch, you'll be asked to allow notifications. Grant permission if you want desktop alerts (like at-risk-deal notices).</p></div></div></section><section class="block"><div class="wrap">
+<section class="block"><div class="wrap">
+<div class="section-head reveal">
+  <span class="eyebrow">見逃したくない変化を、自動で拾う</span>
+  <h2>種類ごとにON/OFFできるデスクトップ通知で、必要な情報だけ受け取れます。</h2>
+  
+</div>
+<div class="grid grid-3">
+<div class="card reveal">
+  
+  <div class="icon">🔔</div>
+  <h3>通知設定</h3>
+  <p>高リスク商談・ステージ変更・目標未達リスク・週次リマインダー・日次ダイジェスト・フォローアップ超過を個別にON/OFFできます。</p>
+</div>
+
+<div class="card reveal">
+  
+  <div class="icon">📅</div>
+  <h3>週次リマインダー / 日次ダイジェスト</h3>
+  <p>停滞商談のまとめ通知（毎週月曜9時）、前日比の変化まとめ通知（毎朝8時）を自動配信します。</p>
+</div>
+
+<div class="card reveal">
+  
+  <div class="icon">⏰</div>
+  <h3>フォローアップ期日超過リマインダー</h3>
+  <p>期日超過の商談を一覧表示し、その場でスヌーズ操作もできます。</p>
+</div>
+
+<div class="card reveal">
+  
+  <div class="icon">📨</div>
+  <h3>見積フォローアップリマインド</h3>
+  <p>見積送付後、一定日数連絡が無い商談をリマインドします。</p>
+</div>
+
+<div class="card reveal">
+  
+  <div class="icon">🚦</div>
+  <h3>クローズ前必須項目チェック</h3>
+  <p>受注/失注にする前に、必須項目の入力漏れを警告します。</p>
+</div>
+
+<div class="card reveal">
+  
+  <div class="icon">🔄</div>
+  <h3>商談変更通知フィード</h3>
+  <p>前回比の新規/削除/ステージ変更/金額変動をまとめて表示します。</p>
+</div>
+</div></div></section><section class="block alt"><div class="wrap">
+<div class="section-head reveal">
+  <span class="eyebrow">通知を、見逃さない・溜め込まない</span>
+  <h2>受け取って終わりにせず、対応状況まで管理できます。</h2>
+  
+</div>
+<div class="grid grid-3">
+<div class="card reveal">
+  
+  <div class="icon">👁</div>
+  <h3>商談の未読/既読管理</h3>
+  <p>変更があった商談を未読として一覧表示し、確認すると既読になります。</p>
+</div>
+
+<div class="card reveal">
+  
+  <div class="icon">🗂</div>
+  <h3>通知履歴センター</h3>
+  <p>拡張機能が出したデスクトップ通知の履歴を一覧で確認できます。</p>
+</div>
+
+<div class="card reveal">
+  
+  <div class="icon">💬</div>
+  <h3>Slack/Teams Webhook通知</h3>
+  <p>現在のフィルター条件の受注/失注サマリーを、手動でSlack/Teamsへ送信できます。</p>
+</div>
+
+<div class="card reveal">
+  
+  <div class="icon">💡</div>
+  <h3>ステージ変更時のフォロー提案</h3>
+  <p>ステージ変更時に、フォローTODO登録をその場で提案するトーストを表示します。</p>
+</div>
+
+<div class="card reveal">
+  
+  <div class="icon">🚩</div>
+  <h3>次回アクション未設定アラート</h3>
+  <p>次回アクションが未設定のオープン商談を一覧表示します。</p>
+</div>
+</div></div></section><section class="block"><div class="wrap">
 <div class="cta-band reveal">
-  <h2>Ready?</h2>
-  <p>Start by browsing the feature list for whatever catches your eye.</p>
-  <div class="hero-ctas"><a class="btn btn-primary" href="features.html">Browse Features</a><a class="btn btn-outline" href="faq.html">Frequently Asked Questions</a></div>
+  <h2>常時、状況を把握したいなら</h2>
+  <p>サイドパネル常駐モードで、ツールバーからいつでも取引先サマリーを確認できます。</p>
+  <div class="hero-ctas"><a class="btn btn-primary" href="side-panel.html">サイドパネルを見る</a><a class="btn btn-outline" href="features.html">機能一覧へ戻る</a></div>
 </div>
 </div></section>
 
@@ -386,37 +475,37 @@ footer.site-footer { background: var(--sky-950); color: rgba(232,244,253,.7); pa
       <div>
         <div class="footer-brand"><span class="brand-badge">🔍</span> Salesforce Opportunity Explorer</div>
         <p style="max-width:32ch;font-size:13.5px;color:rgba(232,244,253,.6);">
-          Set your pipeline free. Make customer connections fun again.<br>Internal edition (restricted)
+          商談を、もっと自由に。顧客とのご縁を、もっと楽しく。<br>Community版（一般公開）
         </p>
       </div>
-      <div><h4>Sitemap</h4><a href="index.html">Home</a>
-<a href="why.html">Why Explorer</a>
-<a href="features.html">All Features</a>
-<a href="explorer.html">Opportunity Explorer</a>
-<a href="graphs.html">Graphs & Targets</a>
-<a href="summary-kanban.html">Summary & Kanban</a>
-<a href="products.html">Product Features</a>
-<a href="ai-features.html">AI Features</a>
+      <div><h4>サイトマップ</h4><a href="index.html">ホーム</a>
+<a href="why.html">導入メリット</a>
+<a href="features.html">機能一覧</a>
+<a href="explorer.html">商談エクスプローラー</a>
+<a href="graphs.html">グラフ・目標管理</a>
+<a href="summary-kanban.html">商談サマリー・カンバン</a>
+<a href="products.html">商談商品機能</a>
+<a href="ai-features.html">AI機能</a>
 <a href="insight-rank.html">Insight Rank</a>
-<a href="account-tools.html">Account Tools</a>
-<a href="pipeline.html">Pipeline Analytics</a>
-<a href="data-quality.html">Data Quality & Forecast</a></div>
-      <div><h4>More</h4><a href="sales-knowledge.html">Sales Knowledge</a>
-<a href="team-management.html">Team Management</a>
-<a href="notifications.html">Notifications</a>
-<a href="side-panel.html">Side Panel</a>
-<a href="productivity.html">Productivity</a>
-<a href="csv-security.html">CSV & Security</a>
-<a href="backup-settings.html">Backup & Settings</a>
-<a href="whats-new.html">What's New</a>
+<a href="account-tools.html">取引先分析ツール</a>
+<a href="pipeline.html">パイプライン分析</a>
+<a href="data-quality.html">データ品質・予測</a></div>
+      <div><h4>もっと見る</h4><a href="sales-knowledge.html">営業ナレッジ</a>
+<a href="team-management.html">チーム管理</a>
+<a href="notifications.html">通知・リマインダー</a>
+<a href="side-panel.html">サイドパネル</a>
+<a href="productivity.html">生産性向上機能</a>
+<a href="csv-security.html">CSV・セキュリティ</a>
+<a href="backup-settings.html">バックアップ・設定</a>
+<a href="whats-new.html">新機能</a>
 <a href="faq.html">FAQ</a>
-<a href="get-started.html">Get Started</a>
-<a href="contact.html">Contact</a></div>
+<a href="get-started.html">導入方法</a>
+<a href="contact.html">お問い合わせ</a></div>
       <div>
-        <h4>Contact</h4>
-        <a href="contact.html">Contact</a>
-        <a href="faq.html">FAQ</a>
-        <a href="get-started.html">Get Started</a>
+        <h4>お問い合わせ</h4>
+        <a href="contact.html">お問い合わせ</a>
+        <a href="faq.html">よくある質問</a>
+        <a href="get-started.html">導入ガイド</a>
       </div>
     </div>
     <div class="footer-bottom">

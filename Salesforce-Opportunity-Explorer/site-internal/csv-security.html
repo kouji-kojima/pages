@@ -3,11 +3,12 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" type="image/png" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAIAAAD8GO2jAAABPklEQVR4nGNk1k1goCVg+c/ASFsLGBhpbcGoDwhaMHh88K+wEpnL1N9OjC4mBkZGYhCa6VD7iNDIxMDASBD9K6jA7qeCCoJ6GZmMsvAFS34ZMpfx6mcI4782LyIQJnbhMYGRySgbh9GlWI1GBqjWdGM1h3Aqwmo0XAphBw5zGJmMc9Hd5ZwG14bHdIR6JMWMe2ehyaKnIlJNZ0CNmP/OafhS0X+nVFJNx2KHUyqymUwoCEMDJvjnHY/fDgYGFGNRg4gQgJiOyw4kC3AEEeOBBfjc3qmDlY3NEyhBxIjpCeQEjsVEu7O47MD0AY2Ka4SZtCmukcxEL+wYDy3BGg1M5VcYGBiYti5EsMuvYDH56mfGQ0tQCztLLCXlf9vo/9q8JGUFqAWHl6KLMFmiF/TUBYOpyiTXglEfELRgqPsAADoVZSwaHPoRAAAAAElFTkSuQmCC">
 <title>CSV・セキュリティ｜Salesforce Opportunity Explorer</title>
-<meta name="description" content="商談・活動・商談商品それぞれの専用CSVエクスポートと、個人情報を守る権限設計。">
+<meta name="description" content="商談・活動・商談商品それぞれの専用CSVエクスポート、一括操作・データ管理と、個人情報を守る権限設計。">
 <meta name="theme-color" content="#032d60">
 <meta property="og:title" content="CSV・セキュリティ｜Salesforce Opportunity Explorer">
-<meta property="og:description" content="商談・活動・商談商品それぞれの専用CSVエクスポートと、個人情報を守る権限設計。">
+<meta property="og:description" content="商談・活動・商談商品それぞれの専用CSVエクスポート、一括操作・データ管理と、個人情報を守る権限設計。">
 <meta property="og:type" content="website">
 <style>
 :root {
@@ -413,6 +414,75 @@ footer.site-footer { background: var(--sky-950); color: rgba(232,244,253,.7); pa
   <h3>外部送信は必要最小限</h3>
   <p>本拡張機能が通信する外部サーバーはSalesforce組織のみ。AI機能を使った場合のみ、選択したAIチャットサービスへ新しいタブが開きます。</p>
 </div>
+</div></div></section><section class="block alt"><div class="wrap">
+<div class="section-head reveal">
+  <span class="eyebrow">一括操作・データ管理も、これひとつで</span>
+  <h2>複数商談へのまとめ操作から、日々の自動出力まで。</h2>
+  
+</div>
+<div class="grid grid-3">
+<div class="card reveal">
+  
+  <div class="icon">📥</div>
+  <h3>CSV一括インポート</h3>
+  <p>CSVから複数商談へのTaskをまとめて登録できます。</p>
+</div>
+
+<div class="card reveal">
+  
+  <div class="icon">📧</div>
+  <h3>メールから商談を自動検出</h3>
+  <p>メール本文を貼り付けると一致する商談を検出し、Taskとして登録します。</p>
+</div>
+
+<div class="card reveal">
+  
+  <div class="icon">🔀</div>
+  <h3>一括ステージ変更（インパクトプレビュー）</h3>
+  <p>変更を確定する前に、売上・受注扱い金額への影響を試算して確認できます。</p>
+</div>
+
+<div class="card reveal">
+  
+  <div class="icon">↩️</div>
+  <h3>一括操作の取り消し</h3>
+  <p>直前に行った一括所有者変更を、ワンクリックで元に戻せます。</p>
+</div>
+
+<div class="card reveal">
+  
+  <div class="icon">🔁</div>
+  <h3>メモ・タグの一括置換</h3>
+  <p>複数商談のメモ/タグを、まとめて検索置換できます。</p>
+</div>
+
+<div class="card reveal">
+  
+  <div class="icon">🗓</div>
+  <h3>定期自動CSVエクスポート</h3>
+  <p>指定した曜日に商談CSVを自動でダウンロードします。</p>
+</div>
+
+<div class="card reveal">
+  
+  <div class="icon">📎</div>
+  <h3>添付ファイル一覧</h3>
+  <p>商談に添付されたファイルの一覧・リンクをその場で確認できます。</p>
+</div>
+
+<div class="card reveal">
+  
+  <div class="icon">📶</div>
+  <h3>API利用状況モニター</h3>
+  <p>このセッションでのSalesforce APIコール数を表示します。</p>
+</div>
+
+<div class="card reveal">
+  
+  <div class="icon">📴</div>
+  <h3>オフライン編集キュー</h3>
+  <p>ネットワーク切断中の変更をローカルにキューイングし、オンライン復帰時に自動で同期します。</p>
+</div>
 </div></div></section><section class="block"><div class="wrap">
 <div class="cta-band reveal">
   <h2>バックアップと設定もチェック</h2>
@@ -439,9 +509,12 @@ footer.site-footer { background: var(--sky-950); color: rgba(232,244,253,.7); pa
 <a href="products.html">商談商品機能</a>
 <a href="ai-features.html">AI機能</a>
 <a href="insight-rank.html">Insight Rank</a>
-<a href="account-tools.html">取引先分析ツール</a></div>
-      <div><h4>もっと見る</h4><a href="pipeline.html">パイプライン分析</a>
-<a href="data-quality.html">データ品質・予測</a>
+<a href="account-tools.html">取引先分析ツール</a>
+<a href="pipeline.html">パイプライン分析</a>
+<a href="data-quality.html">データ品質・予測</a></div>
+      <div><h4>もっと見る</h4><a href="sales-knowledge.html">営業ナレッジ</a>
+<a href="team-management.html">チーム管理</a>
+<a href="notifications.html">通知・リマインダー</a>
 <a href="side-panel.html">サイドパネル</a>
 <a href="productivity.html">生産性向上機能</a>
 <a href="csv-security.html">CSV・セキュリティ</a>

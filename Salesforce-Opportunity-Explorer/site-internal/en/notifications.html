@@ -4,11 +4,11 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link rel="icon" type="image/png" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAIAAAD8GO2jAAABPklEQVR4nGNk1k1goCVg+c/ASFsLGBhpbcGoDwhaMHh88K+wEpnL1N9OjC4mBkZGYhCa6VD7iNDIxMDASBD9K6jA7qeCCoJ6GZmMsvAFS34ZMpfx6mcI4782LyIQJnbhMYGRySgbh9GlWI1GBqjWdGM1h3Aqwmo0XAphBw5zGJmMc9Hd5ZwG14bHdIR6JMWMe2ehyaKnIlJNZ0CNmP/OafhS0X+nVFJNx2KHUyqymUwoCEMDJvjnHY/fDgYGFGNRg4gQgJiOyw4kC3AEEeOBBfjc3qmDlY3NEyhBxIjpCeQEjsVEu7O47MD0AY2Ka4SZtCmukcxEL+wYDy3BGg1M5VcYGBiYti5EsMuvYDH56mfGQ0tQCztLLCXlf9vo/9q8JGUFqAWHl6KLMFmiF/TUBYOpyiTXglEfELRgqPsAADoVZSwaHPoRAAAAAElFTkSuQmCC">
-<title>Get Started | Salesforce Opportunity Explorer</title>
-<meta name="description" content="Setup takes 30 seconds — get started right now from the internal distribution site (restricted).">
+<title>Notifications & Reminders | Salesforce Opportunity Explorer</title>
+<meta name="description" content="High-risk deals, stage changes, at-risk targets, and overdue follow-ups — toggle desktop notifications individually, by type.">
 <meta name="theme-color" content="#032d60">
-<meta property="og:title" content="Get Started | Salesforce Opportunity Explorer">
-<meta property="og:description" content="Setup takes 30 seconds — get started right now from the internal distribution site (restricted).">
+<meta property="og:title" content="Notifications & Reminders | Salesforce Opportunity Explorer">
+<meta property="og:description" content="High-risk deals, stage changes, at-risk targets, and overdue follow-ups — toggle desktop notifications individually, by type.">
 <meta property="og:type" content="website">
 <style>
 :root {
@@ -343,10 +343,10 @@ footer.site-footer { background: var(--sky-950); color: rgba(232,244,253,.7); pa
 <a href="graphs.html">Graph Analytics</a>
 <a href="whats-new.html">What's New</a>
 <a href="faq.html">FAQ</a>
-<a href="get-started.html" class="active">Get Started</a>
+<a href="get-started.html">Get Started</a>
     </nav>
     <div style="display:flex;align-items:center;gap:10px;">
-      <a class="pill" style="flex-shrink:0;" href="../get-started.html">🇯🇵 日本語</a>
+      <a class="pill" style="flex-shrink:0;" href="../notifications.html">🇯🇵 日本語</a>
       <button class="theme-btn" id="themeBtn" aria-label="Toggle theme">🌙</button>
       <a class="nav-cta desktop-only" href="get-started.html">✨ Get Started</a>
       <button class="mobile-toggle" id="mobileToggle" aria-label="Menu">☰</button>
@@ -361,22 +361,111 @@ footer.site-footer { background: var(--sky-950); color: rgba(232,244,253,.7); pa
 <a href="whats-new.html">What's New</a>
 <a href="faq.html">FAQ</a>
 <a href="get-started.html">Get Started</a>
-    <a href="../get-started.html">日本語</a>
+    <a href="../notifications.html">日本語</a>
     <a href="get-started.html">✨ Get Started</a>
   </div>
 </header>
 
 
 <div class="page-hero wrap">
-  <span class="eyebrow">GET STARTED</span>
-  <h1 style="font-size:clamp(28px,4.2vw,42px);">Let's Get Started</h1>
-  <p class="lead center">Three steps and you're set up. Your opportunity management changes starting today.</p>
+  <span class="eyebrow">NOTIFICATIONS</span>
+  <h1 style="font-size:clamp(28px,4.2vw,42px);">🔔 Notifications & Reminders</h1>
+  <p class="lead center">Never find out too late. Stalled deals, risk, and overdue follow-ups — surfaced only when you actually need to know.</p>
 </div>
-<section class="block"><div class="wrap"><div class="steps" style="max-width:680px;margin:0 auto;"><div class="step reveal"><div class="step-num"></div><div><h3>Visit the internal distribution site (restricted)</h3><p style="color:var(--text-sub);">Open the distribution page via the link on your internal portal.</p></div></div><div class="step reveal"><div class="step-num"></div><div><h3>Load the extension</h3><p style="color:var(--text-sub);">Unzip the download, then in Chrome go to chrome://extensions, enable Developer Mode, and choose "Load unpacked."</p></div></div><div class="step reveal"><div class="step-num"></div><div><h3>Open Salesforce Lightning</h3><p style="color:var(--text-sub);">Open the target Salesforce Lightning page and the panel appears automatically in the bottom right. Data refreshes automatically from then on.</p></div></div></div></div></section><section class="block alt"><div class="wrap"><div class="card reveal center" style="max-width:640px;margin:0 auto;"><h3>🔔 About Notification Permissions</h3><p>On first launch, you'll be asked to allow notifications. Grant permission if you want desktop alerts (like at-risk-deal notices).</p></div></div></section><section class="block"><div class="wrap">
+<section class="block"><div class="wrap">
+<div class="section-head reveal">
+  <span class="eyebrow">Changes worth knowing about, caught automatically</span>
+  <h2>Desktop alerts you can toggle by type, so you only hear about what matters.</h2>
+  
+</div>
+<div class="grid grid-3">
+<div class="card reveal">
+  
+  <div class="icon">🔔</div>
+  <h3>Notification Settings</h3>
+  <p>Toggle high-risk deals, stage changes, at-risk targets, weekly reminders, daily digests, and overdue follow-ups individually.</p>
+</div>
+
+<div class="card reveal">
+  
+  <div class="icon">📅</div>
+  <h3>Weekly Reminder / Daily Digest</h3>
+  <p>Auto-delivers a stalled-deal roundup every Monday at 9am, and a day-over-day change summary every morning at 8am.</p>
+</div>
+
+<div class="card reveal">
+  
+  <div class="icon">⏰</div>
+  <h3>Overdue Follow-Up Reminder</h3>
+  <p>Lists overdue deals with a one-click snooze right from the list.</p>
+</div>
+
+<div class="card reveal">
+  
+  <div class="icon">📨</div>
+  <h3>Post-Quote Follow-Up Reminder</h3>
+  <p>Reminds you about deals with no contact for a set number of days after a quote goes out.</p>
+</div>
+
+<div class="card reveal">
+  
+  <div class="icon">🚦</div>
+  <h3>Pre-Close Required-Field Check</h3>
+  <p>Warns about missing required fields before you mark a deal won or lost.</p>
+</div>
+
+<div class="card reveal">
+  
+  <div class="icon">🔄</div>
+  <h3>Deal Change Notification Feed</h3>
+  <p>Rolls up new/removed deals, stage changes, and amount swings since your last check.</p>
+</div>
+</div></div></section><section class="block alt"><div class="wrap">
+<div class="section-head reveal">
+  <span class="eyebrow">Notifications you can act on — not just receive</span>
+  <h2>Manage follow-through, not just the alert itself.</h2>
+  
+</div>
+<div class="grid grid-3">
+<div class="card reveal">
+  
+  <div class="icon">👁</div>
+  <h3>Read/Unread Tracking</h3>
+  <p>Lists changed deals as unread until you review them, then marks them read.</p>
+</div>
+
+<div class="card reveal">
+  
+  <div class="icon">🗂</div>
+  <h3>Notification History</h3>
+  <p>See a full log of every desktop notification the extension has sent.</p>
+</div>
+
+<div class="card reveal">
+  
+  <div class="icon">💬</div>
+  <h3>Slack/Teams Webhook</h3>
+  <p>Manually send a won/lost summary for your current filters to Slack or Teams.</p>
+</div>
+
+<div class="card reveal">
+  
+  <div class="icon">💡</div>
+  <h3>Follow-Up Suggestion on Stage Change</h3>
+  <p>Shows a toast suggesting you log a follow-up ToDo the moment a stage changes.</p>
+</div>
+
+<div class="card reveal">
+  
+  <div class="icon">🚩</div>
+  <h3>No-Next-Action Alert</h3>
+  <p>Lists open opportunities that currently have no next action scheduled.</p>
+</div>
+</div></div></section><section class="block"><div class="wrap">
 <div class="cta-band reveal">
-  <h2>Ready?</h2>
-  <p>Start by browsing the feature list for whatever catches your eye.</p>
-  <div class="hero-ctas"><a class="btn btn-primary" href="features.html">Browse Features</a><a class="btn btn-outline" href="faq.html">Frequently Asked Questions</a></div>
+  <h2>Want an always-on view?</h2>
+  <p>Side Panel Mode keeps the Account Summary one click away from the toolbar, any time.</p>
+  <div class="hero-ctas"><a class="btn btn-primary" href="side-panel.html">See the Side Panel</a><a class="btn btn-outline" href="features.html">← Back to Features</a></div>
 </div>
 </div></section>
 
