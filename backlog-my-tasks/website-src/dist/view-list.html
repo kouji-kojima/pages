@@ -3,8 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>リストビュー | Backlog My Tasks</title>
-<meta name="description" content="期限別グループ表示・クイックフィルター・全文検索・一括操作・コメント通知でゼロ見落としを実現するメインビュー。">
+<title>ホームビュー | Backlog My Tasks</title>
+<meta name="description" content="開閉式ウィジェットダッシュボード・期限別グループ表示・クイックフィルター・全文検索・一括操作・コメント通知でゼロ見落としを実現するメインビュー。">
 <link rel="canonical" href="https://kouji-kojima.github.io/pages/backlog-my-tasks/website-src/dist/view-list.html">
 <link rel="alternate" hreflang="ja" href="https://kouji-kojima.github.io/pages/backlog-my-tasks/website-src/dist/view-list.html">
 <link rel="alternate" hreflang="en" href="https://kouji-kojima.github.io/pages/backlog-my-tasks/website-src/dist/en/view-list.html">
@@ -12,8 +12,8 @@
 <link rel="alternate" hreflang="zh-Hant-TW" href="https://kouji-kojima.github.io/pages/backlog-my-tasks/website-src/dist/zh-TW/view-list.html">
 <link rel="alternate" hreflang="zh-Hant-HK" href="https://kouji-kojima.github.io/pages/backlog-my-tasks/website-src/dist/zh-HK/view-list.html">
 <link rel="alternate" hreflang="x-default" href="https://kouji-kojima.github.io/pages/backlog-my-tasks/website-src/dist/view-list.html">
-<meta property="og:title" content="リストビュー | Backlog My Tasks">
-<meta property="og:description" content="期限別グループ表示・クイックフィルター・全文検索・一括操作・コメント通知でゼロ見落としを実現するメインビュー。">
+<meta property="og:title" content="ホームビュー | Backlog My Tasks">
+<meta property="og:description" content="開閉式ウィジェットダッシュボード・期限別グループ表示・クイックフィルター・全文検索・一括操作・コメント通知でゼロ見落としを実現するメインビュー。">
 <meta property="og:image" content="https://kouji-kojima.github.io/pages/backlog-my-tasks/website-src/dist/assets/img/01_list.jpg">
 <meta property="og:url" content="https://kouji-kojima.github.io/pages/backlog-my-tasks/website-src/dist/view-list.html">
 <meta property="og:type" content="website">
@@ -51,18 +51,22 @@
 
 <section class="page-hero">
   <div class="wrap inner">
-    <div class="breadcrumb"><a href="index.html">ホーム</a> / リスト</div>
-    <div class="eyebrow">表示ビュー ─ リスト</div>
-    <h1>リスト ─ 一番使う、メインビュー。</h1>
-    <p class="lead">毎朝の確認をワンクリックで。期限別に自動整列されたタスク一覧から、状態変更・コメント返信までここで完結します。</p>
+    <div class="breadcrumb"><a href="index.html">ホーム</a> / ホーム表示</div>
+    <div class="eyebrow">表示ビュー ─ ホーム</div>
+    <h1>ホーム ─ 一番使う、メインビュー。</h1>
+    <p class="lead">毎朝の確認をワンクリックで。最上部の開閉式ウィジェットダッシュボードで今日の状況をひと目で把握し、期限別に自動整列されたタスク一覧から状態変更・コメント返信までここで完結します。</p>
   </div>
 </section>
 
 <section>
   <div class="wrap">
     <div class="showcase">
-      <div class="frame"><img src="assets/img/01_list.jpg" alt="リストビューのスクリーンショット" loading="lazy"></div>
+      <div class="frame"><img src="assets/img/01_list.jpg" alt="ホームビューのスクリーンショット" loading="lazy"></div>
       <div class="bullets"><div class="bullet">
+          <div class="dot"></div>
+          <div><h4>開閉式ウィジェットダッシュボード</h4><p>期限切れ・直近完了・最近開いたタスク・プロジェクト別件数などを最上部にカード表示。ドラッグで並び替え、▲/▼ボタンで折りたたみも可能</p></div>
+        </div>
+<div class="bullet">
           <div class="dot"></div>
           <div><h4>期限別グループで一目瞭然</h4><p>期限切れ・本日・1週間以内…と自動でグループ分け。色で危険度がすぐ分かる</p></div>
         </div>
@@ -100,7 +104,7 @@
         <p>Backlog の自分担当タスクを、複数スペース横断でまとめて確認・操作できる Chrome 拡張機能。7つの表示ビューとプロジェクトダッシュボードで、日々のタスク管理とチームの進捗把握をもっと楽に。</p>
       </div>
       <div><h5>表示ビュー</h5><ul><li><a href="views.html">7つの表示ビュー</a></li>
-<li><a href="view-list.html">リスト</a></li>
+<li><a href="view-list.html">ホーム表示</a></li>
 <li><a href="view-matrix.html">マトリックス</a></li>
 <li><a href="view-kanban.html">カンバン</a></li>
 <li><a href="view-gantt.html">ガント</a></li>

@@ -3,8 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>리스트 뷰 | Backlog My Tasks</title>
-<meta name="description" content="기한별 그룹 표시, 빠른 필터, 전문 검색, 일괄 작업, 댓글 알림으로 놓치는 것 없이 관리할 수 있는 메인 뷰입니다.">
+<title>홈 뷰 | Backlog My Tasks</title>
+<meta name="description" content="접이식 위젯 대시보드, 기한별 그룹 표시, 빠른 필터, 전문 검색, 일괄 작업, 댓글 알림으로 놓치는 것 없이 관리할 수 있는 메인 뷰입니다.">
 <link rel="canonical" href="https://kouji-kojima.github.io/pages/backlog-my-tasks/website-src/dist/ko/view-list.html">
 <link rel="alternate" hreflang="ja" href="https://kouji-kojima.github.io/pages/backlog-my-tasks/website-src/dist/view-list.html">
 <link rel="alternate" hreflang="en" href="https://kouji-kojima.github.io/pages/backlog-my-tasks/website-src/dist/en/view-list.html">
@@ -12,8 +12,8 @@
 <link rel="alternate" hreflang="zh-Hant-TW" href="https://kouji-kojima.github.io/pages/backlog-my-tasks/website-src/dist/zh-TW/view-list.html">
 <link rel="alternate" hreflang="zh-Hant-HK" href="https://kouji-kojima.github.io/pages/backlog-my-tasks/website-src/dist/zh-HK/view-list.html">
 <link rel="alternate" hreflang="x-default" href="https://kouji-kojima.github.io/pages/backlog-my-tasks/website-src/dist/view-list.html">
-<meta property="og:title" content="리스트 뷰 | Backlog My Tasks">
-<meta property="og:description" content="기한별 그룹 표시, 빠른 필터, 전문 검색, 일괄 작업, 댓글 알림으로 놓치는 것 없이 관리할 수 있는 메인 뷰입니다.">
+<meta property="og:title" content="홈 뷰 | Backlog My Tasks">
+<meta property="og:description" content="접이식 위젯 대시보드, 기한별 그룹 표시, 빠른 필터, 전문 검색, 일괄 작업, 댓글 알림으로 놓치는 것 없이 관리할 수 있는 메인 뷰입니다.">
 <meta property="og:image" content="https://kouji-kojima.github.io/pages/backlog-my-tasks/website-src/dist/assets/img/01_list.jpg">
 <meta property="og:url" content="https://kouji-kojima.github.io/pages/backlog-my-tasks/website-src/dist/ko/view-list.html">
 <meta property="og:type" content="website">
@@ -51,18 +51,22 @@
 
 <section class="page-hero">
   <div class="wrap inner">
-    <div class="breadcrumb"><a href="index.html">홈</a> / 리스트</div>
-    <div class="eyebrow">보기 화면 ─ 리스트</div>
-    <h1>리스트 ─ 가장 많이 쓰는 메인 뷰.</h1>
-    <p class="lead">매일 아침 확인을 클릭 한 번으로. 기한별로 자동 정렬된 태스크 목록에서 상태 변경, 댓글 답변까지 여기서 모두 끝낼 수 있습니다.</p>
+    <div class="breadcrumb"><a href="index.html">홈</a> / 홈 화면</div>
+    <div class="eyebrow">보기 화면 ─ 홈</div>
+    <h1>홈 ─ 가장 많이 쓰는 메인 뷰.</h1>
+    <p class="lead">매일 아침 확인을 클릭 한 번으로. 최상단의 접이식 위젯 대시보드에서 오늘의 상황을 한눈에 파악하고, 기한별로 자동 정렬된 태스크 목록에서 상태 변경, 댓글 답변까지 여기서 모두 끝낼 수 있습니다.</p>
   </div>
 </section>
 
 <section>
   <div class="wrap">
     <div class="showcase">
-      <div class="frame"><img src="../assets/img/01_list.jpg" alt="리스트 뷰 스크린샷" loading="lazy"></div>
+      <div class="frame"><img src="../assets/img/01_list.jpg" alt="홈 뷰 스크린샷" loading="lazy"></div>
       <div class="bullets"><div class="bullet">
+          <div class="dot"></div>
+          <div><h4>접이식 위젯 대시보드</h4><p>기한 초과・최근 완료・최근 열람한 태스크・프로젝트별 건수 등을 최상단에 카드로 표시. 드래그로 순서 변경, ▲/▼ 버튼으로 접기도 가능</p></div>
+        </div>
+<div class="bullet">
           <div class="dot"></div>
           <div><h4>기한별 그룹으로 한눈에 파악</h4><p>기한 초과・오늘・1주일 이내… 등으로 자동으로 그룹을 나눕니다. 색으로 위험도를 바로 알 수 있습니다</p></div>
         </div>
@@ -100,7 +104,7 @@
         <p>Backlog에서 자신에게 할당된 태스크를 여러 스페이스에 걸쳐 한곳에서 확인·조작할 수 있는 Chrome 확장 프로그램입니다. 7가지 보기 화면과 프로젝트 대시보드로 일상적인 태스크 관리와 팀 진행 상황 파악을 한결 편하게 만들어 줍니다.</p>
       </div>
       <div><h5>보기 화면</h5><ul><li><a href="views.html">7가지 보기 화면</a></li>
-<li><a href="view-list.html">리스트</a></li>
+<li><a href="view-list.html">홈 화면</a></li>
 <li><a href="view-matrix.html">매트릭스</a></li>
 <li><a href="view-kanban.html">칸반</a></li>
 <li><a href="view-gantt.html">간트</a></li>
