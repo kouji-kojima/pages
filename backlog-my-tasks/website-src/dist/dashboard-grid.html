@@ -3,19 +3,19 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>プロジェクト別ダッシュボード | Backlog My Tasks</title>
-<meta name="description" content="KPIカード・前回／先週の差分ビュー・ベロシティグラフ・未アサインのその場解消など、プロジェクトの状態を一画面で確認。">
-<link rel="canonical" href="https://kouji-kojima.github.io/pages/backlog-my-tasks/website-src/dist/dashboard-project.html">
-<link rel="alternate" hreflang="ja" href="https://kouji-kojima.github.io/pages/backlog-my-tasks/website-src/dist/dashboard-project.html">
-<link rel="alternate" hreflang="en" href="https://kouji-kojima.github.io/pages/backlog-my-tasks/website-src/dist/en/dashboard-project.html">
-<link rel="alternate" hreflang="ko" href="https://kouji-kojima.github.io/pages/backlog-my-tasks/website-src/dist/ko/dashboard-project.html">
-<link rel="alternate" hreflang="zh-Hant-TW" href="https://kouji-kojima.github.io/pages/backlog-my-tasks/website-src/dist/zh-TW/dashboard-project.html">
-<link rel="alternate" hreflang="zh-Hant-HK" href="https://kouji-kojima.github.io/pages/backlog-my-tasks/website-src/dist/zh-HK/dashboard-project.html">
-<link rel="alternate" hreflang="x-default" href="https://kouji-kojima.github.io/pages/backlog-my-tasks/website-src/dist/dashboard-project.html">
-<meta property="og:title" content="プロジェクト別ダッシュボード | Backlog My Tasks">
-<meta property="og:description" content="KPIカード・前回／先週の差分ビュー・ベロシティグラフ・未アサインのその場解消など、プロジェクトの状態を一画面で確認。">
-<meta property="og:image" content="https://kouji-kojima.github.io/pages/backlog-my-tasks/website-src/dist/assets/img/09_admin_project.jpg">
-<meta property="og:url" content="https://kouji-kojima.github.io/pages/backlog-my-tasks/website-src/dist/dashboard-project.html">
+<title>一括登録シート | Backlog My Tasks</title>
+<meta name="description" content="表計算感覚で複数タスクを一括登録。Excel等からの範囲貼り付け・行ID指定での親子自動紐付け・行テンプレート・CSVドラッグ&amp;ドロップに対応。">
+<link rel="canonical" href="https://kouji-kojima.github.io/pages/backlog-my-tasks/website-src/dist/dashboard-grid.html">
+<link rel="alternate" hreflang="ja" href="https://kouji-kojima.github.io/pages/backlog-my-tasks/website-src/dist/dashboard-grid.html">
+<link rel="alternate" hreflang="en" href="https://kouji-kojima.github.io/pages/backlog-my-tasks/website-src/dist/en/dashboard-grid.html">
+<link rel="alternate" hreflang="ko" href="https://kouji-kojima.github.io/pages/backlog-my-tasks/website-src/dist/ko/dashboard-grid.html">
+<link rel="alternate" hreflang="zh-Hant-TW" href="https://kouji-kojima.github.io/pages/backlog-my-tasks/website-src/dist/zh-TW/dashboard-grid.html">
+<link rel="alternate" hreflang="zh-Hant-HK" href="https://kouji-kojima.github.io/pages/backlog-my-tasks/website-src/dist/zh-HK/dashboard-grid.html">
+<link rel="alternate" hreflang="x-default" href="https://kouji-kojima.github.io/pages/backlog-my-tasks/website-src/dist/dashboard-grid.html">
+<meta property="og:title" content="一括登録シート | Backlog My Tasks">
+<meta property="og:description" content="表計算感覚で複数タスクを一括登録。Excel等からの範囲貼り付け・行ID指定での親子自動紐付け・行テンプレート・CSVドラッグ&amp;ドロップに対応。">
+<meta property="og:image" content="https://kouji-kojima.github.io/pages/backlog-my-tasks/website-src/dist/assets/img/15_admin_grid.jpg">
+<meta property="og:url" content="https://kouji-kojima.github.io/pages/backlog-my-tasks/website-src/dist/dashboard-grid.html">
 <meta property="og:type" content="website">
 <meta property="og:locale" content="ja">
 <meta name="twitter:card" content="summary_large_image">
@@ -37,11 +37,11 @@
     </nav>
     <details class="lang-switch">
       <summary>🇯🇵 日本語</summary>
-      <div class="lang-switch-menu"><a href="dashboard-project.html" class="active">🇯🇵 日本語</a>
-<a href="en/dashboard-project.html">🇺🇸 English</a>
-<a href="ko/dashboard-project.html">🇰🇷 한국어</a>
-<a href="zh-TW/dashboard-project.html">🇹🇼 繁體中文</a>
-<a href="zh-HK/dashboard-project.html">🇭🇰 繁體中文（香港）</a></div>
+      <div class="lang-switch-menu"><a href="dashboard-grid.html" class="active">🇯🇵 日本語</a>
+<a href="en/dashboard-grid.html">🇺🇸 English</a>
+<a href="ko/dashboard-grid.html">🇰🇷 한국어</a>
+<a href="zh-TW/dashboard-grid.html">🇹🇼 繁體中文</a>
+<a href="zh-HK/dashboard-grid.html">🇭🇰 繁體中文（香港）</a></div>
     </details>
     <a class="btn btn-primary header-cta" href="https://chromewebstore.google.com/detail/backlog-my-tasks/cangphedocncgiloahgkahplfppmfkhi" target="_blank" rel="noopener">Chromeに追加</a>
     <button id="nav-toggle" aria-label="メニュー">☰</button>
@@ -51,41 +51,41 @@
 
 <section class="page-hero">
   <div class="wrap inner">
-    <div class="breadcrumb"><a href="index.html">ホーム</a> / プロジェクト別ダッシュボード</div>
+    <div class="breadcrumb"><a href="index.html">ホーム</a> / 一括登録シート</div>
     <div class="eyebrow">ダッシュボード</div>
-    <h1>プロジェクト別ダッシュボード ─ KPIを一画面で。</h1>
-    <p class="lead">総タスク数から健全性スコアまで、プロジェクトの状態がひと目で分かります。</p>
+    <h1>一括登録シート ─ 表計算感覚でまとめて登録。</h1>
+    <p class="lead">Excelのように貼り付けるだけで、複数タスクを一気に登録できます。</p>
   </div>
 </section>
 
 <section>
   <div class="wrap">
     <div class="showcase">
-      <div class="frame"><img src="assets/img/09_admin_project.jpg" alt="プロジェクト別ダッシュボードのスクリーンショット" loading="lazy"></div>
+      <div class="frame"><img src="assets/img/15_admin_grid.jpg" alt="一括登録シートのスクリーンショット" loading="lazy"></div>
       <div class="bullets"><div class="bullet">
           <div class="dot"></div>
-          <div><h4>KPIを一画面で</h4><p>総タスク・未完了・遅延・完了率・予定時間・健全性スコア（A〜F）</p></div>
+          <div><h4>Excelのように貼り付け</h4><p>表計算ソフトから範囲コピーしてセルに貼り付けるだけ。件名・詳細・開始日・期限日が必須項目</p></div>
         </div>
 <div class="bullet">
           <div class="dot"></div>
-          <div><h4>前回／先週 差分ビュー</h4><p>優先度・マイルストーン・カテゴリー・開始日など7種類の変更をテーブル形式で表示</p></div>
+          <div><h4>行IDで親子付けも一括</h4><p>行に付けたIDを他の行の親タスク欄で参照するだけで、登録成功後に自動で親子付け</p></div>
         </div>
 <div class="bullet">
           <div class="dot"></div>
-          <div><h4>ベロシティで勢いを把握</h4><p>直近12週の完了時間を棒グラフ化。平均線つき</p></div>
+          <div><h4>その場でバリデーション表示</h4><p>必須項目の未入力などをセル単位で即座に警告。登録済み行はグレーアウトして再送信を防止</p></div>
         </div>
 <div class="bullet">
           <div class="dot"></div>
-          <div><h4>未アサインをその場で解消</h4><p>担当者プルダウンで即時割り当て。親タスクでグルーピング表示</p></div>
+          <div><h4>行テンプレートで定型登録を効率化</h4><p>よく使う入力パターンを保存・呼び出し。CSVドラッグ&ドロップでの一括読み込みにも対応</p></div>
         </div>
 </div>
     </div>
     <div class="mt"><div class="cta-band">
-      <h2>プロジェクトの今を、一画面で。</h2>
-      <p>健全性スコアと差分ビューで、報告前の状況確認がぐっと速くなります。</p>
+      <h2>登録の手間を、まとめて減らす。</h2>
+      <p>毎回ひとつずつ登録する手間を、表計算感覚の一括登録でなくします。</p>
       <div class="cta-row">
         <a class="btn btn-on-dark" href="https://chromewebstore.google.com/detail/backlog-my-tasks/cangphedocncgiloahgkahplfppmfkhi" target="_blank" rel="noopener">Chromeに追加</a>
-        <a class="btn btn-ghost" style="background:rgba(255,255,255,.12);color:#fff;border-color:rgba(255,255,255,.3)" href="dashboard-gantt.html">プロジェクト全体ガントを見る</a>
+        <a class="btn btn-ghost" style="background:rgba(255,255,255,.12);color:#fff;border-color:rgba(255,255,255,.3)" href="dashboard-project.html">プロジェクト別ダッシュボードを見る</a>
       </div>
     </div></div>
   </div>

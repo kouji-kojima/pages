@@ -3,19 +3,19 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>建立・匯入・重複使用 | Backlog My Tasks</title>
-<meta name="description" content="建立任務、CSV批量登錄／匯出、留言範本、篩選預設、釘選等，全部都是提升登錄與重複使用效率的功能。">
-<link rel="canonical" href="https://kouji-kojima.github.io/pages/backlog-my-tasks/website-src/dist/zh-HK/task-creation.html">
-<link rel="alternate" hreflang="ja" href="https://kouji-kojima.github.io/pages/backlog-my-tasks/website-src/dist/task-creation.html">
-<link rel="alternate" hreflang="en" href="https://kouji-kojima.github.io/pages/backlog-my-tasks/website-src/dist/en/task-creation.html">
-<link rel="alternate" hreflang="ko" href="https://kouji-kojima.github.io/pages/backlog-my-tasks/website-src/dist/ko/task-creation.html">
-<link rel="alternate" hreflang="zh-Hant-TW" href="https://kouji-kojima.github.io/pages/backlog-my-tasks/website-src/dist/zh-TW/task-creation.html">
-<link rel="alternate" hreflang="zh-Hant-HK" href="https://kouji-kojima.github.io/pages/backlog-my-tasks/website-src/dist/zh-HK/task-creation.html">
-<link rel="alternate" hreflang="x-default" href="https://kouji-kojima.github.io/pages/backlog-my-tasks/website-src/dist/task-creation.html">
-<meta property="og:title" content="建立・匯入・重複使用 | Backlog My Tasks">
-<meta property="og:description" content="建立任務、CSV批量登錄／匯出、留言範本、篩選預設、釘選等，全部都是提升登錄與重複使用效率的功能。">
-<meta property="og:image" content="https://kouji-kojima.github.io/pages/backlog-my-tasks/website-src/dist/assets/img/04_summary.jpg">
-<meta property="og:url" content="https://kouji-kojima.github.io/pages/backlog-my-tasks/website-src/dist/zh-HK/task-creation.html">
+<title>批次登記工作表 | Backlog My Tasks</title>
+<meta name="description" content="以類似試算表的操作方式批次登錄多項任務。支援從Excel等貼上範圍、透過列ID自動建立父子關係、列範本，以及CSV拖放匯入。">
+<link rel="canonical" href="https://kouji-kojima.github.io/pages/backlog-my-tasks/website-src/dist/zh-HK/dashboard-grid.html">
+<link rel="alternate" hreflang="ja" href="https://kouji-kojima.github.io/pages/backlog-my-tasks/website-src/dist/dashboard-grid.html">
+<link rel="alternate" hreflang="en" href="https://kouji-kojima.github.io/pages/backlog-my-tasks/website-src/dist/en/dashboard-grid.html">
+<link rel="alternate" hreflang="ko" href="https://kouji-kojima.github.io/pages/backlog-my-tasks/website-src/dist/ko/dashboard-grid.html">
+<link rel="alternate" hreflang="zh-Hant-TW" href="https://kouji-kojima.github.io/pages/backlog-my-tasks/website-src/dist/zh-TW/dashboard-grid.html">
+<link rel="alternate" hreflang="zh-Hant-HK" href="https://kouji-kojima.github.io/pages/backlog-my-tasks/website-src/dist/zh-HK/dashboard-grid.html">
+<link rel="alternate" hreflang="x-default" href="https://kouji-kojima.github.io/pages/backlog-my-tasks/website-src/dist/dashboard-grid.html">
+<meta property="og:title" content="批次登記工作表 | Backlog My Tasks">
+<meta property="og:description" content="以類似試算表的操作方式批次登錄多項任務。支援從Excel等貼上範圍、透過列ID自動建立父子關係、列範本，以及CSV拖放匯入。">
+<meta property="og:image" content="https://kouji-kojima.github.io/pages/backlog-my-tasks/website-src/dist/assets/img/15_admin_grid.jpg">
+<meta property="og:url" content="https://kouji-kojima.github.io/pages/backlog-my-tasks/website-src/dist/zh-HK/dashboard-grid.html">
 <meta property="og:type" content="website">
 <meta property="og:locale" content="zh_Hant_HK">
 <meta name="twitter:card" content="summary_large_image">
@@ -37,11 +37,11 @@
     </nav>
     <details class="lang-switch">
       <summary>🇭🇰 繁體中文（香港）</summary>
-      <div class="lang-switch-menu"><a href="../task-creation.html">🇯🇵 日本語</a>
-<a href="../en/task-creation.html">🇺🇸 English</a>
-<a href="../ko/task-creation.html">🇰🇷 한국어</a>
-<a href="../zh-TW/task-creation.html">🇹🇼 繁體中文</a>
-<a href="../zh-HK/task-creation.html" class="active">🇭🇰 繁體中文（香港）</a></div>
+      <div class="lang-switch-menu"><a href="../dashboard-grid.html">🇯🇵 日本語</a>
+<a href="../en/dashboard-grid.html">🇺🇸 English</a>
+<a href="../ko/dashboard-grid.html">🇰🇷 한국어</a>
+<a href="../zh-TW/dashboard-grid.html">🇹🇼 繁體中文</a>
+<a href="../zh-HK/dashboard-grid.html" class="active">🇭🇰 繁體中文（香港）</a></div>
     </details>
     <a class="btn btn-primary header-cta" href="https://chromewebstore.google.com/detail/backlog-my-tasks/cangphedocncgiloahgkahplfppmfkhi" target="_blank" rel="noopener">加到Chrome</a>
     <button id="nav-toggle" aria-label="選單">☰</button>
@@ -51,53 +51,41 @@
 
 <section class="page-hero">
   <div class="wrap inner">
-    <div class="breadcrumb"><a href="index.html">首頁</a> / 登錄・範本</div>
-    <div class="eyebrow">實用功能</div>
-    <h1>建立、匯入、重複使用。</h1>
-    <p class="lead">新增任務、CSV批量登錄，以至重複使用範本，全部隨心所欲。免除每次由零開始輸入的麻煩。</p>
+    <div class="breadcrumb"><a href="index.html">首頁</a> / 批次登記工作表</div>
+    <div class="eyebrow">儀表板</div>
+    <h1>批次登錄表格 ─ 以類似試算表的方式一次登錄。</h1>
+    <p class="lead">只要像Excel一樣貼上，即可一次登錄多項任務。</p>
   </div>
 </section>
 
 <section>
   <div class="wrap">
-    <div class="grid grid-3">
-<div class="card">
-          <div class="icon">📝</div>
-          <h3>建立任務</h3>
-          <p>可指定項目、種類、負責人、里程碑及父任務，新增任務</p>
+    <div class="showcase">
+      <div class="frame"><img src="../assets/img/15_admin_grid.jpg" alt="批次登錄表格的螢幕截圖" loading="lazy"></div>
+      <div class="bullets"><div class="bullet">
+          <div class="dot"></div>
+          <div><h4>如Excel般貼上</h4><p>只需從試算表軟體複製範圍並貼到儲存格即可。標題・詳細・開始日・截止日為必填欄位</p></div>
         </div>
-<div class="card">
-          <div class="icon">📥</div>
-          <h3>CSV批量登錄</h3>
-          <p>透過CSV一次過登錄多項任務，並支援下載範本CSV</p>
+<div class="bullet">
+          <div class="dot"></div>
+          <div><h4>以列ID一併設定父子關係</h4><p>只要在其他列的父任務欄位參照該列所設定的ID，登錄成功後即會自動建立父子關係</p></div>
         </div>
-<div class="card">
-          <div class="icon">📤</div>
-          <h3>CSV匯出</h3>
-          <p>以附BOM的UTF-8格式匯出目前的列表，將參照欄位及批量登錄欄位整合於同一個檔案內</p>
+<div class="bullet">
+          <div class="dot"></div>
+          <div><h4>即時顯示驗證結果</h4><p>必填欄位未輸入等狀況會以儲存格為單位即時警告。已登錄的列會變灰以防止重複送出</p></div>
         </div>
-<div class="card">
-          <div class="icon">💬</div>
-          <h3>留言範本</h3>
-          <p>儲存常用回覆，並可連同標註快速發佈</p>
-        </div>
-<div class="card">
-          <div class="icon">🔖</div>
-          <h3>篩選預設</h3>
-          <p>可為篩選、搜尋及分組設定命名並儲存，隨時叫出使用</p>
-        </div>
-<div class="card">
-          <div class="icon">📌</div>
-          <h3>釘選</h3>
-          <p>將重要任務固定於最上方，並自動加入Backlog的關注清單</p>
+<div class="bullet">
+          <div class="dot"></div>
+          <div><h4>以列範本提升制式登錄效率</h4><p>儲存・呼叫常用的輸入模式。也支援以CSV拖放方式批次匯入</p></div>
         </div>
 </div>
+    </div>
     <div class="mt"><div class="cta-band">
-      <h2>將登錄的工夫，減至趨近於零。</h2>
-      <p>透過複製現有任務、CSV批量登錄及範本，減少每次的輸入工作。</p>
+      <h2>把登錄的麻煩，一次減少。</h2>
+      <p>以類似試算表的批次登錄，省去每次逐一登錄的麻煩。</p>
       <div class="cta-row">
         <a class="btn btn-on-dark" href="https://chromewebstore.google.com/detail/backlog-my-tasks/cangphedocncgiloahgkahplfppmfkhi" target="_blank" rel="noopener">加到Chrome</a>
-        <a class="btn btn-ghost" style="background:rgba(255,255,255,.12);color:#fff;border-color:rgba(255,255,255,.3)" href="dashboard.html">查看儀表板</a>
+        <a class="btn btn-ghost" style="background:rgba(255,255,255,.12);color:#fff;border-color:rgba(255,255,255,.3)" href="dashboard-project.html">查看專案別儀表板</a>
       </div>
     </div></div>
   </div>

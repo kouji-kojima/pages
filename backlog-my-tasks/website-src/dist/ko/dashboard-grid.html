@@ -3,19 +3,19 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>매트릭스 뷰 | Backlog My Tasks</title>
-<meta name="description" content="아이젠하워 4분면에서 긴급도×중요도에 따라 태스크가 자동으로 배치됩니다. 우선순위는 보석 색상으로 한눈에 알 수 있습니다.">
-<link rel="canonical" href="https://kouji-kojima.github.io/pages/backlog-my-tasks/website-src/dist/ko/view-matrix.html">
-<link rel="alternate" hreflang="ja" href="https://kouji-kojima.github.io/pages/backlog-my-tasks/website-src/dist/view-matrix.html">
-<link rel="alternate" hreflang="en" href="https://kouji-kojima.github.io/pages/backlog-my-tasks/website-src/dist/en/view-matrix.html">
-<link rel="alternate" hreflang="ko" href="https://kouji-kojima.github.io/pages/backlog-my-tasks/website-src/dist/ko/view-matrix.html">
-<link rel="alternate" hreflang="zh-Hant-TW" href="https://kouji-kojima.github.io/pages/backlog-my-tasks/website-src/dist/zh-TW/view-matrix.html">
-<link rel="alternate" hreflang="zh-Hant-HK" href="https://kouji-kojima.github.io/pages/backlog-my-tasks/website-src/dist/zh-HK/view-matrix.html">
-<link rel="alternate" hreflang="x-default" href="https://kouji-kojima.github.io/pages/backlog-my-tasks/website-src/dist/view-matrix.html">
-<meta property="og:title" content="매트릭스 뷰 | Backlog My Tasks">
-<meta property="og:description" content="아이젠하워 4분면에서 긴급도×중요도에 따라 태스크가 자동으로 배치됩니다. 우선순위는 보석 색상으로 한눈에 알 수 있습니다.">
-<meta property="og:image" content="https://kouji-kojima.github.io/pages/backlog-my-tasks/website-src/dist/assets/img/03_matrix.jpg">
-<meta property="og:url" content="https://kouji-kojima.github.io/pages/backlog-my-tasks/website-src/dist/ko/view-matrix.html">
+<title>일괄 등록 시트 | Backlog My Tasks</title>
+<meta name="description" content="스프레드시트처럼 여러 태스크를 일괄 등록. Excel 등에서 범위 붙여넣기, 행 ID를 통한 상하위 자동 연결, 행 템플릿, CSV 드래그 앤 드롭을 지원합니다.">
+<link rel="canonical" href="https://kouji-kojima.github.io/pages/backlog-my-tasks/website-src/dist/ko/dashboard-grid.html">
+<link rel="alternate" hreflang="ja" href="https://kouji-kojima.github.io/pages/backlog-my-tasks/website-src/dist/dashboard-grid.html">
+<link rel="alternate" hreflang="en" href="https://kouji-kojima.github.io/pages/backlog-my-tasks/website-src/dist/en/dashboard-grid.html">
+<link rel="alternate" hreflang="ko" href="https://kouji-kojima.github.io/pages/backlog-my-tasks/website-src/dist/ko/dashboard-grid.html">
+<link rel="alternate" hreflang="zh-Hant-TW" href="https://kouji-kojima.github.io/pages/backlog-my-tasks/website-src/dist/zh-TW/dashboard-grid.html">
+<link rel="alternate" hreflang="zh-Hant-HK" href="https://kouji-kojima.github.io/pages/backlog-my-tasks/website-src/dist/zh-HK/dashboard-grid.html">
+<link rel="alternate" hreflang="x-default" href="https://kouji-kojima.github.io/pages/backlog-my-tasks/website-src/dist/dashboard-grid.html">
+<meta property="og:title" content="일괄 등록 시트 | Backlog My Tasks">
+<meta property="og:description" content="스프레드시트처럼 여러 태스크를 일괄 등록. Excel 등에서 범위 붙여넣기, 행 ID를 통한 상하위 자동 연결, 행 템플릿, CSV 드래그 앤 드롭을 지원합니다.">
+<meta property="og:image" content="https://kouji-kojima.github.io/pages/backlog-my-tasks/website-src/dist/assets/img/15_admin_grid.jpg">
+<meta property="og:url" content="https://kouji-kojima.github.io/pages/backlog-my-tasks/website-src/dist/ko/dashboard-grid.html">
 <meta property="og:type" content="website">
 <meta property="og:locale" content="ko">
 <meta name="twitter:card" content="summary_large_image">
@@ -37,11 +37,11 @@
     </nav>
     <details class="lang-switch">
       <summary>🇰🇷 한국어</summary>
-      <div class="lang-switch-menu"><a href="../view-matrix.html">🇯🇵 日本語</a>
-<a href="../en/view-matrix.html">🇺🇸 English</a>
-<a href="../ko/view-matrix.html" class="active">🇰🇷 한국어</a>
-<a href="../zh-TW/view-matrix.html">🇹🇼 繁體中文</a>
-<a href="../zh-HK/view-matrix.html">🇭🇰 繁體中文（香港）</a></div>
+      <div class="lang-switch-menu"><a href="../dashboard-grid.html">🇯🇵 日本語</a>
+<a href="../en/dashboard-grid.html">🇺🇸 English</a>
+<a href="../ko/dashboard-grid.html" class="active">🇰🇷 한국어</a>
+<a href="../zh-TW/dashboard-grid.html">🇹🇼 繁體中文</a>
+<a href="../zh-HK/dashboard-grid.html">🇭🇰 繁體中文（香港）</a></div>
     </details>
     <a class="btn btn-primary header-cta" href="https://chromewebstore.google.com/detail/backlog-my-tasks/cangphedocncgiloahgkahplfppmfkhi" target="_blank" rel="noopener">Chrome에 추가</a>
     <button id="nav-toggle" aria-label="메뉴">☰</button>
@@ -51,37 +51,41 @@
 
 <section class="page-hero">
   <div class="wrap inner">
-    <div class="breadcrumb"><a href="index.html">홈</a> / 매트릭스</div>
-    <div class="eyebrow">보기 화면 ─ 매트릭스</div>
-    <h1>매트릭스 ─ 우선순위를 직관적으로.</h1>
-    <p class="lead">아이젠하워 4분면에서 긴급도×중요도에 따라 태스크가 자동으로 배치됩니다. 무엇부터 손대야 할지 한눈에 알 수 있습니다.</p>
+    <div class="breadcrumb"><a href="index.html">홈</a> / 일괄 등록 시트</div>
+    <div class="eyebrow">대시보드</div>
+    <h1>일괄 등록 시트 ─ 스프레드시트처럼 한번에 등록.</h1>
+    <p class="lead">Excel처럼 붙여넣기만 하면 여러 태스크를 한 번에 등록할 수 있습니다.</p>
   </div>
 </section>
 
 <section>
   <div class="wrap">
     <div class="showcase">
-      <div class="frame"><img src="../assets/img/03_matrix.jpg" alt="매트릭스 뷰 스크린샷" loading="lazy"></div>
+      <div class="frame"><img src="../assets/img/15_admin_grid.jpg" alt="일괄 등록 시트 스크린샷" loading="lazy"></div>
       <div class="bullets"><div class="bullet">
           <div class="dot"></div>
-          <div><h4>아이젠하워 4분면</h4><p>긴급도(기한까지 남은 기간)×중요도(우선순위)로 태스크를 자동 배치</p></div>
+          <div><h4>Excel처럼 붙여넣기</h4><p>스프레드시트 소프트웨어에서 범위를 복사해 셀에 붙여넣기만 하면 됩니다. 제목・상세・시작일・기한일은 필수 항목입니다</p></div>
         </div>
 <div class="bullet">
           <div class="dot"></div>
-          <div><h4>우선순위는 보석 색상으로 한눈에</h4><p>루비 빨강(높음) / 앰버 노랑(중간) / 사파이어 파랑(낮음). 별 크기 = 예정 공수</p></div>
+          <div><h4>행 ID로 상하위 연결도 일괄 처리</h4><p>행에 붙인 ID를 다른 행의 상위 태스크 칸에서 참조하기만 하면, 등록 성공 후 자동으로 상하위 연결됩니다</p></div>
         </div>
 <div class="bullet">
           <div class="dot"></div>
-          <div><h4>분면 클릭으로 태스크 목록</h4><p>오른쪽 패널에 이슈 키(동일한 보석 색상)와 함께 표시</p></div>
+          <div><h4>그 자리에서 유효성 검사 표시</h4><p>필수 항목 미입력 등을 셀 단위로 즉시 경고합니다. 등록 완료된 행은 회색으로 표시되어 재전송을 방지합니다</p></div>
+        </div>
+<div class="bullet">
+          <div class="dot"></div>
+          <div><h4>행 템플릿으로 정형화된 등록을 효율화</h4><p>자주 쓰는 입력 패턴을 저장·불러오기. CSV 드래그 앤 드롭으로 일괄 불러오기도 지원</p></div>
         </div>
 </div>
     </div>
     <div class="mt"><div class="cta-band">
-      <h2>우선순위를 고민할 필요가 없습니다.</h2>
-      <p>매트릭스를 여는 것만으로 4분면에 자동으로 배치됩니다. 오른쪽 위 분면부터 순서대로 착수하면 됩니다.</p>
+      <h2>등록의 수고를, 한번에 줄이다.</h2>
+      <p>매번 하나씩 등록하는 수고를, 스프레드시트처럼 일괄 등록으로 없앱니다.</p>
       <div class="cta-row">
         <a class="btn btn-on-dark" href="https://chromewebstore.google.com/detail/backlog-my-tasks/cangphedocncgiloahgkahplfppmfkhi" target="_blank" rel="noopener">Chrome에 추가</a>
-        <a class="btn btn-ghost" style="background:rgba(255,255,255,.12);color:#fff;border-color:rgba(255,255,255,.3)" href="use-cases.html">활용 사례 보기</a>
+        <a class="btn btn-ghost" style="background:rgba(255,255,255,.12);color:#fff;border-color:rgba(255,255,255,.3)" href="dashboard-project.html">프로젝트별 대시보드 보기</a>
       </div>
     </div></div>
   </div>
