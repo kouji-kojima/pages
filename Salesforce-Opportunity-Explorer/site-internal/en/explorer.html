@@ -10,6 +10,7 @@
 <meta property="og:title" content="Opportunity Explorer | Salesforce Opportunity Explorer">
 <meta property="og:description" content="20+ filters and 60+ customizable columns narrow your list down to exactly what you need, instantly.">
 <meta property="og:type" content="website">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
 <style>
 :root {
   --sky-950: #021b3d;
@@ -71,7 +72,11 @@
 html { scroll-behavior: smooth; }
 body {
   margin: 0;
-  font-family: "Yu Gothic", "Hiragino Sans", "Noto Sans JP", -apple-system, BlinkMacSystemFont,
+  /* v26.2.0: Google Fontsで読み込むNoto Sans JPを第一候補にする（従来はOS内蔵の
+     Yu Gothic/Hiragino Sansが先頭でNoto Sans JPは未読み込みのフォールバック止まり
+     だったため、実際にはほぼ使われていなかった）。英語版（html[lang="en"]）は
+     下のルールでNoto Sansに切り替える。 */
+  font-family: "Noto Sans JP", "Yu Gothic", "Hiragino Sans", -apple-system, BlinkMacSystemFont,
                "Segoe UI", "Helvetica Neue", Arial, sans-serif;
   background: var(--bg);
   color: var(--text);
@@ -79,6 +84,9 @@ body {
   -webkit-font-smoothing: antialiased;
   transition: background .25s ease, color .25s ease;
   overflow-x: hidden;
+}
+html[lang="en"] body {
+  font-family: "Noto Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", "Helvetica Neue", Arial, sans-serif;
 }
 img { max-width: 100%; display: block; }
 a { color: inherit; text-decoration: none; }
@@ -409,28 +417,28 @@ footer.site-footer { background: var(--sky-950); color: rgba(232,244,253,.7); pa
 </div>
 
 <div class="card reveal">
-
+  
   <div class="icon">💾</div>
   <h3>Auto-saved filters</h3>
   <p>Your filter state is saved to localStorage — the exact same screen greets you next time you open the panel.</p>
 </div>
 
 <div class="card reveal">
-
+  
   <div class="icon">🔁</div>
-  <h3>Bulk-change owner, affiliation & division</h3>
+  <h3>Bulk-change owner & affiliation</h3>
   <p>Change the owner, affiliation, sales group, or contract sales office for multiple selected opportunities at once. Same-name users or departments are disambiguated automatically, and any mistaken run can be undone.</p>
 </div>
 
 <div class="card reveal">
-
+  
   <div class="icon">📤</div>
   <h3>Bulk register via Excel</h3>
   <p>Download a template, edit it, and upload it back to bulk-create or bulk-update opportunities and their to-dos/events. Dropdown lists in the template help prevent typos.</p>
 </div>
 
 <div class="card reveal">
-
+  
   <div class="icon">🗑</div>
   <h3>Bulk-change the delete flag</h3>
   <p>Toggle the delete flag on or off for multiple selected opportunities at once — no more list re-ordering after every single toggle.</p>

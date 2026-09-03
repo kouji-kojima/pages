@@ -10,6 +10,7 @@
 <meta property="og:title" content="新機能｜Salesforce Opportunity Explorer">
 <meta property="og:description" content="商談・活動のExcel一括登録、削除フラグ一括変更、カスタム列エラーの自動修復など30以上の新機能を含む、v26.0.0までの最新アップデート内容。">
 <meta property="og:type" content="website">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;600;700;800&display=swap" rel="stylesheet">
 <style>
 :root {
   --sky-950: #021b3d;
@@ -71,7 +72,11 @@
 html { scroll-behavior: smooth; }
 body {
   margin: 0;
-  font-family: "Yu Gothic", "Hiragino Sans", "Noto Sans JP", -apple-system, BlinkMacSystemFont,
+  /* v26.2.0: Google Fontsで読み込むNoto Sans JPを第一候補にする（従来はOS内蔵の
+     Yu Gothic/Hiragino Sansが先頭でNoto Sans JPは未読み込みのフォールバック止まり
+     だったため、実際にはほぼ使われていなかった）。英語版（html[lang="en"]）は
+     下のルールでNoto Sansに切り替える。 */
+  font-family: "Noto Sans JP", "Yu Gothic", "Hiragino Sans", -apple-system, BlinkMacSystemFont,
                "Segoe UI", "Helvetica Neue", Arial, sans-serif;
   background: var(--bg);
   color: var(--text);
@@ -79,6 +84,9 @@ body {
   -webkit-font-smoothing: antialiased;
   transition: background .25s ease, color .25s ease;
   overflow-x: hidden;
+}
+html[lang="en"] body {
+  font-family: "Noto Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", "Helvetica Neue", Arial, sans-serif;
 }
 img { max-width: 100%; display: block; }
 a { color: inherit; text-decoration: none; }
@@ -374,49 +382,49 @@ footer.site-footer { background: var(--sky-950); color: rgba(232,244,253,.7); pa
 </div>
 <section class="block"><div class="wrap"><div class="grid grid-2">
 <div class="card reveal">
-
+  
   <div class="icon">🩹</div>
   <h3>列エラーからの自動修復</h3>
   <p>追加したカスタム列が参照できなくなった場合も、自動的にその列を取り除いて再取得。商談エクスプローラーが開けなくなる不具合を未然に防ぎます。</p>
 </div>
 
 <div class="card reveal">
-
+  
   <div class="icon">📤</div>
   <h3>商談活動の一括登録</h3>
   <p>選択した商談へ、Excelテンプレート経由でToDo/行動をまとめて新規登録・更新。行ごとに種別・日付・コメントを変えられます。</p>
 </div>
 
 <div class="card reveal">
-
+  
   <div class="icon">🗂</div>
   <h3>ヘッダーボタンをカテゴリ別に整理</h3>
   <p>検索/分析/AI/一括変更/新規作成の5カテゴリに分けて開閉式に。増え続けるボタンでも目的の機能をすぐ見つけられます。</p>
 </div>
 
 <div class="card reveal">
-
+  
   <div class="icon">📤</div>
   <h3>商談のExcel一括登録・更新</h3>
   <p>専用テンプレートをダウンロードして編集、アップロードするだけで商談の新規登録・更新をまとめて実行。取引先名・所有者名などはプルダウンから選べます。</p>
 </div>
 
 <div class="card reveal">
-
+  
   <div class="icon">🗑</div>
   <h3>削除フラグの一括変更</h3>
   <p>選択した複数の商談の削除フラグをまとめてON/OFF。1件ずつの操作で一覧がずれる手間がありません。</p>
 </div>
 
 <div class="card reveal">
-
+  
   <div class="icon">🏭</div>
   <h3>扱い部課・契約営業部門の一括変更</h3>
   <p>所有者・所属組織に続き、扱い部課(事業部門)・契約営業部門も選択した複数商談へまとめて反映できます（限定公開版）。</p>
 </div>
 
 <div class="card reveal">
-
+  
   <div class="icon">🗣</div>
   <h3>会議メモ→AI TODO一括登録</h3>
   <p>会議メモ/トランスクリプトを貼り付けるとAIでアクションアイテムを抽出し、複数商談へのTask登録を一括実行。AI健康診断など他のAI回答からの一括登録にも対応。</p>

@@ -10,6 +10,7 @@
 <meta property="og:title" content="Productivity Features | Salesforce Opportunity Explorer">
 <meta property="og:description" content="Filter presets, the command palette, weekly reports, and meeting mode — plus a calendar view, global search, and keyboard navigation — cut friction from your daily routine.">
 <meta property="og:type" content="website">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
 <style>
 :root {
   --sky-950: #021b3d;
@@ -71,7 +72,11 @@
 html { scroll-behavior: smooth; }
 body {
   margin: 0;
-  font-family: "Yu Gothic", "Hiragino Sans", "Noto Sans JP", -apple-system, BlinkMacSystemFont,
+  /* v26.2.0: Google Fontsで読み込むNoto Sans JPを第一候補にする（従来はOS内蔵の
+     Yu Gothic/Hiragino Sansが先頭でNoto Sans JPは未読み込みのフォールバック止まり
+     だったため、実際にはほぼ使われていなかった）。英語版（html[lang="en"]）は
+     下のルールでNoto Sansに切り替える。 */
+  font-family: "Noto Sans JP", "Yu Gothic", "Hiragino Sans", -apple-system, BlinkMacSystemFont,
                "Segoe UI", "Helvetica Neue", Arial, sans-serif;
   background: var(--bg);
   color: var(--text);
@@ -79,6 +84,9 @@ body {
   -webkit-font-smoothing: antialiased;
   transition: background .25s ease, color .25s ease;
   overflow-x: hidden;
+}
+html[lang="en"] body {
+  font-family: "Noto Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", "Helvetica Neue", Arial, sans-serif;
 }
 img { max-width: 100%; display: block; }
 a { color: inherit; text-decoration: none; }

@@ -10,6 +10,7 @@
 <meta property="og:title" content="What's New | Salesforce Opportunity Explorer">
 <meta property="og:description" content="Bulk-register opportunities and activities via Excel, bulk-change the delete flag, automatic recovery from custom-column errors, and 30+ more features — updates through v26.0.0.">
 <meta property="og:type" content="website">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
 <style>
 :root {
   --sky-950: #021b3d;
@@ -71,7 +72,11 @@
 html { scroll-behavior: smooth; }
 body {
   margin: 0;
-  font-family: "Yu Gothic", "Hiragino Sans", "Noto Sans JP", -apple-system, BlinkMacSystemFont,
+  /* v26.2.0: Google Fontsで読み込むNoto Sans JPを第一候補にする（従来はOS内蔵の
+     Yu Gothic/Hiragino Sansが先頭でNoto Sans JPは未読み込みのフォールバック止まり
+     だったため、実際にはほぼ使われていなかった）。英語版（html[lang="en"]）は
+     下のルールでNoto Sansに切り替える。 */
+  font-family: "Noto Sans JP", "Yu Gothic", "Hiragino Sans", -apple-system, BlinkMacSystemFont,
                "Segoe UI", "Helvetica Neue", Arial, sans-serif;
   background: var(--bg);
   color: var(--text);
@@ -79,6 +84,9 @@ body {
   -webkit-font-smoothing: antialiased;
   transition: background .25s ease, color .25s ease;
   overflow-x: hidden;
+}
+html[lang="en"] body {
+  font-family: "Noto Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", "Helvetica Neue", Arial, sans-serif;
 }
 img { max-width: 100%; display: block; }
 a { color: inherit; text-decoration: none; }
@@ -374,49 +382,49 @@ footer.site-footer { background: var(--sky-950); color: rgba(232,244,253,.7); pa
 </div>
 <section class="block"><div class="wrap"><div class="grid grid-2">
 <div class="card reveal">
-
+  
   <div class="icon">🩹</div>
   <h3>Self-healing column errors</h3>
   <p>If a custom column you added becomes inaccessible, the extension automatically drops it and refetches — preventing the Opportunity Explorer from getting stuck unable to open.</p>
 </div>
 
 <div class="card reveal">
-
+  
   <div class="icon">📤</div>
   <h3>Bulk-register activities</h3>
   <p>Bulk-create or bulk-update to-dos/events for selected opportunities via an Excel template — type, date, and comment can differ row by row.</p>
 </div>
 
 <div class="card reveal">
-
+  
   <div class="icon">🗂</div>
   <h3>Header buttons organized into categories</h3>
   <p>Buttons are now grouped into five collapsible categories — Search, Analysis, AI, Bulk Change, and New — so the right action is always easy to find, however many buttons are added.</p>
 </div>
 
 <div class="card reveal">
-
+  
   <div class="icon">📤</div>
   <h3>Bulk register opportunities via Excel</h3>
   <p>Download a template, edit it, and upload it back to bulk-create or bulk-update opportunities. Account names, owners, and more are pickable from dropdowns.</p>
 </div>
 
 <div class="card reveal">
-
+  
   <div class="icon">🗑</div>
   <h3>Bulk-change the delete flag</h3>
   <p>Toggle the delete flag on or off for multiple selected opportunities at once — no more list re-ordering after every single toggle.</p>
 </div>
 
 <div class="card reveal">
-
+  
   <div class="icon">🏭</div>
   <h3>Bulk-change sales group & sales office</h3>
   <p>Alongside owner and affiliation, sales group (business division) and contract sales office can now be bulk-changed across selected opportunities too (Internal edition).</p>
 </div>
 
 <div class="card reveal">
-
+  
   <div class="icon">🗣</div>
   <h3>Meeting Notes to TODOs</h3>
   <p>Paste meeting notes/transcripts and generate an AI prompt that extracts action items, then bulk-log Tasks across opportunities. Works with any AI response (e.g. Health Check), too.</p>
