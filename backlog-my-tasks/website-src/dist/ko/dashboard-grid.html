@@ -3,8 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>일괄 등록 시트 | Backlog My Tasks</title>
-<meta name="description" content="스프레드시트처럼 여러 태스크를 일괄 등록. Excel 등에서 범위 붙여넣기, 행 ID를 통한 상하위 자동 연결, 행 템플릿, CSV 드래그 앤 드롭을 지원합니다.">
+<title>일괄 등록・업데이트 시트 | Backlog My Tasks</title>
+<meta name="description" content="표계산 감각으로 여러 작업을 일괄 등록. 기한일로 기간 검색한 기존 작업의 일괄 업데이트, Excel 파일 다운로드・가져오기(드롭다운 포함)에도 대응합니다.">
 <link rel="canonical" href="https://kouji-kojima.github.io/pages/backlog-my-tasks/website-src/dist/ko/dashboard-grid.html">
 <link rel="alternate" hreflang="ja" href="https://kouji-kojima.github.io/pages/backlog-my-tasks/website-src/dist/dashboard-grid.html">
 <link rel="alternate" hreflang="en" href="https://kouji-kojima.github.io/pages/backlog-my-tasks/website-src/dist/en/dashboard-grid.html">
@@ -12,8 +12,8 @@
 <link rel="alternate" hreflang="zh-Hant-TW" href="https://kouji-kojima.github.io/pages/backlog-my-tasks/website-src/dist/zh-TW/dashboard-grid.html">
 <link rel="alternate" hreflang="zh-Hant-HK" href="https://kouji-kojima.github.io/pages/backlog-my-tasks/website-src/dist/zh-HK/dashboard-grid.html">
 <link rel="alternate" hreflang="x-default" href="https://kouji-kojima.github.io/pages/backlog-my-tasks/website-src/dist/dashboard-grid.html">
-<meta property="og:title" content="일괄 등록 시트 | Backlog My Tasks">
-<meta property="og:description" content="스프레드시트처럼 여러 태스크를 일괄 등록. Excel 등에서 범위 붙여넣기, 행 ID를 통한 상하위 자동 연결, 행 템플릿, CSV 드래그 앤 드롭을 지원합니다.">
+<meta property="og:title" content="일괄 등록・업데이트 시트 | Backlog My Tasks">
+<meta property="og:description" content="표계산 감각으로 여러 작업을 일괄 등록. 기한일로 기간 검색한 기존 작업의 일괄 업데이트, Excel 파일 다운로드・가져오기(드롭다운 포함)에도 대응합니다.">
 <meta property="og:image" content="https://kouji-kojima.github.io/pages/backlog-my-tasks/website-src/dist/assets/img/15_admin_grid.jpg">
 <meta property="og:url" content="https://kouji-kojima.github.io/pages/backlog-my-tasks/website-src/dist/ko/dashboard-grid.html">
 <meta property="og:type" content="website">
@@ -51,38 +51,38 @@
 
 <section class="page-hero">
   <div class="wrap inner">
-    <div class="breadcrumb"><a href="index.html">홈</a> / 일괄 등록 시트</div>
+    <div class="breadcrumb"><a href="index.html">홈</a> / 일괄 등록・업데이트 시트</div>
     <div class="eyebrow">대시보드</div>
-    <h1>일괄 등록 시트 ─ 스프레드시트처럼 한번에 등록.</h1>
-    <p class="lead">Excel처럼 붙여넣기만 하면 여러 태스크를 한 번에 등록할 수 있습니다.</p>
+    <h1>일괄 등록・업데이트 시트 ─ 표계산 감각으로 등록도 업데이트도.</h1>
+    <p class="lead">Excel처럼 붙여넣어 신규 작업을 일괄 등록할 수 있을 뿐만 아니라, 기한일로 검색한 기존 작업의 일괄 업데이트나 Excel 파일 다운로드・가져오기에도 대응하고 있습니다.</p>
   </div>
 </section>
 
 <section>
   <div class="wrap">
     <div class="showcase">
-      <div class="frame"><img src="../assets/img/15_admin_grid.jpg" alt="일괄 등록 시트 스크린샷" loading="lazy"></div>
+      <div class="frame"><img src="../assets/img/15_admin_grid.jpg" alt="일괄 등록・업데이트 시트 스크린샷" loading="lazy"></div>
       <div class="bullets"><div class="bullet">
           <div class="dot"></div>
-          <div><h4>Excel처럼 붙여넣기</h4><p>스프레드시트 소프트웨어에서 범위를 복사해 셀에 붙여넣기만 하면 됩니다. 제목・상세・시작일・기한일은 필수 항목입니다</p></div>
+          <div><h4>Excel처럼 붙여넣어 일괄 등록</h4><p>표계산 소프트에서 범위를 복사해 셀에 붙여넣기만 하면 됩니다. 행 ID로 부모-자식 연결도 일괄로, 행 템플릿・CSV 가져오기로 정형 등록도 효율화</p></div>
         </div>
 <div class="bullet">
           <div class="dot"></div>
-          <div><h4>행 ID로 상하위 연결도 일괄 처리</h4><p>행에 붙인 ID를 다른 행의 상위 태스크 칸에서 참조하기만 하면, 등록 성공 후 자동으로 상하위 연결됩니다</p></div>
+          <div><h4>기한일로 검색해 기존 작업을 일괄 업데이트</h4><p>기간・담당자를 지정해 검색한 기존 작업을 시트에 불러와, 실제로 변경한 항목만 모아서 Backlog에 반영</p></div>
         </div>
 <div class="bullet">
           <div class="dot"></div>
-          <div><h4>그 자리에서 유효성 검사 표시</h4><p>필수 항목 미입력 등을 셀 단위로 즉시 경고합니다. 등록 완료된 행은 회색으로 표시되어 재전송을 방지합니다</p></div>
+          <div><h4>업데이트 충돌도 자동 감지</h4><p>불러온 후 다른 사람이 같은 작업을 업데이트하지 않았는지 확인합니다. "강제 업데이트" "최신 불러오기" 중 하나로 해결을 선택할 수 있습니다</p></div>
         </div>
 <div class="bullet">
           <div class="dot"></div>
-          <div><h4>행 템플릿으로 정형화된 등록을 효율화</h4><p>자주 쓰는 입력 패턴을 저장·불러오기. CSV 드래그 앤 드롭으로 일괄 불러오기도 지원</p></div>
+          <div><h4>Excel 파일 다운로드・가져오기에도 대응</h4><p>종류・담당자 등의 열은 Excel에서도 실제 드롭다운으로 선택 가능. 편집 후에는 드롭존에 드래그&드롭으로 가져올 수 있고, Backlog 반영은 마지막 확인 후에</p></div>
         </div>
 </div>
     </div>
     <div class="mt"><div class="cta-band">
-      <h2>등록의 수고를, 한번에 줄이다.</h2>
-      <p>매번 하나씩 등록하는 수고를, 스프레드시트처럼 일괄 등록으로 없앱니다.</p>
+      <h2>등록도 업데이트도, 한꺼번에 줄인다.</h2>
+      <p>매번 하나씩 등록・업데이트하던 수고를, 표계산 감각의 일괄 작업으로 없앱니다.</p>
       <div class="cta-row">
         <a class="btn btn-on-dark" href="https://chromewebstore.google.com/detail/backlog-my-tasks/cangphedocncgiloahgkahplfppmfkhi" target="_blank" rel="noopener">Chrome에 추가</a>
         <a class="btn btn-ghost" style="background:rgba(255,255,255,.12);color:#fff;border-color:rgba(255,255,255,.3)" href="dashboard-project.html">프로젝트별 대시보드 보기</a>
@@ -101,7 +101,7 @@
       </div>
       <div><h5>보기 화면</h5><ul><li><a href="views.html">8가지 보기</a></li>
 <li><a href="view-list.html">홈 화면</a></li>
-<li><a href="dashboard-grid.html">일괄 등록 시트</a></li>
+<li><a href="dashboard-grid.html">일괄 등록・업데이트 시트</a></li>
 <li><a href="view-matrix.html">매트릭스</a></li>
 <li><a href="view-kanban.html">칸반</a></li>
 <li><a href="view-gantt.html">간트</a></li>

@@ -3,8 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Bulk Add Sheet | Backlog My Tasks</title>
-<meta name="description" content="Bulk-register multiple tasks like a spreadsheet. Supports pasting ranges from Excel, automatic parent-child linking via row IDs, row templates, and CSV drag &amp; drop.">
+<title>Bulk Entry &amp; Update Sheet | Backlog My Tasks</title>
+<meta name="description" content="Bulk-register multiple tasks spreadsheet-style. Also supports bulk-updating existing tasks found by due-date range search, and Excel file download/import (with dropdowns).">
 <link rel="canonical" href="https://kouji-kojima.github.io/pages/backlog-my-tasks/website-src/dist/en/dashboard-grid.html">
 <link rel="alternate" hreflang="ja" href="https://kouji-kojima.github.io/pages/backlog-my-tasks/website-src/dist/dashboard-grid.html">
 <link rel="alternate" hreflang="en" href="https://kouji-kojima.github.io/pages/backlog-my-tasks/website-src/dist/en/dashboard-grid.html">
@@ -12,8 +12,8 @@
 <link rel="alternate" hreflang="zh-Hant-TW" href="https://kouji-kojima.github.io/pages/backlog-my-tasks/website-src/dist/zh-TW/dashboard-grid.html">
 <link rel="alternate" hreflang="zh-Hant-HK" href="https://kouji-kojima.github.io/pages/backlog-my-tasks/website-src/dist/zh-HK/dashboard-grid.html">
 <link rel="alternate" hreflang="x-default" href="https://kouji-kojima.github.io/pages/backlog-my-tasks/website-src/dist/dashboard-grid.html">
-<meta property="og:title" content="Bulk Add Sheet | Backlog My Tasks">
-<meta property="og:description" content="Bulk-register multiple tasks like a spreadsheet. Supports pasting ranges from Excel, automatic parent-child linking via row IDs, row templates, and CSV drag &amp; drop.">
+<meta property="og:title" content="Bulk Entry &amp; Update Sheet | Backlog My Tasks">
+<meta property="og:description" content="Bulk-register multiple tasks spreadsheet-style. Also supports bulk-updating existing tasks found by due-date range search, and Excel file download/import (with dropdowns).">
 <meta property="og:image" content="https://kouji-kojima.github.io/pages/backlog-my-tasks/website-src/dist/assets/img/15_admin_grid.jpg">
 <meta property="og:url" content="https://kouji-kojima.github.io/pages/backlog-my-tasks/website-src/dist/en/dashboard-grid.html">
 <meta property="og:type" content="website">
@@ -51,38 +51,38 @@
 
 <section class="page-hero">
   <div class="wrap inner">
-    <div class="breadcrumb"><a href="index.html">Home</a> / Bulk Add Sheet</div>
+    <div class="breadcrumb"><a href="index.html">Home</a> / Bulk Entry &amp; Update Sheet</div>
     <div class="eyebrow">Dashboard</div>
-    <h1>Bulk Entry Sheet — register in bulk, spreadsheet-style.</h1>
-    <p class="lead">Just paste from Excel to register multiple tasks at once.</p>
+    <h1>Bulk Entry & Update Sheet — Register and update, spreadsheet-style.</h1>
+    <p class="lead">Not only can you paste like Excel to bulk-register new tasks — you can also bulk-update existing tasks found by due-date search, and download or import Excel files.</p>
   </div>
 </section>
 
 <section>
   <div class="wrap">
     <div class="showcase">
-      <div class="frame"><img src="../assets/img/15_admin_grid.jpg" alt="Screenshot of the Bulk Entry Sheet" loading="lazy"></div>
+      <div class="frame"><img src="../assets/img/15_admin_grid.jpg" alt="Screenshot of the Bulk Entry &amp; Update Sheet" loading="lazy"></div>
       <div class="bullets"><div class="bullet">
           <div class="dot"></div>
-          <div><h4>Paste like Excel</h4><p>Just copy a range from spreadsheet software and paste it into the cells. Subject, description, start date, and due date are required</p></div>
+          <div><h4>Paste like Excel to bulk-register</h4><p>Just copy a range from a spreadsheet and paste it into the cells. Link parent/child tasks in bulk via row IDs, and speed up routine entry with row templates and CSV import</p></div>
         </div>
 <div class="bullet">
           <div class="dot"></div>
-          <div><h4>Link parent/child tasks in bulk with row IDs</h4><p>Just reference a row's ID from another row's parent-task field — they're linked automatically once registered</p></div>
+          <div><h4>Search by due date to bulk-update existing tasks</h4><p>Load existing tasks found by date range and assignee into the sheet, then push only the fields you actually changed to Backlog</p></div>
         </div>
 <div class="bullet">
           <div class="dot"></div>
-          <div><h4>Inline validation as you go</h4><p>Instantly flags missing required fields per cell. Already-registered rows are grayed out to prevent resubmission</p></div>
+          <div><h4>Update conflicts are detected automatically</h4><p>Checks whether someone else updated the same task after it was loaded. Choose to resolve it with either "Force Update" or "Reload Latest"</p></div>
         </div>
 <div class="bullet">
           <div class="dot"></div>
-          <div><h4>Speed up routine entries with row templates</h4><p>Save and recall frequently used input patterns. Also supports bulk import via CSV drag & drop</p></div>
+          <div><h4>Excel file download and import supported</h4><p>Columns like type and assignee stay real dropdowns even inside Excel. After editing, drag & drop the file onto the drop zone to import — nothing reaches Backlog until you confirm</p></div>
         </div>
 </div>
     </div>
     <div class="mt"><div class="cta-band">
-      <h2>Cut down the effort of registering tasks, all at once.</h2>
-      <p>Stop registering tasks one by one — bulk-register them spreadsheet-style instead.</p>
+      <h2>Cut the effort of registering and updating alike.</h2>
+      <p>No more registering or updating tasks one at a time — do it all at once, spreadsheet-style.</p>
       <div class="cta-row">
         <a class="btn btn-on-dark" href="https://chromewebstore.google.com/detail/backlog-my-tasks/cangphedocncgiloahgkahplfppmfkhi" target="_blank" rel="noopener">Add to Chrome</a>
         <a class="btn btn-ghost" style="background:rgba(255,255,255,.12);color:#fff;border-color:rgba(255,255,255,.3)" href="dashboard-project.html">See the Per-Project Dashboard</a>
@@ -101,7 +101,7 @@
       </div>
       <div><h5>Display Views</h5><ul><li><a href="views.html">8 views</a></li>
 <li><a href="view-list.html">Home View</a></li>
-<li><a href="dashboard-grid.html">Bulk Add Sheet</a></li>
+<li><a href="dashboard-grid.html">Bulk Entry &amp; Update Sheet</a></li>
 <li><a href="view-matrix.html">Matrix</a></li>
 <li><a href="view-kanban.html">Kanban</a></li>
 <li><a href="view-gantt.html">Gantt</a></li>

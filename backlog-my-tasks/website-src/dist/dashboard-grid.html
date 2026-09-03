@@ -3,8 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>一括登録シート | Backlog My Tasks</title>
-<meta name="description" content="表計算感覚で複数タスクを一括登録。Excel等からの範囲貼り付け・行ID指定での親子自動紐付け・行テンプレート・CSVドラッグ&amp;ドロップに対応。">
+<title>一括登録・更新シート | Backlog My Tasks</title>
+<meta name="description" content="表計算感覚で複数タスクを一括登録。期限日で期間検索した既存タスクの一括更新、Excelファイルのダウンロード・取込（プルダウン付き）にも対応。">
 <link rel="canonical" href="https://kouji-kojima.github.io/pages/backlog-my-tasks/website-src/dist/dashboard-grid.html">
 <link rel="alternate" hreflang="ja" href="https://kouji-kojima.github.io/pages/backlog-my-tasks/website-src/dist/dashboard-grid.html">
 <link rel="alternate" hreflang="en" href="https://kouji-kojima.github.io/pages/backlog-my-tasks/website-src/dist/en/dashboard-grid.html">
@@ -12,8 +12,8 @@
 <link rel="alternate" hreflang="zh-Hant-TW" href="https://kouji-kojima.github.io/pages/backlog-my-tasks/website-src/dist/zh-TW/dashboard-grid.html">
 <link rel="alternate" hreflang="zh-Hant-HK" href="https://kouji-kojima.github.io/pages/backlog-my-tasks/website-src/dist/zh-HK/dashboard-grid.html">
 <link rel="alternate" hreflang="x-default" href="https://kouji-kojima.github.io/pages/backlog-my-tasks/website-src/dist/dashboard-grid.html">
-<meta property="og:title" content="一括登録シート | Backlog My Tasks">
-<meta property="og:description" content="表計算感覚で複数タスクを一括登録。Excel等からの範囲貼り付け・行ID指定での親子自動紐付け・行テンプレート・CSVドラッグ&amp;ドロップに対応。">
+<meta property="og:title" content="一括登録・更新シート | Backlog My Tasks">
+<meta property="og:description" content="表計算感覚で複数タスクを一括登録。期限日で期間検索した既存タスクの一括更新、Excelファイルのダウンロード・取込（プルダウン付き）にも対応。">
 <meta property="og:image" content="https://kouji-kojima.github.io/pages/backlog-my-tasks/website-src/dist/assets/img/15_admin_grid.jpg">
 <meta property="og:url" content="https://kouji-kojima.github.io/pages/backlog-my-tasks/website-src/dist/dashboard-grid.html">
 <meta property="og:type" content="website">
@@ -51,38 +51,38 @@
 
 <section class="page-hero">
   <div class="wrap inner">
-    <div class="breadcrumb"><a href="index.html">ホーム</a> / 一括登録シート</div>
+    <div class="breadcrumb"><a href="index.html">ホーム</a> / 一括登録・更新シート</div>
     <div class="eyebrow">ダッシュボード</div>
-    <h1>一括登録シート ─ 表計算感覚でまとめて登録。</h1>
-    <p class="lead">Excelのように貼り付けるだけで、複数タスクを一気に登録できます。</p>
+    <h1>一括登録・更新シート ─ 表計算感覚で登録も更新も。</h1>
+    <p class="lead">Excelのように貼り付けて新規タスクを一括登録できるだけでなく、期限日で検索した既存タスクの一括更新や、Excelファイルのダウンロード・取込にも対応しています。</p>
   </div>
 </section>
 
 <section>
   <div class="wrap">
     <div class="showcase">
-      <div class="frame"><img src="assets/img/15_admin_grid.jpg" alt="一括登録シートのスクリーンショット" loading="lazy"></div>
+      <div class="frame"><img src="assets/img/15_admin_grid.jpg" alt="一括登録・更新シートのスクリーンショット" loading="lazy"></div>
       <div class="bullets"><div class="bullet">
           <div class="dot"></div>
-          <div><h4>Excelのように貼り付け</h4><p>表計算ソフトから範囲コピーしてセルに貼り付けるだけ。件名・詳細・開始日・期限日が必須項目</p></div>
+          <div><h4>Excelのように貼り付けて一括登録</h4><p>表計算ソフトから範囲コピーしてセルに貼り付けるだけ。行IDで親子付けも一括、行テンプレート・CSV読み込みで定型登録も効率化</p></div>
         </div>
 <div class="bullet">
           <div class="dot"></div>
-          <div><h4>行IDで親子付けも一括</h4><p>行に付けたIDを他の行の親タスク欄で参照するだけで、登録成功後に自動で親子付け</p></div>
+          <div><h4>期限日で検索して既存タスクを一括更新</h4><p>期間・担当者を指定して検索した既存タスクをシートに読み込み、実際に変更した項目だけをまとめてBacklogへ反映</p></div>
         </div>
 <div class="bullet">
           <div class="dot"></div>
-          <div><h4>その場でバリデーション表示</h4><p>必須項目の未入力などをセル単位で即座に警告。登録済み行はグレーアウトして再送信を防止</p></div>
+          <div><h4>更新の競合も自動検知</h4><p>読み込み後に他の人が同じタスクを更新していないかチェック。「強制更新」「最新取込」のどちらで解決するか選べます</p></div>
         </div>
 <div class="bullet">
           <div class="dot"></div>
-          <div><h4>行テンプレートで定型登録を効率化</h4><p>よく使う入力パターンを保存・呼び出し。CSVドラッグ&ドロップでの一括読み込みにも対応</p></div>
+          <div><h4>Excelファイルのダウンロード・取込にも対応</h4><p>種別・担当者などの列はExcel上でも実際のプルダウンで選択可能。編集後はドロップゾーンへドラッグ&ドロップで取込、Backlogへの反映は最後の確認後</p></div>
         </div>
 </div>
     </div>
     <div class="mt"><div class="cta-band">
-      <h2>登録の手間を、まとめて減らす。</h2>
-      <p>毎回ひとつずつ登録する手間を、表計算感覚の一括登録でなくします。</p>
+      <h2>登録も更新も、まとめて減らす。</h2>
+      <p>毎回ひとつずつ登録・更新する手間を、表計算感覚の一括操作でなくします。</p>
       <div class="cta-row">
         <a class="btn btn-on-dark" href="https://chromewebstore.google.com/detail/backlog-my-tasks/cangphedocncgiloahgkahplfppmfkhi" target="_blank" rel="noopener">Chromeに追加</a>
         <a class="btn btn-ghost" style="background:rgba(255,255,255,.12);color:#fff;border-color:rgba(255,255,255,.3)" href="dashboard-project.html">プロジェクト別ダッシュボードを見る</a>
@@ -101,7 +101,7 @@
       </div>
       <div><h5>表示ビュー</h5><ul><li><a href="views.html">8つの表示ビュー</a></li>
 <li><a href="view-list.html">ホーム表示</a></li>
-<li><a href="dashboard-grid.html">一括登録シート</a></li>
+<li><a href="dashboard-grid.html">一括登録・更新シート</a></li>
 <li><a href="view-matrix.html">マトリックス</a></li>
 <li><a href="view-kanban.html">カンバン</a></li>
 <li><a href="view-gantt.html">ガント</a></li>

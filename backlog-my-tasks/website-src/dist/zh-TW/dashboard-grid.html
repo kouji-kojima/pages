@@ -3,8 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>批次登錄工作表 | Backlog My Tasks</title>
-<meta name="description" content="以類似試算表的操作方式批次登錄多項任務。支援從Excel等貼上範圍、透過列ID自動建立父子關係、列範本，以及CSV拖放匯入。">
+<title>批次登記・更新工作表 | Backlog My Tasks</title>
+<meta name="description" content="以試算表感覺批次登記多筆任務。也支援以截止日期間搜尋批次更新既有任務，以及Excel檔案下載・匯入（含下拉選單）。">
 <link rel="canonical" href="https://kouji-kojima.github.io/pages/backlog-my-tasks/website-src/dist/zh-TW/dashboard-grid.html">
 <link rel="alternate" hreflang="ja" href="https://kouji-kojima.github.io/pages/backlog-my-tasks/website-src/dist/dashboard-grid.html">
 <link rel="alternate" hreflang="en" href="https://kouji-kojima.github.io/pages/backlog-my-tasks/website-src/dist/en/dashboard-grid.html">
@@ -12,8 +12,8 @@
 <link rel="alternate" hreflang="zh-Hant-TW" href="https://kouji-kojima.github.io/pages/backlog-my-tasks/website-src/dist/zh-TW/dashboard-grid.html">
 <link rel="alternate" hreflang="zh-Hant-HK" href="https://kouji-kojima.github.io/pages/backlog-my-tasks/website-src/dist/zh-HK/dashboard-grid.html">
 <link rel="alternate" hreflang="x-default" href="https://kouji-kojima.github.io/pages/backlog-my-tasks/website-src/dist/dashboard-grid.html">
-<meta property="og:title" content="批次登錄工作表 | Backlog My Tasks">
-<meta property="og:description" content="以類似試算表的操作方式批次登錄多項任務。支援從Excel等貼上範圍、透過列ID自動建立父子關係、列範本，以及CSV拖放匯入。">
+<meta property="og:title" content="批次登記・更新工作表 | Backlog My Tasks">
+<meta property="og:description" content="以試算表感覺批次登記多筆任務。也支援以截止日期間搜尋批次更新既有任務，以及Excel檔案下載・匯入（含下拉選單）。">
 <meta property="og:image" content="https://kouji-kojima.github.io/pages/backlog-my-tasks/website-src/dist/assets/img/15_admin_grid.jpg">
 <meta property="og:url" content="https://kouji-kojima.github.io/pages/backlog-my-tasks/website-src/dist/zh-TW/dashboard-grid.html">
 <meta property="og:type" content="website">
@@ -51,38 +51,38 @@
 
 <section class="page-hero">
   <div class="wrap inner">
-    <div class="breadcrumb"><a href="index.html">首頁</a> / 批次登錄工作表</div>
+    <div class="breadcrumb"><a href="index.html">首頁</a> / 批次登記・更新工作表</div>
     <div class="eyebrow">儀表板</div>
-    <h1>批次登錄表格 ─ 以類似試算表的方式一次登錄。</h1>
-    <p class="lead">只要像Excel一樣貼上，即可一次登錄多項任務。</p>
+    <h1>批次登記・更新工作表 ─ 用試算表感覺登記也更新。</h1>
+    <p class="lead">不僅能像Excel一樣貼上批次登記新任務，也支援以截止日搜尋既有任務並批次更新，以及Excel檔案下載・匯入。</p>
   </div>
 </section>
 
 <section>
   <div class="wrap">
     <div class="showcase">
-      <div class="frame"><img src="../assets/img/15_admin_grid.jpg" alt="批次登錄表格的螢幕截圖" loading="lazy"></div>
+      <div class="frame"><img src="../assets/img/15_admin_grid.jpg" alt="批次登記・更新工作表的截圖" loading="lazy"></div>
       <div class="bullets"><div class="bullet">
           <div class="dot"></div>
-          <div><h4>如Excel般貼上</h4><p>只需從試算表軟體複製範圍並貼到儲存格即可。標題・詳細・開始日・截止日為必填欄位</p></div>
+          <div><h4>像Excel一樣貼上並批次登記</h4><p>只要從試算表軟體複製範圍貼到儲存格即可。可用行ID批次建立父子關聯，並以行範本・CSV匯入提升制式登記效率</p></div>
         </div>
 <div class="bullet">
           <div class="dot"></div>
-          <div><h4>以列ID一併設定父子關係</h4><p>只要在其他列的父任務欄位參照該列所設定的ID，登錄成功後即會自動建立父子關係</p></div>
+          <div><h4>以截止日搜尋批次更新既有任務</h4><p>將依期間・負責人搜尋到的既有任務讀入工作表，只把實際變更的項目彙整反映到Backlog</p></div>
         </div>
 <div class="bullet">
           <div class="dot"></div>
-          <div><h4>即時顯示驗證結果</h4><p>必填欄位未輸入等狀況會以儲存格為單位即時警告。已登錄的列會變灰以防止重複送出</p></div>
+          <div><h4>自動偵測更新衝突</h4><p>讀入後會檢查是否有其他人更新了同一筆任務。可選擇以「強制更新」或「取得最新」其中一種方式解決</p></div>
         </div>
 <div class="bullet">
           <div class="dot"></div>
-          <div><h4>以列範本提升制式登錄效率</h4><p>儲存・呼叫常用的輸入模式。也支援以CSV拖放方式批次匯入</p></div>
+          <div><h4>支援Excel檔案下載・匯入</h4><p>類型・負責人等欄位在Excel中也能以真正的下拉選單選擇。編輯後只要拖放到丟放區即可匯入，最後確認後才會反映到Backlog</p></div>
         </div>
 </div>
     </div>
     <div class="mt"><div class="cta-band">
-      <h2>把登錄的麻煩，一次減少。</h2>
-      <p>以類似試算表的批次登錄，省去每次逐一登錄的麻煩。</p>
+      <h2>登記也好、更新也好，一次省下來。</h2>
+      <p>把每次逐一登記・更新的麻煩，用試算表感覺的批次操作省下來。</p>
       <div class="cta-row">
         <a class="btn btn-on-dark" href="https://chromewebstore.google.com/detail/backlog-my-tasks/cangphedocncgiloahgkahplfppmfkhi" target="_blank" rel="noopener">加到Chrome</a>
         <a class="btn btn-ghost" style="background:rgba(255,255,255,.12);color:#fff;border-color:rgba(255,255,255,.3)" href="dashboard-project.html">查看專案別儀表板</a>
@@ -101,7 +101,7 @@
       </div>
       <div><h5>顯示檢視</h5><ul><li><a href="views.html">8種顯示檢視</a></li>
 <li><a href="view-list.html">首頁畫面</a></li>
-<li><a href="dashboard-grid.html">批次登錄工作表</a></li>
+<li><a href="dashboard-grid.html">批次登記・更新工作表</a></li>
 <li><a href="view-matrix.html">矩陣</a></li>
 <li><a href="view-kanban.html">看板</a></li>
 <li><a href="view-gantt.html">甘特圖</a></li>
