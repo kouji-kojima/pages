@@ -1,5 +1,11 @@
 /* Backlog My Tasks — 紹介サイト共通スタイル */
-@import url('https://fonts.googleapis.com/css2?family=Zen+Kaku+Gothic+New:wght@400;500;700;900&family=Inter:wght@400;500;600;700;800&display=swap');
+/* v30.1.0: ユーザー指示「日本語サイトと紹介pptのフォントをNoto Sans JPに統一して。海外のサイトの
+   言語ごとにフォントもNoto Sans JPみたいなGoogleの標準のフォントにしてあげて」への対応。
+   従来はZen Kaku Gothic New（日本語）+Inter（欧文）の1種類のみを全言語共通で読み込んでいたが、
+   Google製の言語別Noto Sansファミリーに統一する（ja=Noto Sans JP／en=Noto Sans／ko=Noto Sans KR／
+   zh-Hant-TW=Noto Sans TC／zh-Hant-HK=Noto Sans HK）。html[lang]属性ごとにfont-familyを
+   切り替える（下記body/html[lang="..."] body参照） */
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans:wght@400;500;600;700;800&family=Noto+Sans+JP:wght@400;500;700;900&family=Noto+Sans+KR:wght@400;500;700;900&family=Noto+Sans+TC:wght@400;500;700;900&family=Noto+Sans+HK:wght@400;500;700;900&display=swap');
 
 :root{
   --green:#3FD4AD;
@@ -28,12 +34,17 @@
 html{scroll-behavior:smooth;}
 body{
   margin:0;
-  font-family:"Zen Kaku Gothic New","Inter",-apple-system,BlinkMacSystemFont,"Hiragino Kaku Gothic ProN","Yu Gothic",sans-serif;
+  font-family:"Noto Sans JP",-apple-system,BlinkMacSystemFont,"Hiragino Kaku Gothic ProN","Yu Gothic",sans-serif;
   color:var(--ink);
   background:var(--bg);
   line-height:1.75;
   -webkit-font-smoothing:antialiased;
 }
+/* 言語別フォント切り替え（html lang属性はbuild_site.pyのLANG_INFO["html_lang"]と一致させること） */
+html[lang="en"] body{ font-family:"Noto Sans",-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif; }
+html[lang="ko"] body{ font-family:"Noto Sans KR",-apple-system,BlinkMacSystemFont,"Malgun Gothic",sans-serif; }
+html[lang="zh-Hant-TW"] body{ font-family:"Noto Sans TC",-apple-system,BlinkMacSystemFont,"Microsoft JhengHei",sans-serif; }
+html[lang="zh-Hant-HK"] body{ font-family:"Noto Sans HK",-apple-system,BlinkMacSystemFont,"Microsoft JhengHei",sans-serif; }
 img{max-width:100%;display:block;}
 a{color:inherit;text-decoration:none;}
 h1,h2,h3,h4{font-weight:900;line-height:1.35;margin:0 0 .5em;letter-spacing:.01em;word-break:keep-all;overflow-wrap:break-word;}
@@ -48,14 +59,36 @@ ul{margin:0;padding:0;list-style:none;}
   backdrop-filter:blur(10px);
   border-bottom:1px solid var(--border);
 }
+/* v31.0.0再修正: ユーザー報告「特に英語サイトまだHow to Setupの文字被ってます」への対応。
+   過去3回（720px→1180px→1400pxへの引き上げ）はいずれも「ハンバーガーへ切り替わる
+   ビューポート幅のしきい値」を当て推量で調整していたが、根本原因はそこではなかった。
+   Playwright（headless Chromium）で実際にdist配下のHTML/CSSを開き、#site-navの
+   scrollWidth/clientWidthを言語別・ビューポート幅別に実測したところ、共通クラス
+   `.wrap`（max-width:1160px、ページ本文セクションと共通）をヘッダーも流用していたため、
+   ウィンドウ幅をどれだけ広げてもヘッダー内側の実質幅が1160px（−padding）で頭打ちになり、
+   英語（"How to Set Up"等、単語数が多く合計文字数がkanji表記より長い）・繁体字香港版では
+   ビューポート幅を1400pxよりさらに広げても未来永劫はみ出したままだった（1800px幅でも
+   scrollWidthがclientWidthを超過することを実測で確認）。よってメディアクエリのしきい値を
+   さらに引き上げる対症療法では原理的に直らない。ヘッダーの`.wrap`だけ本文セクションより
+   広い専用max-widthを与え、ウィンドウを広げるほど実際にナビへ配分される幅も増えるように
+   構造を直した（同じくPlaywrightでの実測により、この値でen/zh-HKを含む5言語とも
+   1400px超過後は一貫してoverflow=falseになることを確認済み） */
+#site-header .wrap{max-width:1600px;}
 #site-header .bar{display:flex;align-items:center;gap:20px;height:68px;}
 .brand{display:flex;align-items:center;gap:10px;font-weight:800;font-size:17px;color:var(--navy);flex-shrink:0;}
 .brand img{width:32px;height:32px;border-radius:8px;}
-#site-nav{display:flex;align-items:center;gap:2px;flex:1;overflow-x:auto;scrollbar-width:none;}
+/* v31.0.0: ユーザー報告「日本語版だけ、導入方法という文字が見切れてる」への対応。
+   フォントを言語別Noto Sansファミリーに統一した際（本ファイル冒頭のhtml[lang]切り替え参照）、
+   日本語（Noto Sans JP）は他言語のフォントより文字幅が広く、7項目のナビが横幅に収まりきらず
+   #site-nav（overflow-x:auto）が横スクロール状態になって最後の項目が見切れて見えていた
+   （スクロールバー自体はscrollbar-width:noneで非表示のため、見た目には壊れているように映る）。
+   1項目あたりの余白とフォントサイズを詰めて必要幅を減らし、通常の画面幅では
+   スクロールなしで全項目収まるようにした */
+#site-nav{display:flex;align-items:center;gap:0;flex:1;overflow-x:auto;scrollbar-width:none;}
 #site-nav::-webkit-scrollbar{display:none;}
 #site-nav a{
-  font-size:13.5px;font-weight:600;color:var(--sub);white-space:nowrap;
-  padding:8px 12px;border-radius:8px;transition:.15s;
+  font-size:12.5px;font-weight:600;color:var(--sub);white-space:nowrap;
+  padding:7px 9px;border-radius:8px;transition:.15s;
 }
 #site-nav a:hover{color:var(--green-deep);background:var(--green-tint);}
 #site-nav a.active{color:var(--green-deep);background:var(--green-tint);}
@@ -288,7 +321,17 @@ section.dark .section-head .eyebrow{color:var(--green);}
   #site-footer .fgrid{grid-template-columns:repeat(2,1fr);}
   .lang-grid{grid-template-columns:repeat(3,1fr);}
 }
-@media(max-width:720px){
+/* v31.0.0追補: ユーザー報告「英語版もかぶってました」「まだだめでした」への対応。
+   720px→1180pxへの引き上げでも改善しなかったため、ブランド・7項目のナビ・言語切替・
+   CTAボタンを1行に収めるのに必要な実際の幅を720/1180という当て推量ではなく積み上げで
+   見積もり直した：.wrap左右padding 24px×2=48px、.brand（アイコン32px+gap10px+
+   "Backlog My Tasks"文字列、太字17px相当で概ね200px）、.bar gap 20px×3=60px、
+   ナビ7項目（詰めた後のpadding 9px×2+文字列。最長の"Backlog Quest"や"How to Set Up"が
+   1項目130〜150px相当、7項目合計で900px超）、.lang-switch（130px程度）、.header-cta
+   （"Add to Chrome"相当、160px程度）を積算すると1400px近くまで必要になり得る。
+   しきい値をさらに1400pxへ引き上げ、横一列ナビは確実に余裕のある広いデスクトップ幅
+   だけに限定する（それ未満は常にハンバーガーメニューにして見切れを構造的に防ぐ） */
+@media(max-width:1420px){
   #nav-toggle{display:block;}
   #site-nav{
     display:none;position:absolute;top:68px;left:0;right:0;background:#fff;
@@ -296,10 +339,12 @@ section.dark .section-head .eyebrow{color:var(--green);}
     box-shadow:var(--shadow-md);max-height:75vh;overflow-y:auto;
   }
   #site-nav.open{display:flex;}
-  #site-nav a{padding:12px 8px;border-bottom:1px solid var(--border);border-radius:0;}
+  #site-nav a{padding:12px 8px;border-bottom:1px solid var(--border);border-radius:0;font-size:14px;}
   .header-cta{display:none;}
   .lang-switch summary{padding:6px 8px;font-size:12px;}
   .lang-switch-menu{right:auto;left:0;}
+}
+@media(max-width:720px){
   .grid-2,.grid-3,.grid-4{grid-template-columns:1fr;}
   .pain-grid{grid-template-columns:1fr;}
   .stat-bar{grid-template-columns:repeat(2,1fr);}
