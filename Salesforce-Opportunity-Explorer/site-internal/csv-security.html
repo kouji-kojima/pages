@@ -380,9 +380,9 @@ footer.site-footer { background: var(--sky-950); color: rgba(232,244,253,.7); pa
   <h1 style="font-size:clamp(28px,4.2vw,42px);">CSVエクスポート・セキュリティ</h1>
   <p class="lead center">必要なデータをすぐに取り出せる一方、個人情報の扱いには細心の注意を払っています。</p>
 </div>
-<section class="block"><div class="wrap"><div class="grid grid-3">
+<section class="block"><div class="wrap"><div class="grid grid-4">
 <div class="card reveal">
-  
+
   <div class="icon">📋</div>
   <h3>商談一覧CSV</h3>
   <p>一覧の全列に加え、予測売上・商談ID・SalesforceURLを出力。列設定で表示にした列だけがCSVにも反映されます。</p>
@@ -421,6 +421,13 @@ footer.site-footer { background: var(--sky-950); color: rgba(232,244,253,.7); pa
   <div class="icon">🌐</div>
   <h3>外部送信は必要最小限</h3>
   <p>本拡張機能が通信する外部サーバーはSalesforce組織のみ。AI機能を使った場合のみ、選択したAIチャットサービスへ新しいタブが開きます。</p>
+</div>
+
+<div class="card reveal">
+
+  <div class="icon">🔐</div>
+  <h3>ローカルキャッシュの暗号化保存</h3>
+  <p>ブラウザに保存する商談・活動のキャッシュデータをAES-GCM（256bit）で暗号化。暗号鍵は拡張機能専用の隔離領域に保存し、ページや他の拡張機能からはアクセスできません。</p>
 </div>
 </div></div></section><section class="block alt"><div class="wrap">
 <div class="section-head reveal">

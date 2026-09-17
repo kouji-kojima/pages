@@ -382,7 +382,28 @@ footer.site-footer { background: var(--sky-950); color: rgba(232,244,253,.7); pa
 </div>
 <section class="block"><div class="wrap"><div class="grid grid-2">
 <div class="card reveal">
-  
+
+  <div class="icon">🔐</div>
+  <h3>Encrypted the local (IndexedDB) cache</h3>
+  <p>Opportunity and activity cache data stored in the browser is now encrypted with AES-GCM (256-bit). The key lives in the extension's own isolated storage, inaccessible to the page or other extensions. Backup/migration works exactly as before.</p>
+</div>
+
+<div class="card reveal">
+
+  <div class="icon">⚡</div>
+  <h3>Performance improvements across every button</h3>
+  <p>Reviewed the speed of buttons and interactions across the extension — pinning, kanban drag-and-drop, analytics dashboards, and more.</p>
+</div>
+
+<div class="card reveal">
+
+  <div class="icon">📤</div>
+  <h3>Account Activity Bulk Register/Update</h3>
+  <p>Bulk-create or update ToDos/Actions for a selected account via an Excel template (the account counterpart of Bulk Register/Update Activities). Search and pick from every account in SFDC (40,000+).</p>
+</div>
+
+<div class="card reveal">
+
   <div class="icon">🩹</div>
   <h3>Self-healing column errors</h3>
   <p>If a custom column you added becomes inaccessible, the extension automatically drops it and refetches — preventing the Opportunity Explorer from getting stuck unable to open.</p>
