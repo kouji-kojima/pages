@@ -3,8 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>스페이스 통합 요약 / 사용자 목록 | Backlog My Tasks</title>
-<meta name="description" content="모든 프로젝트의 완료율・지연 시간・건전성 점수를 나란히 비교할 수 있습니다. 사용자 목록으로 휴면 계정도 찾을 수 있습니다.">
+<title>스페이스 통합 요약 / 사용자 목록 / 스타 | Backlog My Tasks</title>
+<meta name="description" content="전체 프로젝트의 완료율・지연h・건전성 점수를 나란히 비교. 사용자 목록에서 휴면 계정도 찾을 수 있고, 스타에서 주고받은 수의 럭킹도 볼 수 있습니다.">
 <link rel="canonical" href="https://kouji-kojima.github.io/pages/backlog-my-tasks/website-src/dist/ko/dashboard-cross-space.html">
 <link rel="alternate" hreflang="ja" href="https://kouji-kojima.github.io/pages/backlog-my-tasks/website-src/dist/dashboard-cross-space.html">
 <link rel="alternate" hreflang="en" href="https://kouji-kojima.github.io/pages/backlog-my-tasks/website-src/dist/en/dashboard-cross-space.html">
@@ -12,8 +12,8 @@
 <link rel="alternate" hreflang="zh-Hant-TW" href="https://kouji-kojima.github.io/pages/backlog-my-tasks/website-src/dist/zh-TW/dashboard-cross-space.html">
 <link rel="alternate" hreflang="zh-Hant-HK" href="https://kouji-kojima.github.io/pages/backlog-my-tasks/website-src/dist/zh-HK/dashboard-cross-space.html">
 <link rel="alternate" hreflang="x-default" href="https://kouji-kojima.github.io/pages/backlog-my-tasks/website-src/dist/dashboard-cross-space.html">
-<meta property="og:title" content="스페이스 통합 요약 / 사용자 목록 | Backlog My Tasks">
-<meta property="og:description" content="모든 프로젝트의 완료율・지연 시간・건전성 점수를 나란히 비교할 수 있습니다. 사용자 목록으로 휴면 계정도 찾을 수 있습니다.">
+<meta property="og:title" content="스페이스 통합 요약 / 사용자 목록 / 스타 | Backlog My Tasks">
+<meta property="og:description" content="전체 프로젝트의 완료율・지연h・건전성 점수를 나란히 비교. 사용자 목록에서 휴면 계정도 찾을 수 있고, 스타에서 주고받은 수의 럭킹도 볼 수 있습니다.">
 <meta property="og:image" content="https://kouji-kojima.github.io/pages/backlog-my-tasks/website-src/dist/assets/img/10_admin_space.jpg">
 <meta property="og:url" content="https://kouji-kojima.github.io/pages/backlog-my-tasks/website-src/dist/ko/dashboard-cross-space.html">
 <meta property="og:type" content="website">
@@ -51,10 +51,10 @@
 
 <section class="page-hero">
   <div class="wrap inner">
-    <div class="breadcrumb"><a href="index.html">홈</a> / 스페이스 통합・사용자 목록</div>
+    <div class="breadcrumb"><a href="index.html">홈</a> / 스페이스 통합・사용자 목록・스타</div>
     <div class="eyebrow">대시보드</div>
     <h1>여러 스페이스에 걸쳐 모든 프로젝트를 한눈에.</h1>
-    <p class="lead">여러 스페이스의 상태를 한번에 비교할 수 있고, 휴면 계정도 한눈에 찾을 수 있습니다.</p>
+    <p class="lead">여러 스페이스의 상태를 한눈에 비교하고, 휴면 계정도 바로 찾을 수 있으며, Backlog의 ★ 럭킹도 확인할 수 있습니다.</p>
   </div>
 </section>
 
@@ -93,6 +93,11 @@
         </div>
 </div>
     </div>
+    <div class="divider"></div>
+    <div class="bullets" style="max-width:720px;margin:0 auto;">
+      <h3 style="text-align:center;margin-bottom:1.2em;">⭐ スター（スペース管理者専用）</h3>
+      <div class="bullet"><div class="dot"></div><div><h4>누가 가장 많이 주고 받는가</h4><p>Backlog 본가의 ★(스타) 실적을 집계해 받은 수・준 수・순★(받음−준)을 각각 럭킹으로 표시</p></div></div><div class="bullet"><div class="dot"></div><div><h4>태그 클라우드・월별 추이 그래프</h4><p>준 사람・받은 사람의 태그 클라우드를 보기 쉽게 표시. 월별 ★ 총수 추이와 전월 대비 증감도 확인 가능</p></div></div><div class="bullet"><div class="dot"></div><div><h4>누가 누구에게 가장 많이 주는가</h4><p>준 사람→받은 사람 조합 단위의 페어 럭킹도 표시</p></div></div>
+    </div>
     <div class="mt"><div class="cta-band">
       <h2>위험한 프로젝트에 일찌감치 착수.</h2>
       <p>지연율에 따라 자동으로 플래그가 표시되므로 손을 써야 할 프로젝트를 한눈에 알 수 있습니다.</p>
@@ -126,7 +131,7 @@
 <div><h5>대시보드</h5><ul><li><a href="dashboard.html">대시보드 개요</a></li>
 <li><a href="dashboard-project.html">프로젝트별 대시보드</a></li>
 <li><a href="dashboard-gantt.html">프로젝트 전체 간트</a></li>
-<li><a href="dashboard-cross-space.html">스페이스 통합 / 사용자 목록</a></li>
+<li><a href="dashboard-cross-space.html">스페이스 통합 / 사용자 목록 / 스타</a></li>
 <li><a href="dashboard-organization.html">조직(부서 관리)</a></li></ul></div>
 <div><h5>기타</h5><ul><li><a href="game.html">Backlog Quest</a></li>
 <li><a href="use-cases.html">활용 사례</a></li>
