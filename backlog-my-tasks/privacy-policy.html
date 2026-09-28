@@ -297,7 +297,7 @@
 
 <!-- Sticky Language Tabs -->
 <nav class="pp-lang-bar" role="tablist" aria-label="Language selector">
-  <button class="pp-lang-btn" data-lang="ja"    role="tab">🇯🇵 日本語</button>
+  <button class="pp-lang-btn active" data-lang="ja" role="tab" aria-selected="true">🇯🇵 日本語</button>
   <button class="pp-lang-btn" data-lang="en"    role="tab">🇺🇸 English</button>
   <button class="pp-lang-btn" data-lang="ko"    role="tab">🇰🇷 한국어</button>
   <button class="pp-lang-btn" data-lang="zh-TW" role="tab">🇹🇼 繁體中文</button>
@@ -307,8 +307,14 @@
 <main class="pp-content">
 
 <!-- ════════════════ 日本語 ════════════════ -->
-<section class="pp-lang-section" data-lang="ja">
-  <p class="pp-date">最終更新：2026年4月7日</p>
+<!-- v41.0.0: セキュリティレビュー指摘への対応。この画面がchrome-extension://オリジンで
+     直接開かれた場合、MV3既定のCSP（script-src 'self'、インラインスクリプト不可）により
+     下部のインライン<script>（言語自動判定・タブ切替）が実行されない可能性がある。
+     その場合でも空白ページにならないよう、日本語セクションだけはJS無しでも最初から
+     表示された状態にしておく（JSが実行できる環境では即座にswitchLang()で上書きされるため、
+     通常の言語自動判定・タブ切替の見た目には影響しない） -->
+<section class="pp-lang-section active" data-lang="ja">
+  <p class="pp-date">最終更新：2026年9月24日</p>
 
   <div class="pp-card">
     <div class="pp-card-header"><div class="pp-card-icon">🛡️</div><h2>基本方針</h2></div>
@@ -320,8 +326,8 @@
     <div class="pp-card-header"><div class="pp-card-icon">📋</div><h2>収集する情報</h2></div>
     <p>本拡張機能が収集・保存する情報は以下のみです：</p>
     <ul>
-      <li><strong>Backlog スペース URL</strong>：設定画面で入力したURL（<code>chrome.storage.sync</code> に保存）</li>
-      <li><strong>Backlog API キー</strong>：設定画面で入力したAPIキー（<code>chrome.storage.sync</code> に保存）</li>
+      <li><strong>Backlog スペース URL</strong>：設定画面で入力したURL（<code>chrome.storage.local</code> に保存）</li>
+      <li><strong>Backlog API キー</strong>：設定画面で入力したAPIキー（暗号化のうえ<code>chrome.storage.local</code> に保存）</li>
     </ul>
     <p>また、以下の情報をローカルストレージ（<code>chrome.storage.local</code>）に一時保存します（端末外には送信しません）：</p>
     <ul>
@@ -381,7 +387,7 @@
 
 <!-- ════════════════ English ════════════════ -->
 <section class="pp-lang-section" data-lang="en">
-  <p class="pp-date">Last updated: April 7, 2026</p>
+  <p class="pp-date">Last updated: September 24, 2026</p>
 
   <div class="pp-card">
     <div class="pp-card-header"><div class="pp-card-icon">🛡️</div><h2>Overview</h2></div>
@@ -393,8 +399,8 @@
     <div class="pp-card-header"><div class="pp-card-icon">📋</div><h2>Information We Collect</h2></div>
     <p>The Extension collects and stores only the following:</p>
     <ul>
-      <li><strong>Backlog Space URL</strong>: The URL you enter in settings (stored in <code>chrome.storage.sync</code>)</li>
-      <li><strong>Backlog API Key</strong>: The API key you enter in settings (stored in <code>chrome.storage.sync</code>)</li>
+      <li><strong>Backlog Space URL</strong>: The URL you enter in settings (stored in <code>chrome.storage.local</code>)</li>
+      <li><strong>Backlog API Key</strong>: The API key you enter in settings (encrypted and stored in <code>chrome.storage.local</code>)</li>
     </ul>
     <p>The following is temporarily stored in local storage (<code>chrome.storage.local</code>) and never leaves your device:</p>
     <ul>
@@ -454,7 +460,7 @@
 
 <!-- ════════════════ 한국어 ════════════════ -->
 <section class="pp-lang-section" data-lang="ko">
-  <p class="pp-date">최종 업데이트: 2026년 4월 7일</p>
+  <p class="pp-date">최종 업데이트: 2026년 9월 24일</p>
 
   <div class="pp-card">
     <div class="pp-card-header"><div class="pp-card-icon">🛡️</div><h2>기본 방침</h2></div>
@@ -466,8 +472,8 @@
     <div class="pp-card-header"><div class="pp-card-icon">📋</div><h2>수집하는 정보</h2></div>
     <p>본 확장프로그램이 수집·저장하는 정보는 다음에 한합니다：</p>
     <ul>
-      <li><strong>Backlog 스페이스 URL</strong>：설정 화면에서 입력한 URL（<code>chrome.storage.sync</code> 에 저장）</li>
-      <li><strong>Backlog API 키</strong>：설정 화면에서 입력한 API 키（<code>chrome.storage.sync</code> 에 저장）</li>
+      <li><strong>Backlog 스페이스 URL</strong>：설정 화면에서 입력한 URL（<code>chrome.storage.local</code> 에 저장）</li>
+      <li><strong>Backlog API 키</strong>：설정 화면에서 입력한 API 키（암호화하여 <code>chrome.storage.local</code> 에 저장）</li>
     </ul>
     <p>또한 다음 정보를 로컬 스토리지（<code>chrome.storage.local</code>）에 임시 저장합니다（기기 외부로는 전송되지 않습니다）：</p>
     <ul>
@@ -527,7 +533,7 @@
 
 <!-- ════════════════ 繁體中文（台灣）════════════════ -->
 <section class="pp-lang-section" data-lang="zh-TW">
-  <p class="pp-date">最後更新：2026年4月7日</p>
+  <p class="pp-date">最後更新：2026年9月24日</p>
 
   <div class="pp-card">
     <div class="pp-card-header"><div class="pp-card-icon">🛡️</div><h2>基本方針</h2></div>
@@ -539,8 +545,8 @@
     <div class="pp-card-header"><div class="pp-card-icon">📋</div><h2>收集的資訊</h2></div>
     <p>本擴充功能收集與儲存的資訊僅限以下項目：</p>
     <ul>
-      <li><strong>Backlog 空間 URL</strong>：在設定畫面輸入的 URL（儲存於 <code>chrome.storage.sync</code>）</li>
-      <li><strong>Backlog API 金鑰</strong>：在設定畫面輸入的 API 金鑰（儲存於 <code>chrome.storage.sync</code>）</li>
+      <li><strong>Backlog 空間 URL</strong>：在設定畫面輸入的 URL（儲存於 <code>chrome.storage.local</code>）</li>
+      <li><strong>Backlog API 金鑰</strong>：在設定畫面輸入的 API 金鑰（加密後儲存於 <code>chrome.storage.local</code>）</li>
     </ul>
     <p>以下資訊會暫時儲存於本機儲存空間（<code>chrome.storage.local</code>），不會傳送至裝置外部：</p>
     <ul>
@@ -600,7 +606,7 @@
 
 <!-- ════════════════ 廣東話（香港）════════════════ -->
 <section class="pp-lang-section" data-lang="zh-HK">
-  <p class="pp-date">最後更新：2026年4月7日</p>
+  <p class="pp-date">最後更新：2026年9月24日</p>
 
   <div class="pp-card">
     <div class="pp-card-header"><div class="pp-card-icon">🛡️</div><h2>基本方針</h2></div>
@@ -612,8 +618,8 @@
     <div class="pp-card-header"><div class="pp-card-icon">📋</div><h2>收集的資料</h2></div>
     <p>本擴充程式收集及儲存的資料僅限以下項目：</p>
     <ul>
-      <li><strong>Backlog 空間 URL</strong>：在設定畫面輸入的 URL（儲存於 <code>chrome.storage.sync</code>）</li>
-      <li><strong>Backlog API 金鑰</strong>：在設定畫面輸入的 API 金鑰（儲存於 <code>chrome.storage.sync</code>）</li>
+      <li><strong>Backlog 空間 URL</strong>：在設定畫面輸入的 URL（儲存於 <code>chrome.storage.local</code>）</li>
+      <li><strong>Backlog API 金鑰</strong>：在設定畫面輸入的 API 金鑰（加密後儲存於 <code>chrome.storage.local</code>）</li>
     </ul>
     <p>以下資料會暫時儲存於本地儲存空間（<code>chrome.storage.local</code>），不會傳送至裝置外部：</p>
     <ul>
