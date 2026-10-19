@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Project Dashboard | Backlog My Tasks</title>
-<meta name="description" content="An admin tab bringing together the bulk registration/update sheet, per-project dashboard, all tasks, Gantt, project Kanban, cross-space summary, team workload, data management, user inventory, and stars.">
+<meta name="description" content="Admin tabs that bring together the bulk entry sheet, project dashboard, all tasks, Gantt, project Kanban, cross-space summary, workload for everyone, data management, user inventory, team inventory, and stars.">
 <link rel="canonical" href="https://kouji-kojima.github.io/pages/backlog-my-tasks/website-src/dist/en/dashboard.html">
 <link rel="alternate" hreflang="ja" href="https://kouji-kojima.github.io/pages/backlog-my-tasks/website-src/dist/dashboard.html">
 <link rel="alternate" hreflang="en" href="https://kouji-kojima.github.io/pages/backlog-my-tasks/website-src/dist/en/dashboard.html">
@@ -13,7 +13,7 @@
 <link rel="alternate" hreflang="zh-Hant-HK" href="https://kouji-kojima.github.io/pages/backlog-my-tasks/website-src/dist/zh-HK/dashboard.html">
 <link rel="alternate" hreflang="x-default" href="https://kouji-kojima.github.io/pages/backlog-my-tasks/website-src/dist/dashboard.html">
 <meta property="og:title" content="Project Dashboard | Backlog My Tasks">
-<meta property="og:description" content="An admin tab bringing together the bulk registration/update sheet, per-project dashboard, all tasks, Gantt, project Kanban, cross-space summary, team workload, data management, user inventory, and stars.">
+<meta property="og:description" content="Admin tabs that bring together the bulk entry sheet, project dashboard, all tasks, Gantt, project Kanban, cross-space summary, workload for everyone, data management, user inventory, team inventory, and stars.">
 <meta property="og:image" content="https://kouji-kojima.github.io/pages/backlog-my-tasks/website-src/dist/assets/img/09_admin_project.jpg">
 <meta property="og:url" content="https://kouji-kojima.github.io/pages/backlog-my-tasks/website-src/dist/en/dashboard.html">
 <meta property="og:type" content="website">
@@ -55,7 +55,7 @@
     <div class="breadcrumb"><a href="index.html">Home</a> / Dashboard</div>
     <div class="eyebrow">👑 Dashboard</div>
     <h1>See the whole team at a glance with the Project Dashboard.</h1>
-    <p class="lead">An admin tab shown to all users (only User Inventory and Stars are admin-only). Your projects are shown automatically, and API calls only happen in the Data Management tab.</p>
+    <p class="lead">Admin tabs shown to all users (user inventory, team inventory, and stars are admins only). Your projects are shown automatically, and API calls are made only from the data management tab.</p>
   </div>
 </section>
 
@@ -106,6 +106,11 @@
           <div class="icon">👤</div>
           <h3>User List (admin only)</h3>
           <p>See every user's last login status. Accounts inactive for over a year are highlighted in red, and you can remove them from the space directly</p>
+        </a>
+<a class="card" href="dashboard.html">
+          <div class="icon">👪</div>
+          <h3>Team Inventory (admins only)</h3>
+          <p>Shows a list of Backlog teams and the users in each team. Click a team name to open its team management page.</p>
         </a>
 <a class="card" href="dashboard-organization.html">
           <div class="icon">🏢</div>

@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>プロジェクトダッシュボード | Backlog My Tasks</title>
-<meta name="description" content="一括登録・更新シート・プロジェクト別ダッシュボード・全タスク・ガント・プロジェクトカンバン・スペース横断サマリー・全員ワークロード・データ管理・ユーザ棚卸・スターをまとめた管理タブ。">
+<meta name="description" content="一括登録・更新シート・プロジェクト別ダッシュボード・全タスク・ガント・プロジェクトカンバン・スペース横断サマリー・全員ワークロード・データ管理・ユーザ棚卸・チーム棚卸・スターをまとめた管理タブ。">
 <link rel="canonical" href="https://kouji-kojima.github.io/pages/backlog-my-tasks/website-src/dist/dashboard.html">
 <link rel="alternate" hreflang="ja" href="https://kouji-kojima.github.io/pages/backlog-my-tasks/website-src/dist/dashboard.html">
 <link rel="alternate" hreflang="en" href="https://kouji-kojima.github.io/pages/backlog-my-tasks/website-src/dist/en/dashboard.html">
@@ -13,7 +13,7 @@
 <link rel="alternate" hreflang="zh-Hant-HK" href="https://kouji-kojima.github.io/pages/backlog-my-tasks/website-src/dist/zh-HK/dashboard.html">
 <link rel="alternate" hreflang="x-default" href="https://kouji-kojima.github.io/pages/backlog-my-tasks/website-src/dist/dashboard.html">
 <meta property="og:title" content="プロジェクトダッシュボード | Backlog My Tasks">
-<meta property="og:description" content="一括登録・更新シート・プロジェクト別ダッシュボード・全タスク・ガント・プロジェクトカンバン・スペース横断サマリー・全員ワークロード・データ管理・ユーザ棚卸・スターをまとめた管理タブ。">
+<meta property="og:description" content="一括登録・更新シート・プロジェクト別ダッシュボード・全タスク・ガント・プロジェクトカンバン・スペース横断サマリー・全員ワークロード・データ管理・ユーザ棚卸・チーム棚卸・スターをまとめた管理タブ。">
 <meta property="og:image" content="https://kouji-kojima.github.io/pages/backlog-my-tasks/website-src/dist/assets/img/09_admin_project.jpg">
 <meta property="og:url" content="https://kouji-kojima.github.io/pages/backlog-my-tasks/website-src/dist/dashboard.html">
 <meta property="og:type" content="website">
@@ -55,7 +55,7 @@
     <div class="breadcrumb"><a href="index.html">ホーム</a> / ダッシュボード</div>
     <div class="eyebrow">👑 ダッシュボード</div>
     <h1>プロジェクトダッシュボードで、チーム全体を俯瞰。</h1>
-    <p class="lead">全ユーザーに表示される管理タブ（ユーザ棚卸・スターのみ管理者専用）。所属プロジェクトが自動表示され、API呼び出しはデータ管理タブのみです。</p>
+    <p class="lead">全ユーザーに表示される管理タブ（ユーザ棚卸・チーム棚卸・スターのみ管理者専用）。所属プロジェクトが自動表示され、API呼び出しはデータ管理タブのみです。</p>
   </div>
 </section>
 
@@ -106,6 +106,11 @@
           <div class="icon">👤</div>
           <h3>ユーザ棚卸（管理者専用）</h3>
           <p>全ユーザの最終ログイン状況。1年以上未ログインを赤強調し、スペースから削除も可能</p>
+        </a>
+<a class="card" href="dashboard.html">
+          <div class="icon">👪</div>
+          <h3>チーム棚卸（管理者専用）</h3>
+          <p>Backlogのチーム一覧と、各チームに所属するユーザーを表示。グループ名からグループ管理画面を開けます</p>
         </a>
 <a class="card" href="dashboard-organization.html">
           <div class="icon">🏢</div>
