@@ -317,7 +317,7 @@ footer.site-footer { background: var(--sky-950); color: rgba(232,244,253,.7); pa
 .reveal.pre-in { opacity: 0; transform: translateY(14px); }
 .reveal.pre-in.in { opacity: 1; transform: translateY(0); transition: opacity .5s ease, transform .5s ease; }
 
-/* ナビが全項目を切れずに表示できる幅の段階的な切り替え（v39.1.0）:
+/* ナビが全項目を切れずに表示できる幅の段階的な切り替え:
    1380px以下は「今すぐ始める」ボタンを隠し（モバイルメニューには残る）、
    1250px以下はハンバーガーメニューに切り替える。 */
 @media (max-width: 1380px) {
@@ -409,7 +409,7 @@ footer.site-footer { background: var(--sky-950); color: rgba(232,244,253,.7); pa
   
   <div class="icon">🔮</div>
   <h3>着地予測ML</h3>
-  <p>実際の受注/失注履歴から親部門別の勝率（ラプラススムージング）を学習し、進行中パイプラインの統計的着地予測（中央値/楽観値）を算出。過去の月末スナップショットに対するバックテスト付き。</p>
+  <p>実際の受注/失注履歴から親部門別の受注率（ラプラススムージング）を学習し、進行中パイプラインの統計的着地予測（中央値/楽観値）を算出。過去の月末スナップショットに対するバックテスト付き。</p>
 </div>
 
 <div class="card reveal">
