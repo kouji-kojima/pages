@@ -3,8 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>스페이스 통합 요약 / 사용자 목록 / 스타 | Backlog My Tasks</title>
-<meta name="description" content="전체 프로젝트의 완료율・지연h・건전성 점수를 나란히 비교. 사용자 목록에서 휴면 계정도 찾을 수 있고, 스타에서 주고받은 수의 럭킹도 볼 수 있습니다.">
+<title>스페이스 통합 요약 / 사용자 관리 / 스타 | Backlog My Tasks</title>
+<meta name="description" content="모든 프로젝트의 완료율・지연 h・건전성 점수를 나란히 비교합니다. 사용자 관리에서 휴면 계정도 찾을 수 있고, 스타를 준 수・받은 수 랭킹도 볼 수 있습니다.">
 <link rel="canonical" href="https://kouji-kojima.github.io/pages/backlog-my-tasks/website-src/dist/ko/dashboard-cross-space.html">
 <link rel="alternate" hreflang="ja" href="https://kouji-kojima.github.io/pages/backlog-my-tasks/website-src/dist/dashboard-cross-space.html">
 <link rel="alternate" hreflang="en" href="https://kouji-kojima.github.io/pages/backlog-my-tasks/website-src/dist/en/dashboard-cross-space.html">
@@ -12,8 +12,8 @@
 <link rel="alternate" hreflang="zh-Hant-TW" href="https://kouji-kojima.github.io/pages/backlog-my-tasks/website-src/dist/zh-TW/dashboard-cross-space.html">
 <link rel="alternate" hreflang="zh-Hant-HK" href="https://kouji-kojima.github.io/pages/backlog-my-tasks/website-src/dist/zh-HK/dashboard-cross-space.html">
 <link rel="alternate" hreflang="x-default" href="https://kouji-kojima.github.io/pages/backlog-my-tasks/website-src/dist/dashboard-cross-space.html">
-<meta property="og:title" content="스페이스 통합 요약 / 사용자 목록 / 스타 | Backlog My Tasks">
-<meta property="og:description" content="전체 프로젝트의 완료율・지연h・건전성 점수를 나란히 비교. 사용자 목록에서 휴면 계정도 찾을 수 있고, 스타에서 주고받은 수의 럭킹도 볼 수 있습니다.">
+<meta property="og:title" content="스페이스 통합 요약 / 사용자 관리 / 스타 | Backlog My Tasks">
+<meta property="og:description" content="모든 프로젝트의 완료율・지연 h・건전성 점수를 나란히 비교합니다. 사용자 관리에서 휴면 계정도 찾을 수 있고, 스타를 준 수・받은 수 랭킹도 볼 수 있습니다.">
 <meta property="og:image" content="https://kouji-kojima.github.io/pages/backlog-my-tasks/website-src/dist/assets/img/10_admin_space.jpg">
 <meta property="og:url" content="https://kouji-kojima.github.io/pages/backlog-my-tasks/website-src/dist/ko/dashboard-cross-space.html">
 <meta property="og:type" content="website">
@@ -52,7 +52,7 @@
 
 <section class="page-hero">
   <div class="wrap inner">
-    <div class="breadcrumb"><a href="index.html">홈</a> / 스페이스 통합・사용자 목록・스타</div>
+    <div class="breadcrumb"><a href="index.html">홈</a> / 스페이스 통합・사용자 관리・스타</div>
     <div class="eyebrow">대시보드</div>
     <h1>여러 스페이스에 걸쳐 모든 프로젝트를 한눈에.</h1>
     <p class="lead">여러 스페이스의 상태를 한눈에 비교하고, 휴면 계정도 바로 찾을 수 있으며, Backlog의 ★ 럭킹도 확인할 수 있습니다.</p>
@@ -79,22 +79,22 @@
     </div>
     <div class="divider"></div>
     <div class="showcase reverse">
-      <div class="frame"><img src="../assets/img/12_admin_users.jpg" alt="사용자 목록 스크린샷" loading="lazy"></div>
+      <div class="frame"><img src="../assets/img/12_admin_users.jpg" alt="사용자 관리 스크린샷" loading="lazy"></div>
       <div class="bullets"><div class="bullet">
           <div class="dot"></div>
-          <div><h4>마지막 로그인을 시각화</h4><p>모든 사용자의 로그인 날짜와 경과 일수를 목록으로 표시</p></div>
+          <div><h4>프로젝트 소속 사용자 한눈에</h4><p>프로젝트를 선택하면 소속 사용자를 역할 열과 함께 볼 수 있습니다. 역할로 필터링할 수 있습니다</p></div>
         </div>
 <div class="bullet">
           <div class="dot"></div>
-          <div><h4>휴면 계정 찾기</h4><p>1년 이상 미로그인 계정은 빨간색으로 강조 표시하고 자동 정렬</p></div>
+          <div><h4>사용자와 팀을 그 자리에서 등록</h4><p>「+ 사용자 등록」「+ 팀 등록」으로 프로젝트에 사용자와 팀을 추가할 수 있습니다（관리자・프로젝트 관리자 권한이 필요합니다）</p></div>
         </div>
 <div class="bullet">
           <div class="dot"></div>
-          <div><h4>라이선스 점검에 최적</h4><p>필요 없는 계정은 그 자리에서 스페이스에서 삭제(스페이스 관리자 전용)</p></div>
+          <div><h4>휴면 계정 찾기</h4><p>전체 사용자의 마지막 로그인을 표시합니다. 1년 이상 로그인하지 않은 사용자는 빨간색으로 강조하고 자동으로 정렬합니다. 불필요한 계정은 스페이스에서 삭제할 수도 있습니다</p></div>
         </div>
 <div class="bullet">
           <div class="dot"></div>
-          <div><h4>목록을 Excel로 내보내기</h4><p>사용자 목록을 Excel 파일로 그대로 다운로드해 점검 자료로 활용</p></div>
+          <div><h4>목록을 Excel로 내보내기</h4><p>사용자 관리 목록을 Excel 파일로 그대로 내려받아 점검 자료로 활용할 수 있습니다</p></div>
         </div>
 </div>
     </div>
@@ -136,7 +136,7 @@
 <div><h5>대시보드</h5><ul><li><a href="dashboard.html">대시보드 개요</a></li>
 <li><a href="dashboard-project.html">프로젝트별 대시보드</a></li>
 <li><a href="dashboard-gantt.html">프로젝트 전체 간트</a></li>
-<li><a href="dashboard-cross-space.html">스페이스 통합 / 사용자 목록 / 스타</a></li>
+<li><a href="dashboard-cross-space.html">스페이스 통합 / 사용자 관리 / 스타</a></li>
 <li><a href="dashboard-organization.html">조직(부서 관리)</a></li></ul></div>
 <div><h5>기타</h5><ul><li><a href="game.html">Backlog Quest</a></li>
 <li><a href="use-cases.html">활용 사례</a></li>

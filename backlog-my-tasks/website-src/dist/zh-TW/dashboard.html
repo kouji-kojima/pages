@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>專案儀表板 | Backlog My Tasks</title>
-<meta name="description" content="整合批次登錄・更新表、專案別儀表板、全部任務、甘特圖、專案看板、跨空間摘要、全員工作量、資料管理、使用者清點、團隊清點與星標的管理分頁。">
+<meta name="description" content="整合批次登錄與更新表、專案儀表板、全部任務、甘特圖、專案看板、跨空間摘要、全員工作量、資料管理、專案管理、使用者管理、團隊管理與星星的管理分頁。">
 <link rel="canonical" href="https://kouji-kojima.github.io/pages/backlog-my-tasks/website-src/dist/zh-TW/dashboard.html">
 <link rel="alternate" hreflang="ja" href="https://kouji-kojima.github.io/pages/backlog-my-tasks/website-src/dist/dashboard.html">
 <link rel="alternate" hreflang="en" href="https://kouji-kojima.github.io/pages/backlog-my-tasks/website-src/dist/en/dashboard.html">
@@ -13,7 +13,7 @@
 <link rel="alternate" hreflang="zh-Hant-HK" href="https://kouji-kojima.github.io/pages/backlog-my-tasks/website-src/dist/zh-HK/dashboard.html">
 <link rel="alternate" hreflang="x-default" href="https://kouji-kojima.github.io/pages/backlog-my-tasks/website-src/dist/dashboard.html">
 <meta property="og:title" content="專案儀表板 | Backlog My Tasks">
-<meta property="og:description" content="整合批次登錄・更新表、專案別儀表板、全部任務、甘特圖、專案看板、跨空間摘要、全員工作量、資料管理、使用者清點、團隊清點與星標的管理分頁。">
+<meta property="og:description" content="整合批次登錄與更新表、專案儀表板、全部任務、甘特圖、專案看板、跨空間摘要、全員工作量、資料管理、專案管理、使用者管理、團隊管理與星星的管理分頁。">
 <meta property="og:image" content="https://kouji-kojima.github.io/pages/backlog-my-tasks/website-src/dist/assets/img/09_admin_project.jpg">
 <meta property="og:url" content="https://kouji-kojima.github.io/pages/backlog-my-tasks/website-src/dist/zh-TW/dashboard.html">
 <meta property="og:type" content="website">
@@ -55,7 +55,7 @@
     <div class="breadcrumb"><a href="index.html">首頁</a> / 儀表板</div>
     <div class="eyebrow">👑 儀表板</div>
     <h1>以專案儀表板俯瞰整個團隊。</h1>
-    <p class="lead">所有使用者都會看到的管理分頁（使用者清點、團隊清點與星標僅限管理者）。會自動顯示所屬專案，API 呼叫只在資料管理分頁進行。</p>
+    <p class="lead">所有使用者都會看到的管理分頁。專案管理、使用者管理、團隊管理與星星僅顯示給空間管理者。所屬專案也會自動顯示。</p>
   </div>
 </section>
 
@@ -100,16 +100,21 @@
 <a class="card" href="dashboard.html">
           <div class="icon">📦</div>
           <h3>資料管理</h3>
-          <p>只有這個分頁會呼叫API。透過啟用／非啟用分類排除不需要取得的專案</p>
+          <p>依收藏與啟用／停用狀態排序。可排除不需要取得的專案</p>
+        </a>
+<a class="card" href="dashboard.html">
+          <div class="icon">🗂</div>
+          <h3>專案管理（僅限空間管理者）</h3>
+          <p>依空間列出每個專案的部門、管理者、所屬團隊與所屬使用者。點擊專案名稱或 KEY 可開啟 Backlog 的權限設定頁面，▼ 可展開清單。</p>
         </a>
 <a class="card" href="dashboard-cross-space.html">
           <div class="icon">👤</div>
-          <h3>使用者盤點（僅限管理者）</h3>
-          <p>所有使用者的最後登入狀況。超過一年未登入以紅色強調，也可從空間中刪除</p>
+          <h3>使用者管理（僅限管理者）</h3>
+          <p>列出專案的所屬使用者及其角色（可依角色篩選）。使用「+ 新增使用者」「+ 新增團隊」，可將使用者與團隊加入專案，也能查看所有使用者的最後登入時間</p>
         </a>
 <a class="card" href="dashboard.html">
           <div class="icon">👪</div>
-          <h3>團隊清點（僅管理者）</h3>
+          <h3>團隊管理（僅限管理者）</h3>
           <p>顯示 Backlog 的團隊清單與各團隊的成員。點擊團隊名稱即可開啟團隊管理頁面。</p>
         </a>
 <a class="card" href="dashboard-organization.html">
@@ -156,7 +161,7 @@
 <div><h5>儀表板</h5><ul><li><a href="dashboard.html">儀表板概觀</a></li>
 <li><a href="dashboard-project.html">各專案儀表板</a></li>
 <li><a href="dashboard-gantt.html">整個專案甘特圖</a></li>
-<li><a href="dashboard-cross-space.html">跨空間／使用者清單／星星</a></li>
+<li><a href="dashboard-cross-space.html">跨空間／使用者管理／星星</a></li>
 <li><a href="dashboard-organization.html">組織（部門管理）</a></li></ul></div>
 <div><h5>其他</h5><ul><li><a href="game.html">Backlog Quest</a></li>
 <li><a href="use-cases.html">活用情境</a></li>

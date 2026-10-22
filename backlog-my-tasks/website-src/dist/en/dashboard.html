@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Project Dashboard | Backlog My Tasks</title>
-<meta name="description" content="Admin tabs that bring together the bulk entry sheet, project dashboard, all tasks, Gantt, project Kanban, cross-space summary, workload for everyone, data management, user inventory, team inventory, and stars.">
+<meta name="description" content="An admin tab that brings together the bulk entry and update sheet, project dashboard, all tasks, Gantt, project Kanban, cross-space summary, everyone's workload, Data Management, Project Management, User Management, Team Management, and Stars.">
 <link rel="canonical" href="https://kouji-kojima.github.io/pages/backlog-my-tasks/website-src/dist/en/dashboard.html">
 <link rel="alternate" hreflang="ja" href="https://kouji-kojima.github.io/pages/backlog-my-tasks/website-src/dist/dashboard.html">
 <link rel="alternate" hreflang="en" href="https://kouji-kojima.github.io/pages/backlog-my-tasks/website-src/dist/en/dashboard.html">
@@ -13,7 +13,7 @@
 <link rel="alternate" hreflang="zh-Hant-HK" href="https://kouji-kojima.github.io/pages/backlog-my-tasks/website-src/dist/zh-HK/dashboard.html">
 <link rel="alternate" hreflang="x-default" href="https://kouji-kojima.github.io/pages/backlog-my-tasks/website-src/dist/dashboard.html">
 <meta property="og:title" content="Project Dashboard | Backlog My Tasks">
-<meta property="og:description" content="Admin tabs that bring together the bulk entry sheet, project dashboard, all tasks, Gantt, project Kanban, cross-space summary, workload for everyone, data management, user inventory, team inventory, and stars.">
+<meta property="og:description" content="An admin tab that brings together the bulk entry and update sheet, project dashboard, all tasks, Gantt, project Kanban, cross-space summary, everyone's workload, Data Management, Project Management, User Management, Team Management, and Stars.">
 <meta property="og:image" content="https://kouji-kojima.github.io/pages/backlog-my-tasks/website-src/dist/assets/img/09_admin_project.jpg">
 <meta property="og:url" content="https://kouji-kojima.github.io/pages/backlog-my-tasks/website-src/dist/en/dashboard.html">
 <meta property="og:type" content="website">
@@ -55,7 +55,7 @@
     <div class="breadcrumb"><a href="index.html">Home</a> / Dashboard</div>
     <div class="eyebrow">👑 Dashboard</div>
     <h1>See the whole team at a glance with the Project Dashboard.</h1>
-    <p class="lead">Admin tabs shown to all users (user inventory, team inventory, and stars are admins only). Your projects are shown automatically, and API calls are made only from the data management tab.</p>
+    <p class="lead">An admin tab shown to all users. Project Management, User Management, Team Management, and Stars are visible only to space administrators. Your projects are also displayed automatically.</p>
   </div>
 </section>
 
@@ -100,16 +100,21 @@
 <a class="card" href="dashboard.html">
           <div class="icon">📦</div>
           <h3>Data Management</h3>
-          <p>API calls happen only on this tab. Active/inactive classification excludes projects you don't need to fetch</p>
+          <p>Sorted by favorites and active/inactive status. Projects you don't need to fetch can be excluded</p>
+        </a>
+<a class="card" href="dashboard.html">
+          <div class="icon">🗂</div>
+          <h3>Project Management (space admins only)</h3>
+          <p>Lists each project's department, administrators, teams, and members by space. Click the name or KEY to open its permission settings in Backlog; use ▼ to expand the lists.</p>
         </a>
 <a class="card" href="dashboard-cross-space.html">
           <div class="icon">👤</div>
-          <h3>User List (admin only)</h3>
-          <p>See every user's last login status. Accounts inactive for over a year are highlighted in red, and you can remove them from the space directly</p>
+          <h3>User Management (admins only)</h3>
+          <p>Lists project members with their roles (filter by role). Use “+ Add user” and “+ Add team” to add users and teams to a project, and check everyone's last login</p>
         </a>
 <a class="card" href="dashboard.html">
           <div class="icon">👪</div>
-          <h3>Team Inventory (admins only)</h3>
+          <h3>Team Management (admins only)</h3>
           <p>Shows a list of Backlog teams and the users in each team. Click a team name to open its team management page.</p>
         </a>
 <a class="card" href="dashboard-organization.html">
@@ -156,7 +161,7 @@
 <div><h5>Dashboard</h5><ul><li><a href="dashboard.html">Dashboard Overview</a></li>
 <li><a href="dashboard-project.html">Per-Project Dashboard</a></li>
 <li><a href="dashboard-gantt.html">Project-Wide Gantt</a></li>
-<li><a href="dashboard-cross-space.html">Cross-Space / User Inventory / Stars</a></li>
+<li><a href="dashboard-cross-space.html">Cross-Space / User Management / Stars</a></li>
 <li><a href="dashboard-organization.html">Organization</a></li></ul></div>
 <div><h5>Other</h5><ul><li><a href="game.html">Backlog Quest</a></li>
 <li><a href="use-cases.html">Use Cases</a></li>

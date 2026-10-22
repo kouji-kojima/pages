@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>プロジェクトダッシュボード | Backlog My Tasks</title>
-<meta name="description" content="一括登録・更新シート・プロジェクト別ダッシュボード・全タスク・ガント・プロジェクトカンバン・スペース横断サマリー・全員ワークロード・データ管理・ユーザ棚卸・チーム棚卸・スターをまとめた管理タブ。">
+<meta name="description" content="一括登録・更新シート・プロジェクト別ダッシュボード・全タスク・ガント・プロジェクトカンバン・スペース横断サマリー・全員ワークロード・データ管理・プロジェクト管理・ユーザ管理・チーム管理・スターをまとめた管理タブ。">
 <link rel="canonical" href="https://kouji-kojima.github.io/pages/backlog-my-tasks/website-src/dist/dashboard.html">
 <link rel="alternate" hreflang="ja" href="https://kouji-kojima.github.io/pages/backlog-my-tasks/website-src/dist/dashboard.html">
 <link rel="alternate" hreflang="en" href="https://kouji-kojima.github.io/pages/backlog-my-tasks/website-src/dist/en/dashboard.html">
@@ -13,7 +13,7 @@
 <link rel="alternate" hreflang="zh-Hant-HK" href="https://kouji-kojima.github.io/pages/backlog-my-tasks/website-src/dist/zh-HK/dashboard.html">
 <link rel="alternate" hreflang="x-default" href="https://kouji-kojima.github.io/pages/backlog-my-tasks/website-src/dist/dashboard.html">
 <meta property="og:title" content="プロジェクトダッシュボード | Backlog My Tasks">
-<meta property="og:description" content="一括登録・更新シート・プロジェクト別ダッシュボード・全タスク・ガント・プロジェクトカンバン・スペース横断サマリー・全員ワークロード・データ管理・ユーザ棚卸・チーム棚卸・スターをまとめた管理タブ。">
+<meta property="og:description" content="一括登録・更新シート・プロジェクト別ダッシュボード・全タスク・ガント・プロジェクトカンバン・スペース横断サマリー・全員ワークロード・データ管理・プロジェクト管理・ユーザ管理・チーム管理・スターをまとめた管理タブ。">
 <meta property="og:image" content="https://kouji-kojima.github.io/pages/backlog-my-tasks/website-src/dist/assets/img/09_admin_project.jpg">
 <meta property="og:url" content="https://kouji-kojima.github.io/pages/backlog-my-tasks/website-src/dist/dashboard.html">
 <meta property="og:type" content="website">
@@ -55,7 +55,7 @@
     <div class="breadcrumb"><a href="index.html">ホーム</a> / ダッシュボード</div>
     <div class="eyebrow">👑 ダッシュボード</div>
     <h1>プロジェクトダッシュボードで、チーム全体を俯瞰。</h1>
-    <p class="lead">全ユーザーに表示される管理タブ（ユーザ棚卸・チーム棚卸・スターのみ管理者専用）。所属プロジェクトが自動表示され、API呼び出しはデータ管理タブのみです。</p>
+    <p class="lead">全ユーザーに表示される管理タブです。プロジェクト管理・ユーザ管理・チーム管理・スターは、スペース管理者だけに表示されます。所属プロジェクトも自動で表示されます。</p>
   </div>
 </section>
 
@@ -100,16 +100,21 @@
 <a class="card" href="dashboard.html">
           <div class="icon">📦</div>
           <h3>データ管理</h3>
-          <p>API呼び出しはこのタブだけ。アクティブ／非アクティブ分類で取得不要プロジェクトを除外</p>
+          <p>お気に入り・アクティブ／非アクティブで並べ替え。取得不要なプロジェクトを外せる</p>
+        </a>
+<a class="card" href="dashboard.html">
+          <div class="icon">🗂</div>
+          <h3>プロジェクト管理（スペース管理者専用）</h3>
+          <p>スペースごとに、プロジェクトの部門・管理者・所属チーム・所属ユーザーを一覧。プロジェクト名・KEYを押すとBacklogの権限設定画面を開き、▼で一覧を開閉できます</p>
         </a>
 <a class="card" href="dashboard-cross-space.html">
           <div class="icon">👤</div>
-          <h3>ユーザ棚卸（管理者専用）</h3>
-          <p>全ユーザの最終ログイン状況。1年以上未ログインを赤強調し、スペースから削除も可能</p>
+          <h3>ユーザ管理（管理者専用）</h3>
+          <p>プロジェクトの所属ユーザーをロールつきで一覧（ロールで絞り込み）。「+ ユーザ登録」「+ チーム登録」でプロジェクトに追加でき、全ユーザーの最終ログインも確認できる</p>
         </a>
 <a class="card" href="dashboard.html">
           <div class="icon">👪</div>
-          <h3>チーム棚卸（管理者専用）</h3>
+          <h3>チーム管理（管理者専用）</h3>
           <p>Backlogのチーム一覧と、各チームに所属するユーザーを表示。グループ名からグループ管理画面を開けます</p>
         </a>
 <a class="card" href="dashboard-organization.html">
@@ -156,7 +161,7 @@
 <div><h5>ダッシュボード</h5><ul><li><a href="dashboard.html">ダッシュボード概要</a></li>
 <li><a href="dashboard-project.html">プロジェクト別ダッシュボード</a></li>
 <li><a href="dashboard-gantt.html">プロジェクト全体ガント</a></li>
-<li><a href="dashboard-cross-space.html">スペース横断／ユーザ棚卸／スター</a></li>
+<li><a href="dashboard-cross-space.html">スペース横断／ユーザ管理／スター</a></li>
 <li><a href="dashboard-organization.html">組織（部門管理）</a></li></ul></div>
 <div><h5>その他</h5><ul><li><a href="game.html">Backlog Quest</a></li>
 <li><a href="use-cases.html">活用シーン</a></li>
