@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>간트 뷰 | Backlog My Tasks</title>
-<meta name="description" content="상하위 태스크 계층 트리, 바 드래그로 일정 변경, 의존 관계와 크리티컬 패스, 마일스톤 표시를 지원합니다.">
+<meta name="description" content="상하 관계 태스크 트리, 바 드래그로 일정 변경, 의존 관계와 임계 경로, 마일스톤, 휴일 띠 표시를 지원합니다.">
 <link rel="canonical" href="https://kouji-kojima.github.io/pages/backlog-my-tasks/website-src/dist/ko/view-gantt.html">
 <link rel="alternate" hreflang="ja" href="https://kouji-kojima.github.io/pages/backlog-my-tasks/website-src/dist/view-gantt.html">
 <link rel="alternate" hreflang="en" href="https://kouji-kojima.github.io/pages/backlog-my-tasks/website-src/dist/en/view-gantt.html">
@@ -13,7 +13,7 @@
 <link rel="alternate" hreflang="zh-Hant-HK" href="https://kouji-kojima.github.io/pages/backlog-my-tasks/website-src/dist/zh-HK/view-gantt.html">
 <link rel="alternate" hreflang="x-default" href="https://kouji-kojima.github.io/pages/backlog-my-tasks/website-src/dist/view-gantt.html">
 <meta property="og:title" content="간트 뷰 | Backlog My Tasks">
-<meta property="og:description" content="상하위 태스크 계층 트리, 바 드래그로 일정 변경, 의존 관계와 크리티컬 패스, 마일스톤 표시를 지원합니다.">
+<meta property="og:description" content="상하 관계 태스크 트리, 바 드래그로 일정 변경, 의존 관계와 임계 경로, 마일스톤, 휴일 띠 표시를 지원합니다.">
 <meta property="og:image" content="https://kouji-kojima.github.io/pages/backlog-my-tasks/website-src/dist/assets/img/07_gantt.jpg">
 <meta property="og:url" content="https://kouji-kojima.github.io/pages/backlog-my-tasks/website-src/dist/ko/view-gantt.html">
 <meta property="og:type" content="website">
@@ -65,15 +65,15 @@
       <div class="frame"><img src="../assets/img/07_gantt.jpg" alt="간트 뷰 스크린샷" loading="lazy"></div>
       <div class="bullets"><div class="bullet">
           <div class="dot"></div>
-          <div><h4>계층 트리 + 타임라인</h4><p>상위/하위 과제의 구조를 유지한 채 기간을 시각화합니다. 완료 과제 숨기기도 지원합니다. 과제 행·카테고리 제목의 “＋”에서 바로 하위 과제·새 과제를 등록할 수 있습니다. 행 앞쪽의 손잡이(⠿)를 드래그&드롭하여 상위/하위 관계도 바꿀 수 있습니다 시작일이 같은 과제는 ↑↓ 버튼으로 표시 순서도 바꿀 수 있습니다 각 행의 📌로 고정도 가능합니다.</p></div>
+          <div><h4>계층 트리 + 타임라인</h4><p>상하 관계를 유지한 채 기간을 시각화합니다. 완료 태스크 숨기기도 가능합니다. 태스크 행이나 카테고리 제목의 '+'로 하위·새 태스크를 그 자리에서 추가하고, 행 앞의 손잡이(⠿)를 드래그해 상위를 바꿀 수 있습니다. ▲▼는 같은 시작일·같은 상위 안에서만 순서를 바꾸며, 움직일 수 없는 방향은 숨깁니다. 각 행의 📌로 고정할 수도 있습니다.</p></div>
         </div>
 <div class="bullet">
           <div class="dot"></div>
-          <div><h4>바를 드래그해서 일정 변경</h4><p>시작일・기한일을 드래그로 직접 변경할 수 있습니다. Backlog에 즉시 반영됩니다. 의존하는 후속 태스크로의 자동 일정 이동도 확인 후 실행</p></div>
+          <div><h4>바를 드래그해서 일정 변경</h4><p>시작일·기한을 드래그로 직접 바꾸면 Backlog에 바로 반영됩니다. 시작일과 기한의 앞뒤가 뒤집히면 다른 날짜를 자동으로 맞춥니다. 하위·하하위 태스크는 시작일 순으로 다시 정렬되며, 의존하는 후속 태스크의 자동 일정 이동은 확인 후 실행됩니다.</p></div>
         </div>
 <div class="bullet">
           <div class="dot"></div>
-          <div><h4>번개선으로 진행 상황을 한눈에</h4><p>각 태스크의 진행 선을 잇는 번개선으로 지연・선행 상태를 바로 파악</p></div>
+          <div><h4>번개선으로 진행 상황을 한눈에</h4><p>각 작업의 진행을 잇는 번개 선으로 지연과 선행을 한눈에 파악합니다. 주말·공휴일·휴일 설정은 날짜 열에 맞춘 빗금 무늬의 분홍 띠로 표시되며, 그룹 제목 행에도 같은 빗금이 들어갑니다.</p></div>
         </div>
 <div class="bullet">
           <div class="dot"></div>

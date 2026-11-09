@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>甘特圖檢視 | Backlog My Tasks</title>
-<meta name="description" content="支援父子任務階層樹、拖曳長條變更日程、相依關係與關鍵路徑，以及里程碑顯示。">
+<meta name="description" content="支援父子任務樹狀結構、拖曳橫條更改日程、相依關係同關鍵路徑、里程碑，以及休日色帶顯示。">
 <link rel="canonical" href="https://kouji-kojima.github.io/pages/backlog-my-tasks/website-src/dist/zh-HK/view-gantt.html">
 <link rel="alternate" hreflang="ja" href="https://kouji-kojima.github.io/pages/backlog-my-tasks/website-src/dist/view-gantt.html">
 <link rel="alternate" hreflang="en" href="https://kouji-kojima.github.io/pages/backlog-my-tasks/website-src/dist/en/view-gantt.html">
@@ -13,7 +13,7 @@
 <link rel="alternate" hreflang="zh-Hant-HK" href="https://kouji-kojima.github.io/pages/backlog-my-tasks/website-src/dist/zh-HK/view-gantt.html">
 <link rel="alternate" hreflang="x-default" href="https://kouji-kojima.github.io/pages/backlog-my-tasks/website-src/dist/view-gantt.html">
 <meta property="og:title" content="甘特圖檢視 | Backlog My Tasks">
-<meta property="og:description" content="支援父子任務階層樹、拖曳長條變更日程、相依關係與關鍵路徑，以及里程碑顯示。">
+<meta property="og:description" content="支援父子任務樹狀結構、拖曳橫條更改日程、相依關係同關鍵路徑、里程碑，以及休日色帶顯示。">
 <meta property="og:image" content="https://kouji-kojima.github.io/pages/backlog-my-tasks/website-src/dist/assets/img/07_gantt.jpg">
 <meta property="og:url" content="https://kouji-kojima.github.io/pages/backlog-my-tasks/website-src/dist/zh-HK/view-gantt.html">
 <meta property="og:type" content="website">
@@ -65,15 +65,15 @@
       <div class="frame"><img src="../assets/img/07_gantt.jpg" alt="甘特圖檢視的畫面截圖" loading="lazy"></div>
       <div class="bullets"><div class="bullet">
           <div class="dot"></div>
-          <div><h4>階層樹＋時間軸</h4><p>保持父子任務結構嘅同時視覺化期間，支援隱藏已完成任務。可從任務列與分類標題嘅「＋」直接新增子任務、新任務。拖放列首嘅握把（⠿）仲可以變更父子關係。相同開始日嘅任務亦可以用↑↓按鈕調整顯示順序。每行嘅📌可釘選任務</p></div>
+          <div><h4>階層樹＋時間軸</h4><p>保持父子結構，將期間視覺化。亦可隱藏已完成嘅任務。可以喺任務列或分類標題撳「＋」，當場新增子任務或新任務；拖曳列首嘅把手（⠿）即可更改父子關係。▲▼只會喺相同開始日、相同父任務之中調整次序，無法移動嘅方向會隱藏。各列嘅📌可以釘選。</p></div>
         </div>
 <div class="bullet">
           <div class="dot"></div>
-          <div><h4>拖曳長條即可變更日程</h4><p>可透過拖曳直接變更開始日期及期限日期，即時反映到Backlog。相依的後續任務亦會經確認後自動順延日程</p></div>
+          <div><h4>拖曳長條即可變更日程</h4><p>拖曳即可直接更改開始日・期限日，並即時同步到Backlog。如果開始日同期限日前後顛倒，會自動調整另一個日期。子任務同孫任務會按開始日重新排序，相依嘅後續任務亦會喺確認後自動順延。</p></div>
         </div>
 <div class="bullet">
           <div class="dot"></div>
-          <div><h4>閃電連接線讓進度一目了然</h4><p>以連接各任務進度線的閃電連接線，即時掌握延誤或超前</p></div>
+          <div><h4>閃電連接線讓進度一目了然</h4><p>連接各任務進度嘅閃電線，一眼睇到延誤同提早。周末、公眾假期同休假設定嘅日子，會以對齊日期欄、帶斜線嘅粉紅色帶狀顯示。群組標題行都會有同樣嘅斜線。</p></div>
         </div>
 <div class="bullet">
           <div class="dot"></div>

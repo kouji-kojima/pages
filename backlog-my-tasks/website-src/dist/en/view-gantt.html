@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Gantt View | Backlog My Tasks</title>
-<meta name="description" content="Supports a parent-child task tree, changing schedules by dragging bars, dependencies and critical path, and milestone display.">
+<meta name="description" content="Parent-child task tree, date changes by dragging bars, dependencies and critical path, milestones, and holiday bands.">
 <link rel="canonical" href="https://kouji-kojima.github.io/pages/backlog-my-tasks/website-src/dist/en/view-gantt.html">
 <link rel="alternate" hreflang="ja" href="https://kouji-kojima.github.io/pages/backlog-my-tasks/website-src/dist/view-gantt.html">
 <link rel="alternate" hreflang="en" href="https://kouji-kojima.github.io/pages/backlog-my-tasks/website-src/dist/en/view-gantt.html">
@@ -13,7 +13,7 @@
 <link rel="alternate" hreflang="zh-Hant-HK" href="https://kouji-kojima.github.io/pages/backlog-my-tasks/website-src/dist/zh-HK/view-gantt.html">
 <link rel="alternate" hreflang="x-default" href="https://kouji-kojima.github.io/pages/backlog-my-tasks/website-src/dist/view-gantt.html">
 <meta property="og:title" content="Gantt View | Backlog My Tasks">
-<meta property="og:description" content="Supports a parent-child task tree, changing schedules by dragging bars, dependencies and critical path, and milestone display.">
+<meta property="og:description" content="Parent-child task tree, date changes by dragging bars, dependencies and critical path, milestones, and holiday bands.">
 <meta property="og:image" content="https://kouji-kojima.github.io/pages/backlog-my-tasks/website-src/dist/assets/img/07_gantt.jpg">
 <meta property="og:url" content="https://kouji-kojima.github.io/pages/backlog-my-tasks/website-src/dist/en/view-gantt.html">
 <meta property="og:type" content="website">
@@ -65,15 +65,15 @@
       <div class="frame"><img src="../assets/img/07_gantt.jpg" alt="Screenshot of the Gantt view" loading="lazy"></div>
       <div class="bullets"><div class="bullet">
           <div class="dot"></div>
-          <div><h4>Hierarchical Tree + Timeline</h4><p>Visualize periods while keeping the parent/child structure. Supports hiding completed tasks. Add child tasks or new tasks on the spot with the “＋” on task rows and category headings. Drag the grip (⠿) at the start of a row and drop it to re-parent tasks. Tasks with the same start date can also be reordered with the ↑↓ buttons. Pin tasks per row with 📌.</p></div>
+          <div><h4>Hierarchical Tree + Timeline</h4><p>Shows the period while keeping the parent-child structure. Completed tasks can be hidden. Add child or new tasks on the spot with "+" on a task row or category heading, and change the parent by dragging the handle (⠿) at the start of a row. ▲▼ changes the order only among tasks with the same start date and the same parent; a direction that cannot move is hidden. Pin a row with 📌 if needed.</p></div>
         </div>
 <div class="bullet">
           <div class="dot"></div>
-          <div><h4>Drag the bar to change the schedule</h4><p>Change start and due dates directly by dragging. Reflected in Backlog instantly. Automatic schedule shifting for dependent downstream tasks runs with confirmation too</p></div>
+          <div><h4>Drag the bar to change the schedule</h4><p>Drag the start or due date to change it directly; the change goes to Backlog right away. If the dates are reversed, the other date is adjusted automatically. Children and grandchildren re-sort by start date, and dependent follow-up tasks still shift automatically after confirmation.</p></div>
         </div>
 <div class="bullet">
           <div class="dot"></div>
-          <div><h4>The lightning line shows progress at a glance</h4><p>A lightning line connects each task's progress line, so you can spot delays or being ahead instantly</p></div>
+          <div><h4>The lightning line shows progress at a glance</h4><p>The lightning-bolt line that links each task's progress shows delays and early starts at a glance. Weekends, public holidays, and days set in your holiday settings appear as pink bands with diagonal hatching along their day columns. Group header rows get the same hatching.</p></div>
         </div>
 <div class="bullet">
           <div class="dot"></div>

@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>ガントビュー | Backlog My Tasks</title>
-<meta name="description" content="親子タスクの階層ツリー、バードラッグでの日程変更、依存関係とクリティカルパス、マイルストーン表示に対応。">
+<meta name="description" content="親子タスクの階層ツリー、バードラッグでの日程変更、依存関係とクリティカルパス、マイルストーン表示、休日の帯表示に対応。">
 <link rel="canonical" href="https://kouji-kojima.github.io/pages/backlog-my-tasks/website-src/dist/view-gantt.html">
 <link rel="alternate" hreflang="ja" href="https://kouji-kojima.github.io/pages/backlog-my-tasks/website-src/dist/view-gantt.html">
 <link rel="alternate" hreflang="en" href="https://kouji-kojima.github.io/pages/backlog-my-tasks/website-src/dist/en/view-gantt.html">
@@ -13,7 +13,7 @@
 <link rel="alternate" hreflang="zh-Hant-HK" href="https://kouji-kojima.github.io/pages/backlog-my-tasks/website-src/dist/zh-HK/view-gantt.html">
 <link rel="alternate" hreflang="x-default" href="https://kouji-kojima.github.io/pages/backlog-my-tasks/website-src/dist/view-gantt.html">
 <meta property="og:title" content="ガントビュー | Backlog My Tasks">
-<meta property="og:description" content="親子タスクの階層ツリー、バードラッグでの日程変更、依存関係とクリティカルパス、マイルストーン表示に対応。">
+<meta property="og:description" content="親子タスクの階層ツリー、バードラッグでの日程変更、依存関係とクリティカルパス、マイルストーン表示、休日の帯表示に対応。">
 <meta property="og:image" content="https://kouji-kojima.github.io/pages/backlog-my-tasks/website-src/dist/assets/img/07_gantt.jpg">
 <meta property="og:url" content="https://kouji-kojima.github.io/pages/backlog-my-tasks/website-src/dist/view-gantt.html">
 <meta property="og:type" content="website">
@@ -65,15 +65,15 @@
       <div class="frame"><img src="assets/img/07_gantt.jpg" alt="ガントビューのスクリーンショット" loading="lazy"></div>
       <div class="bullets"><div class="bullet">
           <div class="dot"></div>
-          <div><h4>階層ツリー＋タイムライン</h4><p>親子タスクの構造を保ちながら期間を可視化。完了タスク非表示も対応。タスク行・カテゴリー見出しの「＋」からその場で子タスク・新規タスクを追加登録。行頭のつまみ（⠿）をドラッグ&ドロップして親子の付け替えも可能。同じ開始日のタスクは↑↓ボタンで表示順も変更可能。各行の📌でピン留めも可能</p></div>
+          <div><h4>階層ツリー＋タイムライン</h4><p>親子タスクの構造を保ちながら期間を可視化。完了タスク非表示も対応。タスク行・カテゴリー見出しの「＋」からその場で子タスク・新規タスクを追加。行頭のつまみ（⠿）のドラッグで親子の付け替えも可能。▲▼は同じ開始日・同じ親の中で表示順を入れ替え（動けない向きは隠します）。各行の📌でピン留めも可能</p></div>
         </div>
 <div class="bullet">
           <div class="dot"></div>
-          <div><h4>バーをドラッグして日程変更</h4><p>開始日・期限日をドラッグで直接変更。Backlogへ即反映。依存する後続タスクへの自動日程シフトも確認付きで実行</p></div>
+          <div><h4>バーをドラッグして日程変更</h4><p>開始日・期限日をドラッグで直接変更し、Backlogへ即反映。開始日と期限日の前後が逆になると、もう一方を自動で合わせます。子・孫は開始日順に並び替わり、依存する後続タスクの自動日程シフトも確認付きで実行</p></div>
         </div>
 <div class="bullet">
           <div class="dot"></div>
-          <div><h4>カミナリ線で進捗が一目</h4><p>各タスクの進捗ラインをつなぐカミナリ線で、遅れ・先行をすぐ把握</p></div>
+          <div><h4>カミナリ線で進捗が一目</h4><p>各タスクの進捗ラインをつなぐカミナリ線で、遅れ・先行をすぐ把握。土日・祝日・休日設定は、日の列に沿った斜線入りのピンクの帯で表示。見出し行にも同じ斜線が入ります</p></div>
         </div>
 <div class="bullet">
           <div class="dot"></div>
